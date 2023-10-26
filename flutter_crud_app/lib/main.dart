@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_app/dashboard_menu.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 void main() {
@@ -29,7 +30,8 @@ class MainApp extends HookWidget {
       
       initialRoute: '/',
       routes: {
-        '/': (context) => const Home(),
+        '/': (context) => const DashboardMenu(),
+        '/users': (context) => const Home()
       }
     );
       
@@ -40,8 +42,11 @@ class Home extends StatelessWidget{
   const Home({super.key});
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Sub menu")
+      ),
+      body: const Center(
         child: Text("Hello World")
       ),
     );
