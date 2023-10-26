@@ -13,4 +13,8 @@ final List<Map<String, dynamic>> menuUsers = [
     'title': 'Cadastrar',
     'rota': '/users/create'
   },
+  {
+    'title': 'Listar',
+    'rota': '/users/read'
+  },
 ];

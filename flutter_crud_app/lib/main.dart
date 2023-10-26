@@ -4,6 +4,7 @@ import 'package:flutter_crud_app/tela_configs.dart';
 import 'package:flutter_crud_app/var_json.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import 'users.dart';
 
 void main() {
   runApp(const MainApp());
@@ -27,6 +28,7 @@ class MainApp extends HookWidget {
     );
     return MaterialApp(
       debugShowCheckedModeBanner:false,
+
       
       theme: currentBrightness.value == Brightness.dark ? darkTheme : lightTheme,
 
@@ -35,7 +37,8 @@ class MainApp extends HookWidget {
       routes: {
         '/': (context) => DashboardMenu(lista: menuItens, titulo: "Menu Principal"),
         '/users': (context) => DashboardMenu(lista: menuUsers, titulo: "Menu Usuario"),
-        '/users/create': (context) => const Home(),
+        '/users/create': (context) => const UserCadastro(),
+        '/users/read': (context) => const UserLeitura(),
         '/configs': (context) => TelaConfigs(currentBrightness: currentBrightness)
       }
     );
@@ -43,17 +46,3 @@ class MainApp extends HookWidget {
   }
 }
 
-class Home extends StatelessWidget{
-  const Home({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Sub menu")
-      ),
-      body: const Center(
-        child: Text("Hello World")
-      ),
-    );
-  }
-}
