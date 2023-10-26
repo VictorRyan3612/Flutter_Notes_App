@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_app/dashboard_menu.dart';
+import 'package:flutter_crud_app/tela_configs.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 void main() {
@@ -31,7 +32,8 @@ class MainApp extends HookWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const DashboardMenu(),
-        '/users': (context) => const Home()
+        '/users': (context) => const Home(),
+        '/configs': (context) => TelaConfigs(currentBrightness: currentBrightness)
       }
     );
       
