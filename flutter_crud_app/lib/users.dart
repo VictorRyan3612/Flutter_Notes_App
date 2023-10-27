@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
+import 'package:flutter_hooks/flutter_hooks.dart';
+
 
 class Usuario {
   final String nome;
@@ -18,37 +20,53 @@ class Usuario {
   String toJson() => json.encode(toMap());
 }
 
-class UserCadastro extends StatefulWidget{
+
+class UserCadastro extends HookWidget {
   const UserCadastro({super.key});
 
   @override
-  State<UserCadastro> createState() => _UserCadastroState();
-}
-
-class _UserCadastroState extends State<UserCadastro> {
-
-  @override
   Widget build(BuildContext context) {
+    TextEditingController titleController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Cadastrar Usuario")
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(50.0),
+      body:  Padding(
+        padding: const EdgeInsets.all(50.0),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextField(
-                decoration: InputDecoration(
+                controller: titleController,
+                decoration: const InputDecoration(
                   labelText: 'Nome',
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextField(
-                decoration: InputDecoration(
+                controller: emailController,
+                decoration: const InputDecoration(
                   labelText: 'email',
                 ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (titleController.text.isNotEmpty && emailController.text.isNotEmpty) {
+                    Usuario novaNota = Usuario(nome: titleController.text, email: emailController.text);
+                    Navigator.pop(context, novaNota);
+                  }
+                  else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Por favor, preencha todos os campos.")
+                        
+                      )
+                    );
+                  }
+                },
+                child: const Text('Salvar Usuario'),
               ),
             ]
           ),

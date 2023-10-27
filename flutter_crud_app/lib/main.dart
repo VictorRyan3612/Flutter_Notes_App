@@ -18,10 +18,18 @@ class MainApp extends HookWidget {
     final currentBrightness = useState(Brightness.dark);
     
     final darkTheme = ThemeData(
+      snackBarTheme: const SnackBarThemeData(
+        backgroundColor: Colors.black, 
+        contentTextStyle: TextStyle(color: Colors.white)
+      ),
       brightness: Brightness.dark,
       scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)
     );
     final lightTheme = ThemeData(
+      snackBarTheme: const SnackBarThemeData(
+        backgroundColor: Colors.white, 
+        contentTextStyle: TextStyle(color: Colors.black)
+      ),
       brightness: Brightness.light,
       primarySwatch: Colors.blue,
       scaffoldBackgroundColor: const Color.fromARGB(255, 175, 175, 175)
