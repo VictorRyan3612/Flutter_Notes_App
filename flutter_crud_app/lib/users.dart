@@ -96,7 +96,11 @@ class _UserScreenState extends State<UserScreen> {
                       onPressed: () async {
                         Usuario? novaUsuario = await Navigator.push(
                           context, MaterialPageRoute(
-                            builder: (context) => const UsuarioCadastro(titulo: "Editar Usuario",)
+                            builder: (context) => UsuarioCadastro(
+                              titulo: "Editar Usuario",
+                              nomeExistente: listaUsuario[index].nome,
+                              emailExistente: listaUsuario[index].email
+                            )
                           )
                         );
                         if (novaUsuario!= null){
@@ -147,7 +151,15 @@ class _UserScreenState extends State<UserScreen> {
 
 class UsuarioCadastro extends StatefulWidget {
   final String titulo;
-  const UsuarioCadastro({Key? key, this.titulo = 'Adicionar Usuario'}) : super(key: key);
+  final String? nomeExistente;
+  final String? emailExistente;
+  
+  const UsuarioCadastro({
+    Key? key, 
+    this.titulo = 'Adicionar Usuario',
+    this.nomeExistente,
+    this.emailExistente,
+  }) : super(key: key);
   @override
   State<UsuarioCadastro> createState() => _UsuarioCadastroState();
 }
@@ -156,6 +168,12 @@ class _UsuarioCadastroState extends State<UsuarioCadastro> {
   TextEditingController _nomeController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _nomeController.text = widget.nomeExistente ?? '';
+    _emailController.text = widget.emailExistente ?? '';
+  }
   @override
   Widget build(BuildContext context) {
     String titulo = widget.titulo;
@@ -171,7 +189,7 @@ class _UsuarioCadastroState extends State<UsuarioCadastro> {
             TextField(
               controller: _nomeController,
               decoration: const InputDecoration(
-                labelText: 'Título',
+                labelText: 'Nome',
               ),
             ),
             const SizedBox(height: 8.0),
