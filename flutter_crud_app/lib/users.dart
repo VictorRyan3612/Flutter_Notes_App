@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+// import 'package:flutter_hooks/flutter_hooks.dart';
 
 class Usuario {
   final String nome;
@@ -20,19 +20,52 @@ class Usuario {
 }
 
 
-class UserCadastro extends HookWidget {
+class UserCadastro extends StatefulWidget {
   const UserCadastro({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    List<Usuario> listaUsuario = [];
+  State<UserCadastro> createState() => _UserCadastroState();
+}
 
+class _UserCadastroState extends State<UserCadastro> {
+    List<Usuario> listaUsuario = [];
+  
+  @override
+  void initState() {
+    super.initState();
+    carregarUsuarios();
+  }
+
+  Future<void> carregarUsuarios() async {
+      Directory directory = await getApplicationSupportDirectory();
+      File file = File('${directory.path}/users.dat');
+      print("""
+        diretório=${directory},file=${file}
+      """);
+      if (file.existsSync()) {
+
+        String content = await file.readAsString();
+        print("content =($content)");
+        if (content != '') {
+          List<dynamic> jsonList = json.decode(content);
+        setState(() {
+          listaUsuario = jsonList.map((json) => Usuario(nome: json['nome'], email: json['email'])).toList();
+        });
+        }
+        
+      }
+    }
+    
     Future<void> salvarUser() async {
       Directory directory = await getApplicationSupportDirectory();
       File file = File('${directory.path}/users.dat');
       String content = json.encode(listaUsuario.map((usuario) => usuario.toMap()).toList());
       await file.writeAsString(content);
     }
+
+
+  @override
+  Widget build(BuildContext context) {
 
     TextEditingController nomeController = TextEditingController();
     TextEditingController emailController = TextEditingController();
