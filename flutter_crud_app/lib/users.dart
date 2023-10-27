@@ -20,14 +20,14 @@ class Usuario {
 }
 
 
-class UserCadastro extends StatefulWidget {
-  const UserCadastro({super.key});
+class UserScreen extends StatefulWidget {
+  const UserScreen({super.key});
 
   @override
-  State<UserCadastro> createState() => _UserCadastroState();
+  State<UserScreen> createState() => _UserScreenState();
 }
 
-class _UserCadastroState extends State<UserCadastro> {
+class _UserScreenState extends State<UserScreen> {
     List<Usuario> listaUsuario = [];
   
   @override
@@ -66,55 +66,87 @@ class _UserCadastroState extends State<UserCadastro> {
 
   @override
   Widget build(BuildContext context) {
-
-    TextEditingController nomeController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cadastrar Usuario")
+        title: const Text('Bloco de Notas'),
       ),
-      body:  Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                controller: nomeController,
-                decoration: const InputDecoration(
-                  labelText: 'Nome',
-                ),
+      body: ListView.builder(
+        itemCount: listaUsuario.length,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: const EdgeInsets.all(8.0),
+            child: ListTile(
+              title: Text(listaUsuario[index].nome),
+              subtitle: Text(listaUsuario[index].email),
+            ),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          Usuario novaUsuario = await Navigator.push(context, MaterialPageRoute(builder: (context) => const UsuarioCadastro()));
+          if (novaUsuario != '') {
+            setState(() {
+              listaUsuario.add(novaUsuario);
+              salvarUser();
+            });
+          }
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+
+class UsuarioCadastro extends StatefulWidget {
+  const UsuarioCadastro({super.key});
+  @override
+  State<UsuarioCadastro> createState() => _UsuarioCadastroState();
+}
+
+class _UsuarioCadastroState extends State<UsuarioCadastro> {
+  TextEditingController _nomeController = TextEditingController();
+
+  TextEditingController _emailController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Adicionar Usuario'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextField(
+              controller: _nomeController,
+              decoration: const InputDecoration(
+                labelText: 'Título',
               ),
-              const SizedBox(height: 10.0),
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                ),
+            ),
+            const SizedBox(height: 8.0),
+            TextField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                labelText: 'email',
               ),
-              ElevatedButton(
-                onPressed: () {
-                  if (nomeController.text.isNotEmpty && emailController.text.isNotEmpty) {
-                    Usuario novoUser = Usuario(nome: nomeController.text, email: emailController.text);
-                    listaUsuario.add(novoUser);
-                    salvarUser();
-                    Navigator.pop(context);
-                  }
-                  else{
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Por favor, preencha todos os campos.")
-                        
-                      )
-                    );
-                  }
-                },
-                child: const Text('Salvar Usuario'),
-              ),
-            ]
-          ),
-        )
-      )
+            ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                if (_nomeController.text.isNotEmpty && _emailController.text.isNotEmpty) {
+                  Usuario novoUsuario = Usuario(nome: _nomeController.text, email: _emailController.text);
+                  Navigator.pop(context, novoUsuario);
+                }
+              },
+              child: const Text('Salvar Usuario'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
