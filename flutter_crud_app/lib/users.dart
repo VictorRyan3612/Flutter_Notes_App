@@ -7,13 +7,14 @@ import 'package:path_provider/path_provider.dart';
 class Usuario {
   final String nome;
   final String email;
-
-  Usuario({required this.nome, required this.email});
+  late String status;
+  Usuario({required this.nome, required this.email, this.status = "v"});
 
   Map<String, dynamic> toMap() {
     return {
       'nome': nome,
       'email': email,
+      'status': status
     };
   }
   String toJson() => json.encode(toMap());
@@ -28,7 +29,7 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-    List<Usuario> listaUsuario = [];
+  List<Usuario> listaUsuario = [];
   
   @override
   void initState() {
@@ -39,20 +40,21 @@ class _UserScreenState extends State<UserScreen> {
   Future<void> carregarUsuarios() async {
       Directory directory = await getApplicationSupportDirectory();
       File file = File('${directory.path}/users.dat');
-      print("""
-        diretório=${directory},file=${file}
-      """);
+
       if (file.existsSync()) {
 
         String content = await file.readAsString();
         print("content =($content)");
         if (content != '') {
           List<dynamic> jsonList = json.decode(content);
-        setState(() {
-          listaUsuario = jsonList.map((json) => Usuario(nome: json['nome'], email: json['email'])).toList();
-        });
+          setState(() {
+            listaUsuario = jsonList.map((json) => Usuario(
+              nome: json['nome'], 
+              email: json['email'], 
+              status: json['status'])
+            ).toList();
+          });
         }
-        
       }
     }
     
@@ -73,19 +75,39 @@ class _UserScreenState extends State<UserScreen> {
       body: ListView.builder(
         itemCount: listaUsuario.length,
         itemBuilder: (context, index) {
-          return Card(
-            margin: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: Text(listaUsuario[index].nome),
-              subtitle: Text(listaUsuario[index].email),
-            ),
-          );
+          // final usuario = listaUsuario[index];
+          if (listaUsuario[index].status == "v") {
+            return Card(
+              margin: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: Text(listaUsuario[index].nome),
+                subtitle: Text(listaUsuario[index].email),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {
+                    // Algoritmo de exclusão lógica
+                    setState(() {
+                      listaUsuario[index].status = 'x';
+                      salvarUser();
+                    });
+                  },
+                ),
+              ),
+            );
+          }
+          else{
+            return Container();
+          }
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Usuario novaUsuario = await Navigator.push(context, MaterialPageRoute(builder: (context) => const UsuarioCadastro()));
-          if (novaUsuario != '') {
+          Usuario? novaUsuario = await Navigator.push(
+            context, MaterialPageRoute(
+              builder: (context) => const UsuarioCadastro()
+            )
+          );
+          if (novaUsuario != null) {
             setState(() {
               listaUsuario.add(novaUsuario);
               salvarUser();
@@ -107,7 +129,6 @@ class UsuarioCadastro extends StatefulWidget {
 
 class _UsuarioCadastroState extends State<UsuarioCadastro> {
   TextEditingController _nomeController = TextEditingController();
-
   TextEditingController _emailController = TextEditingController();
 
   @override
@@ -146,28 +167,6 @@ class _UsuarioCadastroState extends State<UsuarioCadastro> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class UserLeitura extends StatefulWidget{
-  const UserLeitura({super.key});
-
-  @override
-  State<UserLeitura> createState() => _UserLeituraState();
-}
-
-class _UserLeituraState extends State<UserLeitura> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Listagem")
-      ),
-      body: const Center(
-        child: Text("Listar")
       ),
     );
   }
