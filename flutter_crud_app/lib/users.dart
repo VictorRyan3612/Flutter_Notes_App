@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
 
 class Usuario {
   final String nome;
@@ -12,11 +12,10 @@ class Usuario {
 
   Map<String, dynamic> toMap() {
     return {
-      'title': nome,
+      'nome': nome,
       'email': email,
     };
   }
-
   String toJson() => json.encode(toMap());
 }
 
@@ -26,7 +25,16 @@ class UserCadastro extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController titleController = TextEditingController();
+    List<Usuario> listaUsuario = [];
+
+    Future<void> salvarUser() async {
+      Directory directory = await getApplicationSupportDirectory();
+      File file = File('${directory.path}/users.dat');
+      String content = json.encode(listaUsuario.map((usuario) => usuario.toMap()).toList());
+      await file.writeAsString(content);
+    }
+
+    TextEditingController nomeController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +47,7 @@ class UserCadastro extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextField(
-                controller: titleController,
+                controller: nomeController,
                 decoration: const InputDecoration(
                   labelText: 'Nome',
                 ),
@@ -48,14 +56,16 @@ class UserCadastro extends HookWidget {
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
-                  labelText: 'email',
+                  labelText: 'Email',
                 ),
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (titleController.text.isNotEmpty && emailController.text.isNotEmpty) {
-                    Usuario novaNota = Usuario(nome: titleController.text, email: emailController.text);
-                    Navigator.pop(context, novaNota);
+                  if (nomeController.text.isNotEmpty && emailController.text.isNotEmpty) {
+                    Usuario novoUser = Usuario(nome: nomeController.text, email: emailController.text);
+                    listaUsuario.add(novoUser);
+                    salvarUser();
+                    Navigator.pop(context);
                   }
                   else{
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -76,8 +86,15 @@ class UserCadastro extends HookWidget {
   }
 }
 
-class UserLeitura extends StatelessWidget{
+class UserLeitura extends StatefulWidget{
   const UserLeitura({super.key});
+
+  @override
+  State<UserLeitura> createState() => _UserLeituraState();
+}
+
+class _UserLeituraState extends State<UserLeitura> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
