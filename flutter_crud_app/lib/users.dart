@@ -5,8 +5,8 @@ import 'package:path_provider/path_provider.dart';
 // import 'package:flutter_hooks/flutter_hooks.dart';
 
 class Usuario {
-  final String nome;
-  final String email;
+  late String nome;
+  late String email;
   late String status;
   Usuario({required this.nome, required this.email, this.status = "v"});
 
@@ -65,6 +65,12 @@ class _UserScreenState extends State<UserScreen> {
       await file.writeAsString(content);
     }
 
+  void atualizarUsuario(int index, Usuario novoUsuario) {
+    setState(() {
+      listaUsuario[index] = novoUsuario;
+      salvarUser();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,15 +88,33 @@ class _UserScreenState extends State<UserScreen> {
               child: ListTile(
                 title: Text(listaUsuario[index].nome),
                 subtitle: Text(listaUsuario[index].email),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    // Algoritmo de exclusão lógica
-                    setState(() {
-                      listaUsuario[index].status = 'x';
-                      salvarUser();
-                    });
-                  },
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () async {
+                        Usuario? novaUsuario = await Navigator.push(
+                          context, MaterialPageRoute(
+                            builder: (context) => const UsuarioCadastro(titulo: "Editar Usuario",)
+                          )
+                        );
+                        if (novaUsuario!= null){
+                          atualizarUsuario(index, novaUsuario);
+                        }
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        // Algoritmo de exclusão lógica
+                        setState(() {
+                          listaUsuario[index].status = 'x';
+                          salvarUser();
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ),
             );
@@ -104,7 +128,7 @@ class _UserScreenState extends State<UserScreen> {
         onPressed: () async {
           Usuario? novaUsuario = await Navigator.push(
             context, MaterialPageRoute(
-              builder: (context) => const UsuarioCadastro()
+              builder: (context) => const UsuarioCadastro(titulo: "Adicionar Usuario",)
             )
           );
           if (novaUsuario != null) {
@@ -122,7 +146,8 @@ class _UserScreenState extends State<UserScreen> {
 
 
 class UsuarioCadastro extends StatefulWidget {
-  const UsuarioCadastro({super.key});
+  final String titulo;
+  const UsuarioCadastro({Key? key, this.titulo = 'Adicionar Usuario'}) : super(key: key);
   @override
   State<UsuarioCadastro> createState() => _UsuarioCadastroState();
 }
@@ -133,9 +158,10 @@ class _UsuarioCadastroState extends State<UsuarioCadastro> {
 
   @override
   Widget build(BuildContext context) {
+    String titulo = widget.titulo;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adicionar Usuario'),
+        title: Text(titulo),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
