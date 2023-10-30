@@ -74,6 +74,28 @@ class _UserScreenState extends State<UserScreen> {
     });
   }
 
+  Future<void> edicaocallback(int index) async {
+    Usuario? novaUsuario = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => UsuarioCadastro(
+          titulo: "Editar Usuario",
+          nomeExistente: listaUsuario[index].nome,
+          emailExistente: listaUsuario[index].email,
+        ),
+      ),
+    );
+    if (novaUsuario != null) {
+      atualizarUsuario(index, novaUsuario);
+    }
+  }
+  void deleteCallback(index){
+    setState(() {
+      listaUsuario[index].status = 'x';
+      salvarUser();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,26 +110,11 @@ class _UserScreenState extends State<UserScreen> {
             return UsuarioCard(
               cardTitle: listaUsuario[index].nome,
               cardSubtitle: listaUsuario[index].email,
-              onEditPressed: () async {
-                Usuario? novaUsuario = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UsuarioCadastro(
-                      titulo: "Editar Usuario",
-                      nomeExistente: listaUsuario[index].nome,
-                      emailExistente: listaUsuario[index].email,
-                    ),
-                  ),
-                );
-                if (novaUsuario != null) {
-                  atualizarUsuario(index, novaUsuario);
-                }
+              onEditPressed: () async{
+                edicaocallback(index);
               },
               onDeletePressed: () {
-                setState(() {
-                  listaUsuario[index].status = 'x';
-                  salvarUser();
-                });
+                deleteCallback(index);
               },
             );
           }
