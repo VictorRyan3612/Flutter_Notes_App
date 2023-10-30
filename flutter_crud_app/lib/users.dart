@@ -9,13 +9,15 @@ import 'widgets/user_card.dart';
 class Usuario {
   late String nome;
   late String email;
+  late String cpf;
   late String status;
-  Usuario({required this.nome, required this.email, this.status = "v"});
+  Usuario({required this.nome, required this.email, required this.cpf, this.status = "v"});
 
   Map<String, dynamic> toMap() {
     return {
       'nome': nome,
       'email': email,
+      'cpf': cpf,
       'status': status
     };
   }
@@ -53,6 +55,7 @@ class _UserScreenState extends State<UserScreen> {
             listaUsuario = jsonList.map((json) => Usuario(
               nome: json['nome'], 
               email: json['email'], 
+              cpf: json['cpf'],
               status: json['status'])
             ).toList();
           });
@@ -82,6 +85,7 @@ class _UserScreenState extends State<UserScreen> {
           titulo: "Editar Usuario",
           nomeExistente: listaUsuario[index].nome,
           emailExistente: listaUsuario[index].email,
+          cpfExistense: listaUsuario[index].cpf,
         ),
       ),
     );
@@ -148,26 +152,28 @@ class UsuarioCadastro extends StatefulWidget {
   final String titulo;
   final String? nomeExistente;
   final String? emailExistente;
-  
+  final String? cpfExistense;
   const UsuarioCadastro({
     Key? key, 
     this.titulo = 'Adicionar Usuario',
     this.nomeExistente,
     this.emailExistente,
+    this.cpfExistense,
   }) : super(key: key);
   @override
   State<UsuarioCadastro> createState() => _UsuarioCadastroState();
 }
 
 class _UsuarioCadastroState extends State<UsuarioCadastro> {
-  TextEditingController _nomeController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _cpfController = TextEditingController();
   @override
   void initState() {
     super.initState();
     _nomeController.text = widget.nomeExistente ?? '';
     _emailController.text = widget.emailExistente ?? '';
+    _cpfController.text = widget.cpfExistense ?? '';
   }
   @override
   Widget build(BuildContext context) {
@@ -194,11 +200,21 @@ class _UsuarioCadastroState extends State<UsuarioCadastro> {
                 labelText: 'email',
               ),
             ),
+            TextField(
+              controller: _cpfController,
+              decoration: const InputDecoration(
+                labelText: 'CPF',
+              ),
+            ),
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                if (_nomeController.text.isNotEmpty && _emailController.text.isNotEmpty) {
-                  Usuario novoUsuario = Usuario(nome: _nomeController.text, email: _emailController.text);
+                if (_nomeController.text.isNotEmpty && _emailController.text.isNotEmpty && _cpfController.text.isNotEmpty) {
+                  Usuario novoUsuario = Usuario(
+                    nome: _nomeController.text,
+                    email: _emailController.text, 
+                    cpf: _cpfController.text,
+                  );
                   Navigator.pop(context, novoUsuario);
                 }
                 else{
