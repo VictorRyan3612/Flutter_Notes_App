@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 // import 'package:flutter_hooks/flutter_hooks.dart';
 
+import 'widgets/user_card.dart';
+
 class Usuario {
   late String nome;
   late String email;
@@ -83,44 +85,30 @@ class _UserScreenState extends State<UserScreen> {
         itemBuilder: (context, index) {
           // final usuario = listaUsuario[index];
           if (listaUsuario[index].status == "v") {
-            return Card(
-              margin: const EdgeInsets.all(8.0),
-              child: ListTile(
-                title: Text(listaUsuario[index].nome),
-                subtitle: Text(listaUsuario[index].email),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () async {
-                        Usuario? novaUsuario = await Navigator.push(
-                          context, MaterialPageRoute(
-                            builder: (context) => UsuarioCadastro(
-                              titulo: "Editar Usuario",
-                              nomeExistente: listaUsuario[index].nome,
-                              emailExistente: listaUsuario[index].email
-                            )
-                          )
-                        );
-                        if (novaUsuario!= null){
-                          atualizarUsuario(index, novaUsuario);
-                        }
-                      },
+            return UsuarioCard(
+              cardTitle: listaUsuario[index].nome,
+              cardSubtitle: listaUsuario[index].email,
+              onEditPressed: () async {
+                Usuario? novaUsuario = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UsuarioCadastro(
+                      titulo: "Editar Usuario",
+                      nomeExistente: listaUsuario[index].nome,
+                      emailExistente: listaUsuario[index].email,
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        // Algoritmo de exclusão lógica
-                        setState(() {
-                          listaUsuario[index].status = 'x';
-                          salvarUser();
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+                if (novaUsuario != null) {
+                  atualizarUsuario(index, novaUsuario);
+                }
+              },
+              onDeletePressed: () {
+                setState(() {
+                  listaUsuario[index].status = 'x';
+                  salvarUser();
+                });
+              },
             );
           }
           else{
