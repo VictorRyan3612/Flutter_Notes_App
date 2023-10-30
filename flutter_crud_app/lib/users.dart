@@ -201,9 +201,17 @@ class _UsuarioCadastroState extends State<UsuarioCadastro> {
                   Usuario novoUsuario = Usuario(nome: _nomeController.text, email: _emailController.text);
                   Navigator.pop(context, novoUsuario);
                 }
+                else{
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Por favor, preencha todos os campos.")
+                    )
+                  );
+                }
               },
               child: const Text('Salvar Usuario'),
             ),
+            
           ],
         ),
       ),
