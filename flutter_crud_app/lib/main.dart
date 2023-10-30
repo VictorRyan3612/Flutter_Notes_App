@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crud_app/dashboard_menu.dart';
-import 'package:flutter_crud_app/tela_configs.dart';
+import 'package:flutter_crud_app/screens/dashboard_menu.dart';
+import 'package:flutter_crud_app/screens/tela_configs.dart';
 import 'package:flutter_crud_app/var_json.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
