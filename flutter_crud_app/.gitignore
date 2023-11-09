@@ -42,3 +42,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Removing folders to keep the project clean
+/android
+/build
+/ios
+/macos
+/web
+/windows
+.metadata
+pubspec.lock
