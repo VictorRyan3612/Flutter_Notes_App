@@ -1,4 +1,6 @@
 {
    "language": "english",
-   "mainapptitle": "Main Menu"
+   "mainapptitle": "Main Menu",
+   "usercardtitle": "Users",
+   "configcardtitle": "Configs"
 }

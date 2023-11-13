@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_app/screens/dashboard_menu.dart';
 import 'package:flutter_crud_app/screens/tela_configs.dart';
-import 'package:flutter_crud_app/var_json.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -48,7 +47,7 @@ class MainApp extends HookWidget {
         Locale('en'),
         Locale('pt')
         ],
-      locale: const Locale('pt'),
+      locale: const Locale('en'),
       
       debugShowCheckedModeBanner:false,
 
@@ -59,7 +58,17 @@ class MainApp extends HookWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => DashboardMenu(
-          
+          cards: [
+            {
+              "title": AppLocalizations.of(context)!.usercardtitle,
+              "rota": '/users'
+            },
+            {
+              "title": AppLocalizations.of(context)!.configcardtitle,
+              "rota": '/configs'
+            }
+            
+          ],
           titulo: AppLocalizations.of(context)!.mainapptitle
         ),
         '/users': (context) => const UserScreen(),

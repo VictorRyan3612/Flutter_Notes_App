@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class DashboardMenu extends StatelessWidget {
   final String titulo;
   // final List<Map<String, dynamic>> lista;
-  const DashboardMenu({required this.titulo, super.key});
+  final List<Map<String, dynamic>> cards;
+  const DashboardMenu({required this.titulo, required this.cards, super.key});
   
   @override
   Widget build(BuildContext context) {
@@ -24,15 +25,13 @@ class DashboardMenu extends StatelessWidget {
                     child: Wrap(
                       spacing: 20,
                       runSpacing: 20,
-                      children: [
-                        Text("Tela inicial")
-                        ]
-                      // lista.map((item) {
-                      //   return CustomCard(
-                      //     title: item['title'],
-                      //     rota: item['rota'],
-                      //   );
-                      // }).toList(),
+                      children: 
+                      cards.map((item) {
+                        return CustomCard(
+                          title: item['title'],
+                          rota: item['rota'],
+                        );
+                      }).toList(),
                     ),
                   ),
                 )
