@@ -3,6 +3,8 @@ import 'package:flutter_crud_app/screens/dashboard_menu.dart';
 import 'package:flutter_crud_app/screens/tela_configs.dart';
 import 'package:flutter_crud_app/var_json.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'users.dart';
 
@@ -35,6 +37,19 @@ class MainApp extends HookWidget {
       scaffoldBackgroundColor: const Color.fromARGB(255, 175, 175, 175)
     );
     return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+
+      supportedLocales: const [
+        Locale('en'),
+        Locale('pt')
+        ],
+      locale: const Locale('pt'),
+      
       debugShowCheckedModeBanner:false,
 
       
@@ -43,7 +58,10 @@ class MainApp extends HookWidget {
       
       initialRoute: '/',
       routes: {
-        '/': (context) => DashboardMenu(lista: menuItens, titulo: "Menu Principal"),
+        '/': (context) => DashboardMenu(
+          lista: menuItens, 
+          titulo: AppLocalizations.of(context)!.mainapptitle
+        ),
         '/users': (context) => const UserScreen(),
         // '/users/create': (context) => const UserCadastro(),
         // '/users/read': (context) => const UserLeitura(),
