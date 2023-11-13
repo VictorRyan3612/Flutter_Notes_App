@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class DashboardMenu extends StatelessWidget {
   final String titulo;
-  // final List<Map<String, dynamic>> lista;
   final List<Map<String, dynamic>> cards;
   const DashboardMenu({required this.titulo, required this.cards, super.key});
   
