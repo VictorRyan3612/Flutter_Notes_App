@@ -59,12 +59,10 @@ class MainApp extends HookWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => DashboardMenu(
-          lista: menuItens, 
+          
           titulo: AppLocalizations.of(context)!.mainapptitle
         ),
         '/users': (context) => const UserScreen(),
-        // '/users/create': (context) => const UserCadastro(),
-        // '/users/read': (context) => const UserLeitura(),
         '/configs': (context) => TelaConfigs(currentBrightness: currentBrightness)
       }
     );
