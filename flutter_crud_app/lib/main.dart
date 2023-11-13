@@ -18,6 +18,7 @@ class MainApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentBrightness = useState(Brightness.dark);
+    final currentLocale = useState(Locale("en"));
     
     final darkTheme = ThemeData(
       snackBarTheme: const SnackBarThemeData(
@@ -48,7 +49,7 @@ class MainApp extends HookWidget {
         Locale('en'),
         Locale('pt')
         ],
-      locale: const Locale('en'),
+      locale: currentLocale.value,
       
       debugShowCheckedModeBanner:false,
 
@@ -63,7 +64,9 @@ class MainApp extends HookWidget {
           titulo: AppLocalizations.of(context)!.mainapptitle
         ),
         '/users': (context) => const UserScreen(),
-        '/configs': (context) => TelaConfigs(currentBrightness: currentBrightness)
+        '/configs': (context) => TelaConfigs(
+          currentBrightness: currentBrightness,
+          currentLocale: currentLocale)
       }
     );
       

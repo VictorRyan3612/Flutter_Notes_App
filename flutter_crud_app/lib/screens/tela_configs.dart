@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:card_settings/card_settings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TelaConfigs extends HookWidget implements PreferredSizeWidget{
   final ValueNotifier<Brightness> currentBrightness;
+  final ValueNotifier<Locale> currentLocale;
 
-  const TelaConfigs({required this.currentBrightness, super.key});
+  const TelaConfigs({required this.currentBrightness, required this.currentLocale, super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -48,6 +50,12 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                             }
                           },
                         ),
+                        CardSettingsListPicker(
+                          label: "Idioma",
+                          items: AppLocalizations.supportedLocales,
+                          initialItem: currentLocale.value,
+                          onChanged: (value1) => currentLocale.value = value1!,
+                          )
                       ],
                     ),
                   ],
