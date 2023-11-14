@@ -54,10 +54,6 @@ class UserDataService {
     return _userListNotifier.value;
   }
 
-  carregar() async{
-    listaUsers = await userDataService.loadUsers();
-    print(listaUsers);
-  }
   Future<void> carregarUsuarios() async {
     listaUsers = await userDataService.loadUsers();
   }
@@ -70,10 +66,10 @@ class UserDataService {
     await file.writeAsString(content);
   }
 
-  void deleteUser(Usuario user) {
+  void deleteUser(Usuario user, Function() funcaoCarregar) {
     user.status = 'x';
-    saveUsers(listaUsers);
-    carregarUsuarios();
+    saveUsers(_userListNotifier.value);
+    funcaoCarregar();
   }
 
   void atualizarUsuario(int index, Usuario novoUsuario) {

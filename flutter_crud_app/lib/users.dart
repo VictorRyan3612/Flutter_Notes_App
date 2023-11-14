@@ -50,7 +50,6 @@ class UserScreen extends HookWidget {
       }
     }
 
-    
 
     return Scaffold(
       appBar: MyAppBar(),
@@ -66,7 +65,8 @@ class UserScreen extends HookWidget {
                 edicaocallback(index);
               },
               onDeletePressed: () {
-                userDataService.deleteUser(listaUsuario.value[index]);
+                userDataService.deleteUser(listaUsuario.value[index], carregarUsuarios);
+                
               },
             );
           } else {
