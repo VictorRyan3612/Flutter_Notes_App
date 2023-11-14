@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'widgets/user_card.dart';
+import 'widgets/my_app_bar.dart';
 
 class Usuario {
   late String nome;
@@ -98,9 +99,8 @@ class UserScreen extends HookWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.userPageTitle),
-      ),
+      appBar: MyAppBar(),
+        
       body: ListView.builder(
         itemCount: listaUsuario.value.length,
         itemBuilder: (context, index) {
