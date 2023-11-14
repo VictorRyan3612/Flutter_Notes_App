@@ -1,12 +1,14 @@
+// flutter packages
 import 'package:flutter/material.dart';
-import 'package:flutter_crud_app/screens/dashboard_menu.dart';
-import 'package:flutter_crud_app/screens/tela_configs.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'var_json.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// my packages
+import 'package:flutter_crud_app/screens/tela_configs.dart';
+import 'package:flutter_crud_app/screens/dashboard_menu.dart';
+import 'var_json.dart';
 import 'users.dart';
 
 void main() {
@@ -19,7 +21,7 @@ class MainApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentBrightness = useState(Brightness.dark);
-    final currentLocale = useState(Locale("en"));
+    final currentLocale = useState(const Locale("en"));
 
     Future<void> loadSettings() async {
       final prefs = await SharedPreferences.getInstance();
@@ -30,8 +32,6 @@ class MainApp extends HookWidget {
       final languageCode = prefs.getString('languageCode') ?? 'en';
       currentLocale.value = Locale(languageCode);
     }
-
-    
     
     final darkTheme = ThemeData(
       snackBarTheme: const SnackBarThemeData(
@@ -75,16 +75,10 @@ class MainApp extends HookWidget {
       
       initialRoute: '/',
       routes: {
-        '/': (context) {
-        if (currentBrightness.value == null || currentLocale.value == null) {
-            return CircularProgressIndicator();
-          } else {
-            return DashboardMenu(
-              cards: CardsMenu.getCards(context),
-              titulo: AppLocalizations.of(context)!.mainapptitle,
-            );
-          }
-        },
+        '/': (context) => DashboardMenu(
+          cards: CardsMenu.getCards(context),
+          titulo: AppLocalizations.of(context)!.mainapptitle,
+        ),        
         '/users': (context) => const UserScreen(),
         '/configs': (context) => TelaConfigs(
           currentBrightness: currentBrightness,
