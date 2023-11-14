@@ -1,36 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'widgets/user_card.dart';
 import 'widgets/my_app_bar.dart';
 import 'data/user_data_service.dart';
-class Usuario {
-  late String nome;
-  late String email;
-  late String cpf;
-  late String status;
-  Usuario(
-    {required this.nome,
-    required this.email,
-    required this.cpf,
-    this.status = "v"}
-  );
 
-  Map<String, dynamic> toMap() {
-    return {
-      'nome': nome,
-      'email': email,
-      'cpf': cpf,
-      'status': status
-    };
-  }
-
-  String toJson() => json.encode(toMap());
-}
 
 class UserScreen extends HookWidget {
   const UserScreen({super.key});
