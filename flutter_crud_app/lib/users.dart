@@ -12,11 +12,11 @@ class UserScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listaUsuario = useState<List<Usuario>>([]);
+    // final userListNotifier = userDataService.userListNotifier; 
+    final listaUsuario = useState<List<Usuario>>([]);;
 
     Future<void> carregarUsuarios() async {
-      List<Usuario> loadedUsers = await userDataService.loadUsers();
-      listaUsuario.value = loadedUsers;
+      listaUsuario.value = await userDataService.carregarUsuarios();
     }
 
 

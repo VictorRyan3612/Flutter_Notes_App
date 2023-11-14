@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/foundation.dart';
 
 class Usuario {
   late String nome;
@@ -27,6 +28,9 @@ class Usuario {
 }
 
 class UserDataService {
+   final ValueNotifier<List<Usuario>> _userListNotifier = ValueNotifier<List<Usuario>>([]);
+  ValueNotifier<List<Usuario>> get userListNotifier => _userListNotifier;
+
   Future<List<Usuario>> loadUsers() async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
@@ -46,7 +50,10 @@ class UserDataService {
 
     return [];
   }
-
+  Future<List<Usuario>> carregarUsuarios() async {
+    List<Usuario> loadedUsers = await userDataService.loadUsers();
+    return loadedUsers;
+  }
   Future<void> saveUsers(List<Usuario> users) async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
