@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'var_json.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'users.dart';
 
@@ -19,6 +20,18 @@ class MainApp extends HookWidget {
   Widget build(BuildContext context) {
     final currentBrightness = useState(Brightness.dark);
     final currentLocale = useState(Locale("en"));
+
+    Future<void> loadSettings() async {
+      final prefs = await SharedPreferences.getInstance();
+      
+      final isDarkMode = prefs.getBool('isDarkMode') ?? false;
+      currentBrightness.value = isDarkMode ? Brightness.dark : Brightness.light;
+
+      final languageCode = prefs.getString('languageCode') ?? 'en';
+      currentLocale.value = Locale(languageCode);
+    }
+
+    
     
     final darkTheme = ThemeData(
       snackBarTheme: const SnackBarThemeData(
@@ -37,6 +50,9 @@ class MainApp extends HookWidget {
       primarySwatch: Colors.blue,
       scaffoldBackgroundColor: const Color.fromARGB(255, 175, 175, 175)
     );
+
+    loadSettings();
+
     return MaterialApp(
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -59,10 +75,16 @@ class MainApp extends HookWidget {
       
       initialRoute: '/',
       routes: {
-        '/': (context) => DashboardMenu(
-          cards: CardsMenu.getCards(context),
-          titulo: AppLocalizations.of(context)!.mainapptitle
-        ),
+        '/': (context) {
+        if (currentBrightness.value == null || currentLocale.value == null) {
+            return CircularProgressIndicator();
+          } else {
+            return DashboardMenu(
+              cards: CardsMenu.getCards(context),
+              titulo: AppLocalizations.of(context)!.mainapptitle,
+            );
+          }
+        },
         '/users': (context) => const UserScreen(),
         '/configs': (context) => TelaConfigs(
           currentBrightness: currentBrightness,
