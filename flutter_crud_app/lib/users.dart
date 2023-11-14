@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'widgets/user_card.dart';
 import 'widgets/my_app_bar.dart';
-
+import 'data/user_data_service.dart';
 class Usuario {
   late String nome;
   late String email;
@@ -40,23 +40,10 @@ class UserScreen extends HookWidget {
     final listaUsuario = useState<List<Usuario>>([]);
 
     Future<void> carregarUsuarios() async {
-      Directory directory = await getApplicationSupportDirectory();
-      File file = File('${directory.path}/users.dat');
-
-      if (file.existsSync()) {
-        String content = await file.readAsString();
-        if (content != '') {
-          List<dynamic> jsonList = json.decode(content);
-          listaUsuario.value = jsonList.map((json) => Usuario(
-            nome: json['nome'],
-            email: json['email'],
-            cpf: json['cpf'],
-            status: json['status'],
-          ))
-          .toList();
-        }
-      }
+      List<Usuario> loadedUsers = await userDataService.loadUsers();
+      listaUsuario.value = loadedUsers;
     }
+
 
     useEffect(() {
       carregarUsuarios();
@@ -64,11 +51,7 @@ class UserScreen extends HookWidget {
     }, const []);
 
     Future<void> salvarUser() async {
-      Directory directory = await getApplicationSupportDirectory();
-      File file = File('${directory.path}/users.dat');
-      String content = json.encode(
-          listaUsuario.value.map((usuario) => usuario.toMap()).toList());
-      await file.writeAsString(content);
+      await userDataService.saveUsers(listaUsuario.value);
     }
 
     void atualizarUsuario(int index, Usuario novoUsuario) {
@@ -92,8 +75,8 @@ class UserScreen extends HookWidget {
       }
     }
 
-    void deleteCallback(index) {
-      listaUsuario.value[index].status = 'x';
+    void deleteCallback(int index) {
+      userDataService.deleteUser(listaUsuario.value, index);
       salvarUser();
       carregarUsuarios();
     }
