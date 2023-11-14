@@ -25,7 +25,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.configspagetitle),
+        title: Text(AppLocalizations.of(context)!.configsPageTitle),
       ),
 
 
@@ -41,13 +41,13 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                   children: [
                     CardSettingsSection(
                       header: CardSettingsHeader(
-                        label: AppLocalizations.of(context)!.configsheader,
+                        label: AppLocalizations.of(context)!.configsHeader,
                       ),
                       children: [
                         CardSettingsSwitch(
                           trueLabel: '', 
                           falseLabel: '',
-                          label: AppLocalizations.of(context)!.configsmodetheme,
+                          label: AppLocalizations.of(context)!.configsModeTheme,
                           initialValue:  currentBrightness.value == Brightness.dark,
                           onChanged: (value) {
                             if (currentBrightness.value == Brightness.dark) {
@@ -61,7 +61,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                           },
                         ),
                         CardSettingsListPicker(
-                          label: AppLocalizations.of(context)!.configslanguagepick,
+                          label: AppLocalizations.of(context)!.configsLanguagePick,
                           items: AppLocalizations.supportedLocales,
                           initialItem: currentLocale.value,
                           onChanged: (value1) {

@@ -81,7 +81,7 @@ class UserScreen extends HookWidget {
         context,
         MaterialPageRoute(
           builder: (context) => UsuarioCadastro(
-            titulo: AppLocalizations.of(context)!.usertitleedit,
+            titulo: AppLocalizations.of(context)!.userTitleEdit,
             nomeExistente: listaUsuario.value[index].nome,
             emailExistente: listaUsuario.value[index].email,
             cpfExistense: listaUsuario.value[index].cpf,
@@ -101,7 +101,7 @@ class UserScreen extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.userpagetitle),
+        title: Text(AppLocalizations.of(context)!.userPageTitle),
       ),
       body: ListView.builder(
         itemCount: listaUsuario.value.length,
@@ -128,7 +128,7 @@ class UserScreen extends HookWidget {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                UsuarioCadastro(titulo: AppLocalizations.of(context)!.usertitlecreate),
+                UsuarioCadastro(titulo: AppLocalizations.of(context)!.userTitleCreate),
             ),
           );
           if (novaUsuario != null) {
@@ -174,20 +174,20 @@ class UsuarioCadastro extends HookWidget {
             TextField(
               controller: nomeController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.userfieldname,
+                labelText: AppLocalizations.of(context)!.userFieldName,
               ),
             ),
             const SizedBox(height: 8.0),
             TextField(
               controller: emailController,
               decoration:  InputDecoration(
-                labelText: AppLocalizations.of(context)!.userfieldemail,
+                labelText: AppLocalizations.of(context)!.userFieldEmail,
               ),
             ),
             TextField(
               controller: cpfController,
               decoration:  InputDecoration(
-                labelText: AppLocalizations.of(context)!.userfieldcpf,
+                labelText: AppLocalizations.of(context)!.userFieldCpf,
               ),
             ),
             const SizedBox(height: 16.0),
@@ -205,11 +205,11 @@ class UsuarioCadastro extends HookWidget {
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(AppLocalizations.of(context)!.useraviso)),
+                      content: Text(AppLocalizations.of(context)!.userAviso)),
                   );
                 }
               },
-              child: Text(AppLocalizations.of(context)!.usersave),
+              child: Text(AppLocalizations.of(context)!.userSave),
             ),
           ],
         ),

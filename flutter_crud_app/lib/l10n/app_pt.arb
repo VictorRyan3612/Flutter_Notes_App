@@ -2,20 +2,20 @@
    "language": "Portuguese",
    "mainapptitle": "Menu Principal",
 
-   "usercardtitle": "Usuários",
-   "userpagetitle": "Lista de Usuários",
-   "usertitlecreate": "Adicionar Usuário",
-   "usertitleedit": "Editar Usuário",
-   "useraviso": "Por favor, preencha todos os campos",
-   "usersave": "Salvar Usuario",
-   "userfieldname": "Nome",
-   "userfieldemail": "Email",
-   "userfieldcpf": "CPF",
+   "userCardTitle": "Usuários",
+   "userPageTitle": "Lista de Usuários",
+   "userTitleCreate": "Adicionar Usuário",
+   "userTitleEdit": "Editar Usuário",
+   "userAviso": "Por favor, preencha todos os campos",
+   "userSave": "Salvar Usuario",
+   "userFieldName": "Nome",
+   "userFieldEmail": "Email",
+   "userFieldCpf": "CPF",
 
 
-   "configscardtitle": "Configurações",
-   "configspagetitle": "Tela de Configurações",
-   "configsheader": "Geral",
-   "configsmodetheme": "Modo Noturno",
-   "configslanguagepick": "Selecionar Idioma"
+   "configsCardTitle": "Configurações",
+   "configsPageTitle": "Tela de Configurações",
+   "configsHeader": "Geral",
+   "configsModeTheme": "Modo Noturno",
+   "configsLanguagePick": "Selecionar Idioma"
 }

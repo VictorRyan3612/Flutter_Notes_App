@@ -4,11 +4,11 @@ class CardsMenu {
   static List<Map<String, String>> getCards(context) {
     return [
       {
-        "title": AppLocalizations.of(context)!.usercardtitle,
+        "title": AppLocalizations.of(context)!.userCardTitle,
         "rota": '/users',
       },
       {
-        "title": AppLocalizations.of(context)!.configscardtitle,
+        "title": AppLocalizations.of(context)!.configsCardTitle,
         "rota": '/configs',
       },
     ];
