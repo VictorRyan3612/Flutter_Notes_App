@@ -47,6 +47,7 @@ class UserDataService {
           status: json['status'],
         )).toList();
         _userListNotifier.value = userList;
+        listaUsers =_userListNotifier.value;
         return _userListNotifier.value;
       }
     }
@@ -54,9 +55,6 @@ class UserDataService {
     return _userListNotifier.value;
   }
 
-  Future<void> carregarUsuarios() async {
-    listaUsers = await userDataService.loadUsers();
-  }
 
 
   Future<void> saveUsers(List<Usuario> users) async {
@@ -72,10 +70,17 @@ class UserDataService {
     funcaoCarregar();
   }
 
-  void atualizarUsuario(int index, Usuario novoUsuario) {
+  void atualizarUsuario({
+    required List<Usuario> listaUsers,
+    required int index,
+    required Usuario novoUsuario,
+    required Function() funcaoCarregar,
+  }) {
+
     listaUsers[index] = novoUsuario;
+
     userDataService.saveUsers(listaUsers);
-    carregarUsuarios();
+    funcaoCarregar();
   }
 }
 

@@ -22,33 +22,10 @@ class UserScreen extends HookWidget {
 
     useEffect(() {
       carregarUsuarios();
-    //   userDataService.carregar();
-    // listaUsuario.value = userDataService.listaUsers;
-    // print({"oi",listaUsuario.value});
+
       return null;
     }, const []);
 
-
-    void atualizarUsuario(int index, Usuario novoUsuario) {
-      listaUsuario.value[index] = novoUsuario;
-      userDataService.saveUsers(listaUsuario.value);
-      carregarUsuarios();
-    }
-
-    Future<void> edicaocallback(int index) async {
-      Usuario? novaUsuario = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => UsuarioCadastro(
-            titulo: AppLocalizations.of(context)!.userTitleEdit,
-            usuarioAtual: listaUsuario.value[index]
-          ),
-        ),
-      );
-      if (novaUsuario != null) {
-        atualizarUsuario(index, novaUsuario);
-      }
-    }
 
 
     return Scaffold(
@@ -61,9 +38,28 @@ class UserScreen extends HookWidget {
             return UsuarioCard(
               cardTitle: listaUsuario.value[index].nome,
               cardSubtitle: listaUsuario.value[index].email,
+
               onEditPressed: () async {
-                edicaocallback(index);
+                Usuario? novaUsuario = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UsuarioCadastro(
+                      titulo: AppLocalizations.of(context)!.userTitleEdit,
+                      usuarioAtual: listaUsuario.value[index]
+                    ),
+                  ),
+                );
+                if (novaUsuario != null) {
+                  userDataService.atualizarUsuario(
+                    listaUsers: listaUsuario.value,
+                    novoUsuario: novaUsuario,
+                    index: index,
+                    funcaoCarregar: carregarUsuarios
+
+                  );
+                }
               },
+              
               onDeletePressed: () {
                 userDataService.deleteUser(listaUsuario.value[index], carregarUsuarios);
                 
