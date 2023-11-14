@@ -54,8 +54,8 @@ class UserDataService {
     await file.writeAsString(content);
   }
 
-  void deleteUser(List<Usuario> users, int index) {
-    users[index].status = 'x';
+  void deleteUser(Usuario user) {
+    user.status = 'x';
   }
 }
 

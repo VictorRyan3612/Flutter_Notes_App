@@ -25,13 +25,10 @@ class UserScreen extends HookWidget {
       return null;
     }, const []);
 
-    Future<void> salvarUser() async {
-      await userDataService.saveUsers(listaUsuario.value);
-    }
 
     void atualizarUsuario(int index, Usuario novoUsuario) {
       listaUsuario.value[index] = novoUsuario;
-      salvarUser();
+      userDataService.saveUsers(listaUsuario.value);
       carregarUsuarios();
     }
 
@@ -51,8 +48,8 @@ class UserScreen extends HookWidget {
     }
 
     void deleteCallback(int index) {
-      userDataService.deleteUser(listaUsuario.value, index);
-      salvarUser();
+      userDataService.deleteUser(listaUsuario.value[index]);
+      userDataService.saveUsers(listaUsuario.value);
       carregarUsuarios();
     }
 
@@ -89,7 +86,7 @@ class UserScreen extends HookWidget {
           );
           if (novaUsuario != null) {
             listaUsuario.value = [...listaUsuario.value, novaUsuario];
-            salvarUser();
+            userDataService.saveUsers(listaUsuario.value);
           }
         },
         child: const Icon(Icons.add),
