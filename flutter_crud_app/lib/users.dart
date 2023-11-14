@@ -82,9 +82,7 @@ class UserScreen extends HookWidget {
         MaterialPageRoute(
           builder: (context) => UsuarioCadastro(
             titulo: AppLocalizations.of(context)!.userTitleEdit,
-            nomeExistente: listaUsuario.value[index].nome,
-            emailExistente: listaUsuario.value[index].email,
-            cpfExistense: listaUsuario.value[index].cpf,
+            usuarioAtual: listaUsuario.value[index]
           ),
         ),
       );
@@ -144,24 +142,19 @@ class UserScreen extends HookWidget {
 
 class UsuarioCadastro extends HookWidget {
   final String titulo;
-  final String? nomeExistente;
-  final String? emailExistente;
-  final String? cpfExistense;
+  final Usuario? usuarioAtual;
 
   const UsuarioCadastro({
     Key? key,
     required this.titulo,
-    this.nomeExistente,
-    this.emailExistente,
-    this.cpfExistense,
+    this.usuarioAtual
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final nomeController = useTextEditingController(text: nomeExistente ?? '');
-    final emailController = useTextEditingController(text: emailExistente ?? '');
-    final cpfController = useTextEditingController(text: cpfExistense ?? '');
-
+    final nomeController = useTextEditingController(text: usuarioAtual?.nome ?? '');
+    final emailController = useTextEditingController(text: usuarioAtual?.email ?? '');
+    final cpfController = useTextEditingController(text: usuarioAtual?.cpf ?? '');
     return Scaffold(
       appBar: AppBar(
         title: Text(titulo),
@@ -177,7 +170,6 @@ class UsuarioCadastro extends HookWidget {
                 labelText: AppLocalizations.of(context)!.userFieldName,
               ),
             ),
-            const SizedBox(height: 8.0),
             TextField(
               controller: emailController,
               decoration:  InputDecoration(
