@@ -48,7 +48,6 @@ class _UserScreenState extends State<UserScreen> {
       if (file.existsSync()) {
 
         String content = await file.readAsString();
-        print("content =($content)");
         if (content != '') {
           List<dynamic> jsonList = json.decode(content);
           setState(() {

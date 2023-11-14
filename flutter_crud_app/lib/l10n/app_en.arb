@@ -1,4 +1,10 @@
 {
-   "language": "english",
-   "mainapptitle": "Main Menu"
+   "language": "English",
+   "mainapptitle": "Main Menu",
+   "usercardtitle": "Users",
+   "configscardtitle": "Configs",
+   "configspagetitle": "Configs Screen",
+   "configsheader": "General",
+   "configsmodetheme": "Dark Mode",
+   "configslanguagepick": "Select Language"
 }

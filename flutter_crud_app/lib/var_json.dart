@@ -1,20 +1,16 @@
-final List<Map<String, dynamic>> menuItens = [
-  {
-    'title': 'Usuários',
-    'rota': '/users'
-  },
-  {
-    'title': 'Configurações',
-    'rota': '/configs'
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class CardsMenu {
+  static List<Map<String, String>> getCards(context) {
+    return [
+      {
+        "title": AppLocalizations.of(context)!.usercardtitle,
+        "rota": '/users',
+      },
+      {
+        "title": AppLocalizations.of(context)!.configscardtitle,
+        "rota": '/configs',
+      },
+    ];
   }
-];
-final List<Map<String, dynamic>> menuUsers = [
-  {
-    'title': 'Cadastrar',
-    'rota': '/users/create'
-  },
-  {
-    'title': 'Listar',
-    'rota': '/users/read'
-  },
-];
+}
