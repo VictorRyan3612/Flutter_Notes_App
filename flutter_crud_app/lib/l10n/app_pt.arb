@@ -1,6 +1,10 @@
 {
-   "language": "portuguese",
+   "language": "Portuguese",
    "mainapptitle": "Menu Principal",
    "usercardtitle": "Usuários",
-   "configcardtitle": "Configurações"
+   "configscardtitle": "Configurações",
+   "configspagetitle": "Tela de Configurações",
+   "configsheader": "Geral",
+   "configsmodetheme": "Modo Noturno",
+   "configslanguagepick": "Selecionar Idioma"
 }

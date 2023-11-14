@@ -8,7 +8,7 @@ class CardsMenu {
         "rota": '/users',
       },
       {
-        "title": AppLocalizations.of(context)!.configcardtitle,
+        "title": AppLocalizations.of(context)!.configscardtitle,
         "rota": '/configs',
       },
     ];

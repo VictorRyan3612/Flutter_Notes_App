@@ -17,7 +17,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tela de configurações'),
+        title: Text(AppLocalizations.of(context)!.configspagetitle),
       ),
 
 
@@ -33,13 +33,13 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                   children: [
                     CardSettingsSection(
                       header: CardSettingsHeader(
-                        label: 'Geral',
+                        label: AppLocalizations.of(context)!.configsheader,
                       ),
                       children: [
                         CardSettingsSwitch(
                           trueLabel: '', 
                           falseLabel: '',
-                          label: 'Modo noturno',
+                          label: AppLocalizations.of(context)!.configsmodetheme,
                           initialValue: true,
                           onChanged: (value) {
                             if (currentBrightness.value == Brightness.dark) {
@@ -51,7 +51,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                           },
                         ),
                         CardSettingsListPicker(
-                          label: "Idioma",
+                          label: AppLocalizations.of(context)!.configslanguagepick,
                           items: AppLocalizations.supportedLocales,
                           initialItem: currentLocale.value,
                           onChanged: (value1) => currentLocale.value = value1!,
