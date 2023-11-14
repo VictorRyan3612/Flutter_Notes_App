@@ -13,15 +13,18 @@ class UserScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     // final userListNotifier = userDataService.userListNotifier; 
-    final listaUsuario = useState<List<Usuario>>([]);;
+    final listaUsuario = useState<List<Usuario>>([]);
 
     Future<void> carregarUsuarios() async {
-      listaUsuario.value = await userDataService.carregarUsuarios();
+      listaUsuario.value = await userDataService.loadUsers();
     }
 
 
     useEffect(() {
       carregarUsuarios();
+    //   userDataService.carregar();
+    // listaUsuario.value = userDataService.listaUsers;
+    // print({"oi",listaUsuario.value});
       return null;
     }, const []);
 
@@ -47,11 +50,7 @@ class UserScreen extends HookWidget {
       }
     }
 
-    void deleteCallback(int index) {
-      userDataService.deleteUser(listaUsuario.value[index]);
-      userDataService.saveUsers(listaUsuario.value);
-      carregarUsuarios();
-    }
+    
 
     return Scaffold(
       appBar: MyAppBar(),
@@ -67,7 +66,7 @@ class UserScreen extends HookWidget {
                 edicaocallback(index);
               },
               onDeletePressed: () {
-                deleteCallback(index);
+                userDataService.deleteUser(listaUsuario.value[index]);
               },
             );
           } else {

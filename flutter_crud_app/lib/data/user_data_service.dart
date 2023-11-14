@@ -28,9 +28,10 @@ class Usuario {
 }
 
 class UserDataService {
-   final ValueNotifier<List<Usuario>> _userListNotifier = ValueNotifier<List<Usuario>>([]);
+  final ValueNotifier<List<Usuario>> _userListNotifier = ValueNotifier<List<Usuario>>([]);
   ValueNotifier<List<Usuario>> get userListNotifier => _userListNotifier;
-
+  
+  List<Usuario> listaUsers =[];
   Future<List<Usuario>> loadUsers() async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
@@ -39,21 +40,29 @@ class UserDataService {
       String content = await file.readAsString();
       if (content != '') {
         List<dynamic> jsonList = json.decode(content);
-        return jsonList.map((json) => Usuario(
+        List<Usuario> userList = jsonList.map((json) => Usuario(
           nome: json['nome'],
           email: json['email'],
           cpf: json['cpf'],
           status: json['status'],
         )).toList();
+        _userListNotifier.value = userList;
+        return _userListNotifier.value;
       }
     }
 
-    return [];
+    return _userListNotifier.value;
   }
-  Future<List<Usuario>> carregarUsuarios() async {
-    List<Usuario> loadedUsers = await userDataService.loadUsers();
-    return loadedUsers;
+
+  carregar() async{
+    listaUsers = await userDataService.loadUsers();
+    print(listaUsers);
   }
+  Future<void> carregarUsuarios() async {
+    listaUsers = await userDataService.loadUsers();
+  }
+
+
   Future<void> saveUsers(List<Usuario> users) async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
@@ -63,6 +72,14 @@ class UserDataService {
 
   void deleteUser(Usuario user) {
     user.status = 'x';
+    saveUsers(listaUsers);
+    carregarUsuarios();
+  }
+
+  void atualizarUsuario(int index, Usuario novoUsuario) {
+    listaUsers[index] = novoUsuario;
+    userDataService.saveUsers(listaUsers);
+    carregarUsuarios();
   }
 }
 
