@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'widgets/user_card.dart';
@@ -80,7 +81,7 @@ class UserScreen extends HookWidget {
         context,
         MaterialPageRoute(
           builder: (context) => UsuarioCadastro(
-            titulo: "Editar Usuario",
+            titulo: AppLocalizations.of(context)!.usertitleedit,
             nomeExistente: listaUsuario.value[index].nome,
             emailExistente: listaUsuario.value[index].email,
             cpfExistense: listaUsuario.value[index].cpf,
@@ -100,7 +101,7 @@ class UserScreen extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bloco de Notas'),
+        title: Text(AppLocalizations.of(context)!.userpagetitle),
       ),
       body: ListView.builder(
         itemCount: listaUsuario.value.length,
@@ -127,7 +128,7 @@ class UserScreen extends HookWidget {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  const UsuarioCadastro(titulo: "Adicionar Usuario"),
+                UsuarioCadastro(titulo: AppLocalizations.of(context)!.usertitlecreate),
             ),
           );
           if (novaUsuario != null) {
@@ -149,7 +150,7 @@ class UsuarioCadastro extends HookWidget {
 
   const UsuarioCadastro({
     Key? key,
-    this.titulo = 'Adicionar Usuario',
+    required this.titulo,
     this.nomeExistente,
     this.emailExistente,
     this.cpfExistense,
@@ -172,21 +173,21 @@ class UsuarioCadastro extends HookWidget {
           children: [
             TextField(
               controller: nomeController,
-              decoration: const InputDecoration(
-                labelText: 'Nome',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.userfieldname,
               ),
             ),
             const SizedBox(height: 8.0),
             TextField(
               controller: emailController,
-              decoration: const InputDecoration(
-                labelText: 'email',
+              decoration:  InputDecoration(
+                labelText: AppLocalizations.of(context)!.userfieldemail,
               ),
             ),
             TextField(
               controller: cpfController,
-              decoration: const InputDecoration(
-                labelText: 'CPF',
+              decoration:  InputDecoration(
+                labelText: AppLocalizations.of(context)!.userfieldcpf,
               ),
             ),
             const SizedBox(height: 16.0),
@@ -203,12 +204,12 @@ class UsuarioCadastro extends HookWidget {
                   Navigator.pop(context, novoUsuario);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text("Por favor, preencha todos os campos.")),
+                    SnackBar(
+                      content: Text(AppLocalizations.of(context)!.useraviso)),
                   );
                 }
               },
-              child: const Text('Salvar Usuario'),
+              child: Text(AppLocalizations.of(context)!.usersave),
             ),
           ],
         ),

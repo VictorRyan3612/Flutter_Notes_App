@@ -1,7 +1,18 @@
 {
    "language": "English",
    "mainapptitle": "Main Menu",
+
    "usercardtitle": "Users",
+   "userpagetitle": "Users List",
+   "usertitlecreate": "Add User",
+   "usertitleedit": "Edit User",
+   "useraviso": "Please fill in all fields",
+   "usersave": "Save User",
+   "userfieldname": "Name",
+   "userfieldemail": "Email",
+   "userfieldcpf": "CPF",
+
+
    "configscardtitle": "Configs",
    "configspagetitle": "Configs Screen",
    "configsheader": "General",

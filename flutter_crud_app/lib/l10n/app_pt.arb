@@ -1,7 +1,18 @@
 {
    "language": "Portuguese",
    "mainapptitle": "Menu Principal",
+
    "usercardtitle": "Usuários",
+   "userpagetitle": "Lista de Usuários",
+   "usertitlecreate": "Adicionar Usuário",
+   "usertitleedit": "Editar Usuário",
+   "useraviso": "Por favor, preencha todos os campos",
+   "usersave": "Salvar Usuario",
+   "userfieldname": "Nome",
+   "userfieldemail": "Email",
+   "userfieldcpf": "CPF",
+
+
    "configscardtitle": "Configurações",
    "configspagetitle": "Tela de Configurações",
    "configsheader": "Geral",
