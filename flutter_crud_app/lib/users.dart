@@ -14,7 +14,7 @@ class UserScreen extends HookWidget {
   Widget build(BuildContext context) {
     // final userListNotifier = userDataService.userListNotifier; 
     final listaUsuario = useState<List<Usuario>>([]);
-
+    
     Future<void> carregarUsuarios() async {
       listaUsuario.value = await userDataService.loadUsers();
     }
@@ -29,7 +29,7 @@ class UserScreen extends HookWidget {
 
 
     return Scaffold(
-      appBar: MyAppBar(),
+      appBar: MyAppBar(callback: userDataService.filtrarEstadoAtual),
         
       body: ListView.builder(
         itemCount: listaUsuario.value.length,

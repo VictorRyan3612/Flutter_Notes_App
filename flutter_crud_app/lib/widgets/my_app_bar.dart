@@ -22,7 +22,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: TextField(
-                // onChanged: (value) => _callback(value),
+                onChanged: (value) => _callback(value),
                 decoration: const InputDecoration(
                   hintText: 'Filtrar',
                 ),

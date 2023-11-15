@@ -82,6 +82,32 @@ class UserDataService {
     userDataService.saveUsers(listaUsers);
     funcaoCarregar();
   }
+  
+  void filtrarEstadoAtual(String filtrar) {
+    List objetos = listaUsers;
+    if (objetos.isEmpty) return;
+
+    List objetosFiltrados = [];
+
+    if (filtrar != '') {
+      for (var objeto in objetos) {
+        if (objeto.toString().toLowerCase().contains(filtrar.toLowerCase())) {
+          objetosFiltrados.add(objeto);
+        }
+      }
+    }
+
+    else {
+      objetosFiltrados = listaUsers;
+    }
+    emitirEstadoFiltrado(objetosFiltrados);
+  }
+  void emitirEstadoFiltrado(List objetosFiltrados) {
+    var estado = List<Usuario>.from(listaUsers);
+    // estado['dataObjects'] = objetosFiltrados;
+    listaUsers = estado;
+  }
+
 }
 
 final UserDataService userDataService = UserDataService();
