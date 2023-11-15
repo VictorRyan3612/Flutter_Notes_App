@@ -68,7 +68,9 @@ class MainApp extends HookWidget {
         '/users': (context) => const UserScreen(),
         '/configs': (context) => TelaConfigs(
           currentBrightness: currentBrightness,
-          currentLocale: currentLocale)
+          currentLocale: currentLocale,
+          currentColor: currentColor
+          )
       }
     );
       
