@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_crud_app/screens/tela_configs.dart';
 import 'package:flutter_crud_app/screens/dashboard_menu.dart';
 import 'var_json.dart';
-import 'users.dart';
+import 'screens/users_list_screen.dart';
 import 'config/theme_config.dart';
 
 void main() {
