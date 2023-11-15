@@ -77,10 +77,10 @@ class UserDataService {
     await file.writeAsString(content);
   }
 
-  void deleteUser(Usuario user, Function() funcaoCarregar) {
+  void deleteUser(Usuario user) {
     user.status = 'x';
-    saveUsers(_userListNotifier.value);
-    funcaoCarregar();
+    saveUsers(usersStateNotifier.value['dataObjects']);
+    carregarUsuarios();
   }
 
   void atualizarUsuario({

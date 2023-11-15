@@ -6,7 +6,6 @@ import 'widgets/user_card.dart';
 import 'widgets/my_app_bar.dart';
 import 'data/user_data_service.dart';
 
-
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
@@ -15,84 +14,80 @@ class UserScreen extends StatelessWidget {
     userDataService.carregarUsuarios();
     return Scaffold(
       appBar: MyAppBar(callback: userDataService.filtrarEstadoAtual),
-        
       body: ValueListenableBuilder(
-        valueListenable: userDataService.usersStateNotifier, 
+        valueListenable: userDataService.usersStateNotifier,
 
-        builder: (_, value, __){
-          if ((value['dataObjects'].length == 0) && (value['status'] == TableStatus.ready)){
+        builder: (_, value, __) {
+          if ((value['dataObjects'].length == 0) && (value['status'] == TableStatus.ready)) {
             return const Center(
-              child: Text(
-                "Não tem nenhum Usuario",
+              child: Text("Não tem nenhum Usuario",
                 style: TextStyle(fontSize: 30)
               )
             );
-          }
+          } 
 
-          else{
+          else {
             return ListView.builder(
               itemCount: value['dataObjects'].length,
-              itemBuilder: (context, index) {             
+              itemBuilder: (context, index) {
                 switch (value['status']) {
                   case TableStatus.idle:
                     const Text("Em estado de espera");
 
-                  case TableStatus.ready :
-                  if (value['dataObjects'].isNotEmpty){
-                    return UsuarioCard(
-                      cardTitle: value['dataObjects'][index].nome,
-                      cardSubtitle: value['dataObjects'][index].email,
-
-                      onEditPressed: () async {
-                        Usuario? newUser = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UsuarioCadastro(
-                              titulo: AppLocalizations.of(context)!.userTitleEdit,
-                              usuarioAtual: value['dataObjects'][index]
-                            ),
-                          ),
+                  case TableStatus.ready:
+                    if (value['dataObjects'].isNotEmpty) {
+                      if (value['dataObjects'][index].status == 'v') {
+                        return UsuarioCard(
+                          cardTitle: value['dataObjects'][index].nome,
+                          cardSubtitle: value['dataObjects'][index].email,
+                          onEditPressed: () async {
+                            Usuario? newUser = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UsuarioCadastro(
+                                  titulo: AppLocalizations.of(context)!.userTitleEdit,
+                                  usuarioAtual: value['dataObjects'][index]
+                                ),
+                              ),
+                            );
+                            if (newUser != null) {
+                              userDataService.atualizarUsuario(
+                                listaUsers: value['dataObjects'],
+                                novoUsuario: newUser,
+                                index: index,
+                              );
+                            }
+                          },
+                          onDeletePressed: () {
+                            userDataService
+                                .deleteUser(value['dataObjects'][index]);
+                          },
                         );
-                        if (newUser != null) {
-                          userDataService.atualizarUsuario(
-                            listaUsers: value['dataObjects'],
-                            novoUsuario: newUser,
-                            index: index,
-                          );
-                        }
-                      },
-                      
-                      onDeletePressed: () {
-                        // userDataService.deleteUser(value['dataObjects'][index], userDataService.carregarUsuarios);
-                        
-                      },
-                    );
-                  
-                  } else{
-                    return const Center(
-                      child: Text(
-                        "Não tem nenhum Usuario",
-                        style: TextStyle(fontSize: 30)
-                      )
-                    );
-                  }
+                      }
+                    } 
+                    
+                    else {
+                      return const Center(
+                        child: Text(
+                          "Não tem nenhum Usuario",
+                          style: TextStyle(fontSize: 30)
+                        )
+                      );
+                    }
                 }
-              
               }
             );
-          
-        }
           }
-
+        }
+          
       ),
-      
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           Usuario? newUser = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                UsuarioCadastro(titulo: AppLocalizations.of(context)!.userTitleCreate),
+              builder: (context) => UsuarioCadastro(
+                titulo: AppLocalizations.of(context)!.userTitleCreate),
             ),
           );
           if (newUser != null) {
@@ -110,17 +105,17 @@ class UsuarioCadastro extends HookWidget {
   final String titulo;
   final Usuario? usuarioAtual;
 
-  const UsuarioCadastro({
-    Key? key,
-    required this.titulo,
-    this.usuarioAtual
-  }) : super(key: key);
+  const UsuarioCadastro({Key? key, required this.titulo, this.usuarioAtual})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final nomeController = useTextEditingController(text: usuarioAtual?.nome ?? '');
-    final emailController = useTextEditingController(text: usuarioAtual?.email ?? '');
-    final cpfController = useTextEditingController(text: usuarioAtual?.cpf ?? '');
+    final nomeController =
+        useTextEditingController(text: usuarioAtual?.nome ?? '');
+    final emailController =
+        useTextEditingController(text: usuarioAtual?.email ?? '');
+    final cpfController =
+        useTextEditingController(text: usuarioAtual?.cpf ?? '');
     return Scaffold(
       appBar: AppBar(
         title: Text(titulo),
@@ -138,13 +133,13 @@ class UsuarioCadastro extends HookWidget {
             ),
             TextField(
               controller: emailController,
-              decoration:  InputDecoration(
+              decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldEmail,
               ),
             ),
             TextField(
               controller: cpfController,
-              decoration:  InputDecoration(
+              decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldCpf,
               ),
             ),
@@ -163,7 +158,7 @@ class UsuarioCadastro extends HookWidget {
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(AppLocalizations.of(context)!.userAviso)),
+                        content: Text(AppLocalizations.of(context)!.userAviso)),
                   );
                 }
               },
