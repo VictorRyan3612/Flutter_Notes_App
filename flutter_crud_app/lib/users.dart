@@ -7,33 +7,15 @@ import 'widgets/my_app_bar.dart';
 import 'data/user_data_service.dart';
 
 
-class UserScreen extends HookWidget {
+class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // final userListNotifier = userDataService.userListNotifier; 
-    final listaUsuario = useState<List<Usuario>>([]);
-    
-    Future<void> carregarUsuarios() async {
-      listaUsuario.value = await userDataService.loadUsers();
-    }
-
-
-    useEffect(() {
-      carregarUsuarios();
-
-      return null;
-    }, const []);
-
-
-
+    userDataService.loadUsers;
     return Scaffold(
       appBar: MyAppBar(callback: userDataService.filtrarEstadoAtual),
         
-      // body: ListView.builder(
-      //   itemCount: listaUsuario.value.length,
-      //   itemBuilder: (context, index) {
       body: ValueListenableBuilder(
         valueListenable: userDataService.usersStateNotifier, 
         builder: (_, value, __){
@@ -43,8 +25,8 @@ class UserScreen extends HookWidget {
             itemBuilder: (context, index) {
               if (value[index].status == "v") {
                 return UsuarioCard(
-                  cardTitle: listaUsuario.value[index].nome,
-                  cardSubtitle: listaUsuario.value[index].email,
+                  cardTitle: value[index].nome,
+                  cardSubtitle: value[index].email,
 
                   onEditPressed: () async {
                     Usuario? novaUsuario = await Navigator.push(
@@ -52,23 +34,23 @@ class UserScreen extends HookWidget {
                       MaterialPageRoute(
                         builder: (context) => UsuarioCadastro(
                           titulo: AppLocalizations.of(context)!.userTitleEdit,
-                          usuarioAtual: listaUsuario.value[index]
+                          usuarioAtual: value[index]
                         ),
                       ),
                     );
                     if (novaUsuario != null) {
-                      userDataService.atualizarUsuario(
-                        listaUsers: listaUsuario.value,
-                        novoUsuario: novaUsuario,
-                        index: index,
-                        funcaoCarregar: carregarUsuarios
+                      // userDataService.atualizarUsuario(
+                      //   listaUsers: value,
+                      //   novoUsuario: novaUsuario,
+                      //   index: index,
+                      //   funcaoCarregar: userDataService.carregarUsuarios
 
-                      );
+                      // );
                     }
                   },
                   
                   onDeletePressed: () {
-                    userDataService.deleteUser(listaUsuario.value[index], carregarUsuarios);
+                    userDataService.deleteUser(value[index], userDataService.loadUsers);
                     
                   },
                 );
@@ -96,8 +78,8 @@ class UserScreen extends HookWidget {
             ),
           );
           if (novaUsuario != null) {
-            listaUsuario.value = [...listaUsuario.value, novaUsuario];
-            userDataService.saveUsers(listaUsuario.value);
+            // listaUsuario.value = [...listaUsuario.value, novaUsuario];
+            // userDataService.saveUsers(listaUsuario.value);
           }
         },
         child: const Icon(Icons.add),
