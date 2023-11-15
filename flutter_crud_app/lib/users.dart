@@ -12,60 +12,80 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    userDataService.loadUsers;
+    userDataService.carregarUsuarios();
     return Scaffold(
       appBar: MyAppBar(callback: userDataService.filtrarEstadoAtual),
         
       body: ValueListenableBuilder(
         valueListenable: userDataService.usersStateNotifier, 
+
         builder: (_, value, __){
-          print("${value}");
-          ListView.builder(
-            itemCount: value.length,
-            itemBuilder: (context, index) {
-              if (value[index].status == "v") {
-                return UsuarioCard(
-                  cardTitle: value[index].nome,
-                  cardSubtitle: value[index].email,
+          if ((value['dataObjects'].length == 0) && (value['status'] == TableStatus.ready)){
+            return const Center(
+              child: Text(
+                "Não tem nenhum Usuario",
+                style: TextStyle(fontSize: 30)
+              )
+            );
+          }
 
-                  onEditPressed: () async {
-                    Usuario? novaUsuario = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => UsuarioCadastro(
-                          titulo: AppLocalizations.of(context)!.userTitleEdit,
-                          usuarioAtual: value[index]
-                        ),
-                      ),
+          else{
+            return ListView.builder(
+              itemCount: value['dataObjects'].length,
+              itemBuilder: (context, index) {             
+                switch (value['status']) {
+                  case TableStatus.idle:
+                    const Text("Em estado de espera");
+
+                  case TableStatus.ready :
+                  if (value['dataObjects'].isNotEmpty){
+                    return UsuarioCard(
+                      cardTitle: value['dataObjects'][index].nome,
+                      cardSubtitle: value['dataObjects'][index].email,
+
+                      onEditPressed: () async {
+                        Usuario? novaUsuario = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UsuarioCadastro(
+                              titulo: AppLocalizations.of(context)!.userTitleEdit,
+                              usuarioAtual: value['dataObjects'][index]
+                            ),
+                          ),
+                        );
+                        if (novaUsuario != null) {
+                          // userDataService.atualizarUsuario(
+                          //   listaUsers: value,
+                          //   novoUsuario: novaUsuario,
+                          //   index: index,
+                          //   funcaoCarregar: userDataService.carregarUsuarios
+
+                          // );
+                        }
+                      },
+                      
+                      onDeletePressed: () {
+                        // userDataService.deleteUser(value['dataObjects'][index], userDataService.loadUsers);
+                        
+                      },
                     );
-                    if (novaUsuario != null) {
-                      // userDataService.atualizarUsuario(
-                      //   listaUsers: value,
-                      //   novoUsuario: novaUsuario,
-                      //   index: index,
-                      //   funcaoCarregar: userDataService.carregarUsuarios
-
-                      // );
-                    }
-                  },
                   
-                  onDeletePressed: () {
-                    userDataService.deleteUser(value[index], userDataService.loadUsers);
-                    
-                  },
-                );
-              }
-              else {
-                return Container();
-              }
+                  } else{
+                    return const Center(
+                      child: Text(
+                        "Não tem nenhum Usuario",
+                        style: TextStyle(fontSize: 30)
+                      )
+                    );
+                  }
+                }
               
-            
-            }
-          );
-          return const Center(
-            child: Text("Erro desconhecido")
-          );
+              }
+            );
+          
         }
+          }
+
       ),
       
       floatingActionButton: FloatingActionButton(

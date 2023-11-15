@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
 
+enum TableStatus{idle,loading,ready,error}
+
 class Usuario {
   late String nome;
   late String email;
@@ -33,6 +35,7 @@ class UserDataService {
 
   final ValueNotifier<Map<String,dynamic>> usersStateNotifier = 
     ValueNotifier({
+      'status':TableStatus.idle,
       'dataObjects':[],
     }
   );
@@ -51,9 +54,7 @@ class UserDataService {
           cpf: json['cpf'],
           status: json['status'],
         )).toList();
-        _userListNotifier.value = userList;
-        listaUsers =_userListNotifier.value;
-        return _userListNotifier.value;
+        return userList;
       }
     }
 
@@ -61,7 +62,14 @@ class UserDataService {
   }
 
 
-
+  void carregarUsuarios() async {
+    var json = await loadUsers();
+    usersStateNotifier.value = {
+      'status':TableStatus.ready,
+      'dataObjects': json
+    };
+    listaUsers = json;
+  }
   Future<void> saveUsers(List<Usuario> users) async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
