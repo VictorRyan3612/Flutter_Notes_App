@@ -30,7 +30,12 @@ class Usuario {
 class UserDataService {
   final ValueNotifier<List<Usuario>> _userListNotifier = ValueNotifier<List<Usuario>>([]);
   ValueNotifier<List<Usuario>> get userListNotifier => _userListNotifier;
-  
+
+  final ValueNotifier<Map<String,dynamic>> usersStateNotifier = 
+    ValueNotifier({
+      'dataObjects':[],
+    }
+  );
   List<Usuario> listaUsers =[];
   Future<List<Usuario>> loadUsers() async {
     Directory directory = await getApplicationSupportDirectory();
@@ -82,7 +87,7 @@ class UserDataService {
     userDataService.saveUsers(listaUsers);
     funcaoCarregar();
   }
-  
+
   void filtrarEstadoAtual(String filtrar) {
     List objetos = listaUsers;
     if (objetos.isEmpty) return;

@@ -31,45 +31,61 @@ class UserScreen extends HookWidget {
     return Scaffold(
       appBar: MyAppBar(callback: userDataService.filtrarEstadoAtual),
         
-      body: ListView.builder(
-        itemCount: listaUsuario.value.length,
-        itemBuilder: (context, index) {
-          if (listaUsuario.value[index].status == "v") {
-            return UsuarioCard(
-              cardTitle: listaUsuario.value[index].nome,
-              cardSubtitle: listaUsuario.value[index].email,
+      // body: ListView.builder(
+      //   itemCount: listaUsuario.value.length,
+      //   itemBuilder: (context, index) {
+      body: ValueListenableBuilder(
+        valueListenable: userDataService.usersStateNotifier, 
+        builder: (_, value, __){
+          print("${value}");
+          ListView.builder(
+            itemCount: value.length,
+            itemBuilder: (context, index) {
+              if (value[index].status == "v") {
+                return UsuarioCard(
+                  cardTitle: listaUsuario.value[index].nome,
+                  cardSubtitle: listaUsuario.value[index].email,
 
-              onEditPressed: () async {
-                Usuario? novaUsuario = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UsuarioCadastro(
-                      titulo: AppLocalizations.of(context)!.userTitleEdit,
-                      usuarioAtual: listaUsuario.value[index]
-                    ),
-                  ),
+                  onEditPressed: () async {
+                    Usuario? novaUsuario = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UsuarioCadastro(
+                          titulo: AppLocalizations.of(context)!.userTitleEdit,
+                          usuarioAtual: listaUsuario.value[index]
+                        ),
+                      ),
+                    );
+                    if (novaUsuario != null) {
+                      userDataService.atualizarUsuario(
+                        listaUsers: listaUsuario.value,
+                        novoUsuario: novaUsuario,
+                        index: index,
+                        funcaoCarregar: carregarUsuarios
+
+                      );
+                    }
+                  },
+                  
+                  onDeletePressed: () {
+                    userDataService.deleteUser(listaUsuario.value[index], carregarUsuarios);
+                    
+                  },
                 );
-                if (novaUsuario != null) {
-                  userDataService.atualizarUsuario(
-                    listaUsers: listaUsuario.value,
-                    novoUsuario: novaUsuario,
-                    index: index,
-                    funcaoCarregar: carregarUsuarios
-
-                  );
-                }
-              },
+              }
+              else {
+                return Container();
+              }
               
-              onDeletePressed: () {
-                userDataService.deleteUser(listaUsuario.value[index], carregarUsuarios);
-                
-              },
-            );
-          } else {
-            return Container();
-          }
-        },
+            
+            }
+          );
+          return const Center(
+            child: Text("Erro desconhecido")
+          );
+        }
       ),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           Usuario? novaUsuario = await Navigator.push(
