@@ -10,6 +10,7 @@ import 'package:flutter_crud_app/screens/tela_configs.dart';
 import 'package:flutter_crud_app/screens/dashboard_menu.dart';
 import 'var_json.dart';
 import 'users.dart';
+import 'config/theme_config.dart';
 
 void main() {
   runApp(const MainApp());
@@ -22,6 +23,7 @@ class MainApp extends HookWidget {
   Widget build(BuildContext context) {
     final currentBrightness = useState(Brightness.dark);
     final currentLocale = useState(const Locale("en"));
+    final currentColor = useState(Colors.red);
 
     Future<void> loadSettings() async {
       final prefs = await SharedPreferences.getInstance();
@@ -32,24 +34,9 @@ class MainApp extends HookWidget {
       final languageCode = prefs.getString('languageCode') ?? 'en';
       currentLocale.value = Locale(languageCode);
     }
-    
-    final darkTheme = ThemeData(
-      snackBarTheme: const SnackBarThemeData(
-        backgroundColor: Colors.black, 
-        contentTextStyle: TextStyle(color: Colors.white)
-      ),
-      brightness: Brightness.dark,
-      scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)
-    );
-    final lightTheme = ThemeData(
-      snackBarTheme: const SnackBarThemeData(
-        backgroundColor: Colors.white, 
-        contentTextStyle: TextStyle(color: Colors.black)
-      ),
-      brightness: Brightness.light,
-      primarySwatch: Colors.blue,
-      scaffoldBackgroundColor: const Color.fromARGB(255, 175, 175, 175)
-    );
+
+    // /config/theme_config.dart
+    final finalTheme = setTheme(currentBrightness.value, currentColor.value);
 
     loadSettings();
 
@@ -66,12 +53,11 @@ class MainApp extends HookWidget {
         Locale('pt')
         ],
       locale: currentLocale.value,
-      
       debugShowCheckedModeBanner:false,
 
       
-      theme: currentBrightness.value == Brightness.dark ? darkTheme : lightTheme,
-
+      // color: currentColor.value,
+      theme: finalTheme,
       
       initialRoute: '/',
       routes: {
@@ -88,4 +74,3 @@ class MainApp extends HookWidget {
       
   }
 }
-
