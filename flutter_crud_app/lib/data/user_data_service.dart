@@ -87,13 +87,12 @@ class UserDataService {
     required List<Usuario> listaUsers,
     required int index,
     required Usuario novoUsuario,
-    required Function() funcaoCarregar,
   }) {
 
     listaUsers[index] = novoUsuario;
 
     userDataService.saveUsers(listaUsers);
-    funcaoCarregar();
+    carregarUsuarios();
   }
 
   void filtrarEstadoAtual(String filtrar) {

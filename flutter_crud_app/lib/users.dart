@@ -44,7 +44,7 @@ class UserScreen extends StatelessWidget {
                       cardSubtitle: value['dataObjects'][index].email,
 
                       onEditPressed: () async {
-                        Usuario? novaUsuario = await Navigator.push(
+                        Usuario? newUser = await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => UsuarioCadastro(
@@ -53,19 +53,17 @@ class UserScreen extends StatelessWidget {
                             ),
                           ),
                         );
-                        if (novaUsuario != null) {
-                          // userDataService.atualizarUsuario(
-                          //   listaUsers: value,
-                          //   novoUsuario: novaUsuario,
-                          //   index: index,
-                          //   funcaoCarregar: userDataService.carregarUsuarios
-
-                          // );
+                        if (newUser != null) {
+                          userDataService.atualizarUsuario(
+                            listaUsers: value['dataObjects'],
+                            novoUsuario: newUser,
+                            index: index,
+                          );
                         }
                       },
                       
                       onDeletePressed: () {
-                        // userDataService.deleteUser(value['dataObjects'][index], userDataService.loadUsers);
+                        // userDataService.deleteUser(value['dataObjects'][index], userDataService.carregarUsuarios);
                         
                       },
                     );
@@ -90,15 +88,15 @@ class UserScreen extends StatelessWidget {
       
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Usuario? novaUsuario = await Navigator.push(
+          Usuario? newUser = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) =>
                 UsuarioCadastro(titulo: AppLocalizations.of(context)!.userTitleCreate),
             ),
           );
-          if (novaUsuario != null) {
-            // listaUsuario.value = [...listaUsuario.value, novaUsuario];
+          if (newUser != null) {
+            // listaUsuario.value = [...listaUsuario.value, newUser];
             // userDataService.saveUsers(listaUsuario.value);
           }
         },
@@ -156,12 +154,12 @@ class UsuarioCadastro extends HookWidget {
                 if (nomeController.text.isNotEmpty &&
                     emailController.text.isNotEmpty &&
                     cpfController.text.isNotEmpty) {
-                  Usuario novoUsuario = Usuario(
+                  Usuario newUser = Usuario(
                     nome: nomeController.text,
                     email: emailController.text,
                     cpf: cpfController.text,
                   );
-                  Navigator.pop(context, novoUsuario);
+                  Navigator.pop(context, newUser);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
