@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-ThemeData setTheme(Brightness corTema, MaterialColor corDestaque) {
+ThemeData setTheme(Brightness corTema, corName) {
+  var corColors = searchCodCorByName(corName);
   ThemeData finalTema;
   if (corTema == Brightness.dark){
     finalTema = ThemeData(
@@ -19,7 +20,7 @@ ThemeData setTheme(Brightness corTema, MaterialColor corDestaque) {
         contentTextStyle: TextStyle(color: Colors.black)
       ),
       brightness: Brightness.light,
-      primarySwatch: corDestaque,
+      primarySwatch: corColors,
       scaffoldBackgroundColor: const Color.fromARGB(255, 175, 175, 175)
     );
   }
@@ -27,13 +28,21 @@ ThemeData setTheme(Brightness corTema, MaterialColor corDestaque) {
 } 
 
 
-
+searchNomeByCod(codCor){
+  return varColor.firstWhere(
+    (item) => item['color'] == codCor,
+    orElse: () => varColor[0]
+  )['nome'];
+  
+}
+searchCodCorByName(str){
+  return varColor.firstWhere(
+    (item) => item['nome'] == str,
+    orElse: () => varColor[0]
+  )['color'];
+}
 
 var varColor = [
-  {
-    'nome': 'Black',
-    'color': Colors.black
-  },
   {
     'nome': 'Blue',
     'color': Colors.blue
@@ -45,6 +54,10 @@ var varColor = [
   {
     'nome': 'Green',
     'color': Colors.green
+  },
+  {
+    'nome': 'Gray',
+    'color': Colors.grey
   },
   {
     'nome': 'Orange',
@@ -61,10 +74,6 @@ var varColor = [
   {
     'nome': 'Red',
     'color': Colors.red
-  },
-  {
-    'nome': 'White',
-    'color': Colors.white
   },
   {
     'nome': 'Yellow',

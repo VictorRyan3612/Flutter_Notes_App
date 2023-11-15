@@ -8,7 +8,7 @@ import '../config/theme_config.dart';
 class TelaConfigs extends HookWidget implements PreferredSizeWidget{
   final ValueNotifier<Brightness> currentBrightness;
   final ValueNotifier<Locale> currentLocale;
-  final ValueNotifier<Color> currentColor;
+  final ValueNotifier<String> currentColor;
 
   const TelaConfigs({
     required this.currentBrightness, 
@@ -27,6 +27,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
 
       prefs.setBool('isDarkMode', currentBrightness.value == Brightness.dark);
       prefs.setString('languageCode', currentLocale.value.languageCode);
+      prefs.setString('colorTheme', currentColor.value);
     }
 
     return Scaffold(
@@ -74,15 +75,17 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                             currentLocale.value = value1!;
                             saveSettings();
                           }   
-                        ),CardSettingsListPicker(
+                        ),
+                        CardSettingsListPicker(
                           label: "Colors",
                           items: varColor.map((item) => item['nome']).toList(),
                           
-                          initialItem: varColor.firstWhere(
-                            (item) => item['color'] == currentColor.value,
-                            orElse: () => varColor[0]
-                          )['nome'],
-                          
+                          initialItem: currentColor.value,
+
+                          onChanged: (value2) {
+                            currentColor.value = value2.toString();
+                            saveSettings();
+                          },
                         )
                       ],
                     ),

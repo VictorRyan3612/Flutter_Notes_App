@@ -23,7 +23,7 @@ class MainApp extends HookWidget {
   Widget build(BuildContext context) {
     final currentBrightness = useState(Brightness.dark);
     final currentLocale = useState(const Locale("en"));
-    final currentColor = useState(Colors.red);
+    final currentColor = useState('Blue');
 
     Future<void> loadSettings() async {
       final prefs = await SharedPreferences.getInstance();
@@ -33,6 +33,8 @@ class MainApp extends HookWidget {
 
       final languageCode = prefs.getString('languageCode') ?? 'en';
       currentLocale.value = Locale(languageCode);
+      final corTheme = prefs.getString('colorTheme') ?? 'Blue';
+      currentColor.value = corTheme;
     }
 
     // /config/theme_config.dart
