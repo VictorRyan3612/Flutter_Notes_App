@@ -65,6 +65,8 @@ class UserScreen extends StatelessWidget {
                             userDataService.deleteUser(value['dataObjects'][index]);
                           },
                         );
+                      }else{
+                        return Container();
                       }
                     } 
                     
@@ -93,8 +95,7 @@ class UserScreen extends StatelessWidget {
             ),
           );
           if (newUser != null) {
-            // listaUsuario.value = [...listaUsuario.value, newUser];
-            // userDataService.saveUsers(listaUsuario.value);
+            userDataService.criarUser(newUser);
           }
         },
         child: const Icon(Icons.add),

@@ -77,6 +77,14 @@ class UserDataService {
     await file.writeAsString(content);
   }
 
+  void criarUser(Usuario newUser){
+    usersStateNotifier.value['dataObjects'] = [...usersStateNotifier.value['dataObjects'], newUser];
+    usersStateNotifier.value['dataObjects'] = List<Usuario>.from(usersStateNotifier.value['dataObjects']);
+
+    saveUsers(usersStateNotifier.value['dataObjects']);
+    carregarUsuarios();
+  }
+
   void deleteUser(Usuario user) {
     user.status = 'x';
     saveUsers(usersStateNotifier.value['dataObjects']);
