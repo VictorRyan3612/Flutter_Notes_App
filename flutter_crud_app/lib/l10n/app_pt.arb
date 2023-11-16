@@ -11,6 +11,10 @@
    "userFieldName": "Nome",
    "userFieldEmail": "Email",
    "userFieldCpf": "CPF",
+   "userWait": "Em estado de espera",
+   "userFilter": "Filtrar",
+   "userNoUser": "Não foi encontrado nenhum Usuário",
+   "userEmpty": "Não tem nenhum Usuario",
 
 
    "configsCardTitle": "Configurações",

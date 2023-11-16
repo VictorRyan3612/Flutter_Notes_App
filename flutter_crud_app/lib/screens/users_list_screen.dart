@@ -20,8 +20,8 @@ class UserScreen extends StatelessWidget {
 
         builder: (_, value, __) {
           if ((value['dataObjects'].length == 0) && (value['status'] == TableStatus.ready)) {
-            return const Center(
-              child: Text("Não foi encontrado nenhum Usuário",
+            return Center(
+              child: Text(AppLocalizations.of(context)!.userNoUser,
                 style: TextStyle(fontSize: 30)
               )
             );
@@ -33,7 +33,7 @@ class UserScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 switch (value['status']) {
                   case TableStatus.idle:
-                    const Text("Em estado de espera");
+                    Text(AppLocalizations.of(context)!.userWait);
 
                   case TableStatus.ready:
                     if (value['dataObjects'].isNotEmpty) {
@@ -71,9 +71,9 @@ class UserScreen extends StatelessWidget {
                     } 
                     
                     else {
-                      return const Center(
+                      return Center(
                         child: Text(
-                          "Não tem nenhum Usuario",
+                          AppLocalizations.of(context)!.userEmpty,
                           style: TextStyle(fontSize: 30)
                         )
                       );
