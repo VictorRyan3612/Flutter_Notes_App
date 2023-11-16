@@ -39,6 +39,8 @@ class UserDataService {
       'dataObjects':[],
     }
   );
+  bool isSorted = false;
+
   List<Usuario> listaOriginal =[];
   Future<List<Usuario>> loadUsers() async {
     Directory directory = await getApplicationSupportDirectory();
@@ -70,6 +72,8 @@ class UserDataService {
     };
     listaOriginal = json;
   }
+
+
   Future<void> saveUsers(List<Usuario> users) async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
@@ -128,7 +132,19 @@ class UserDataService {
     usersStateNotifier.value = estado;
   }
 
-  
+  ordenar(){
+    var estado = Map<String, dynamic>.from(usersStateNotifier.value);
+
+    if (!isSorted){
+      estado['dataObjects'].sort((Usuario a, Usuario b) => a.nome.compareTo(b.nome));
+      usersStateNotifier.value = estado;
+      isSorted= true;
+    } 
+    else{
+      estado['dataObjects'] = List.from(estado['dataObjects'].reversed);
+      usersStateNotifier.value = estado;
+    }
+  }
   
   
 

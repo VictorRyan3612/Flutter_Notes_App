@@ -14,7 +14,10 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     userDataService.carregarUsuarios();
     return Scaffold(
-      appBar: MyAppBar(callback: userDataService.filtrarEstadoAtual),
+      appBar: MyAppBar(
+        callbackFilter: userDataService.filtrarEstadoAtual,
+        callbackSort: userDataService.ordenar,
+        ),
       body: ValueListenableBuilder(
         valueListenable: userDataService.usersStateNotifier,
 
