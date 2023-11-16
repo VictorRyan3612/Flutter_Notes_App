@@ -104,28 +104,28 @@ class UserDataService {
   }
 
   void filtrarEstadoAtual(String filtrar) {
-    List objetos = listaUsers;
-    if (objetos.isEmpty) return;
+    List<Usuario> objetosOriginais = listaUsers;
+    if (objetosOriginais.isEmpty) return;
 
-    List objetosFiltrados = [];
-
+    List<Usuario> objetosFiltrados = [];
     if (filtrar != '') {
-      for (var objeto in objetos) {
-        if (objeto.toString().toLowerCase().contains(filtrar.toLowerCase())) {
-          objetosFiltrados.add(objeto);
+      for (var objetoInd in objetosOriginais) {
+        if (objetoInd.nome.toLowerCase().contains(filtrar.toLowerCase())) {
+          objetosFiltrados.add(objetoInd);
         }
       }
+    } else {
+      objetosFiltrados = objetosOriginais;
     }
+    
 
-    else {
-      objetosFiltrados = listaUsers;
-    }
     emitirEstadoFiltrado(objetosFiltrados);
   }
-  void emitirEstadoFiltrado(List objetosFiltrados) {
-    var estado = List<Usuario>.from(listaUsers);
-    // estado['dataObjects'] = objetosFiltrados;
-    listaUsers = estado;
+
+  void emitirEstadoFiltrado(List<Usuario> objetosFiltrados) {
+    var estado = Map<String, dynamic>.from(usersStateNotifier.value);
+    estado['dataObjects'] = objetosFiltrados;
+    usersStateNotifier.value = estado;
   }
 
 }

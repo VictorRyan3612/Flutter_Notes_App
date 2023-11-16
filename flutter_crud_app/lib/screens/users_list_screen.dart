@@ -21,7 +21,7 @@ class UserScreen extends StatelessWidget {
         builder: (_, value, __) {
           if ((value['dataObjects'].length == 0) && (value['status'] == TableStatus.ready)) {
             return const Center(
-              child: Text("Não tem nenhum Usuario",
+              child: Text("Não foi encontrado nenhum Usuário",
                 style: TextStyle(fontSize: 30)
               )
             );
