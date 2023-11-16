@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
 
+enum TableStatus{idle,loading,ready,error}
+
 class Usuario {
   late String nome;
   late String email;
@@ -30,8 +32,16 @@ class Usuario {
 class UserDataService {
   final ValueNotifier<List<Usuario>> _userListNotifier = ValueNotifier<List<Usuario>>([]);
   ValueNotifier<List<Usuario>> get userListNotifier => _userListNotifier;
-  
-  List<Usuario> listaUsers =[];
+
+  final ValueNotifier<Map<String,dynamic>> usersStateNotifier = 
+    ValueNotifier({
+      'status':TableStatus.idle,
+      'dataObjects':[],
+    }
+  );
+  bool isSorted = false;
+
+  List<Usuario> listaOriginal =[];
   Future<List<Usuario>> loadUsers() async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
@@ -46,15 +56,22 @@ class UserDataService {
           cpf: json['cpf'],
           status: json['status'],
         )).toList();
-        _userListNotifier.value = userList;
-        listaUsers =_userListNotifier.value;
-        return _userListNotifier.value;
+        return userList;
       }
     }
 
     return _userListNotifier.value;
   }
 
+
+  void carregarUsuarios() async {
+    var json = await loadUsers();
+    usersStateNotifier.value = {
+      'status':TableStatus.ready,
+      'dataObjects': json
+    };
+    listaOriginal = json;
+  }
 
 
   Future<void> saveUsers(List<Usuario> users) async {
@@ -64,49 +81,72 @@ class UserDataService {
     await file.writeAsString(content);
   }
 
-  void deleteUser(Usuario user, Function() funcaoCarregar) {
+  void criarUser(Usuario newUser){
+    usersStateNotifier.value['dataObjects'] = [...usersStateNotifier.value['dataObjects'], newUser];
+    usersStateNotifier.value['dataObjects'] = List<Usuario>.from(usersStateNotifier.value['dataObjects']);
+
+    saveUsers(usersStateNotifier.value['dataObjects']);
+    carregarUsuarios();
+  }
+
+  void deleteUser(Usuario user) {
     user.status = 'x';
-    saveUsers(_userListNotifier.value);
-    funcaoCarregar();
+    saveUsers(usersStateNotifier.value['dataObjects']);
+    carregarUsuarios();
   }
 
   void atualizarUsuario({
     required List<Usuario> listaUsers,
     required int index,
     required Usuario novoUsuario,
-    required Function() funcaoCarregar,
   }) {
 
     listaUsers[index] = novoUsuario;
 
     userDataService.saveUsers(listaUsers);
-    funcaoCarregar();
+    carregarUsuarios();
   }
-  
+
   void filtrarEstadoAtual(String filtrar) {
-    List objetos = listaUsers;
-    if (objetos.isEmpty) return;
+    List<Usuario> objetosOriginais = listaOriginal;
+    if (objetosOriginais.isEmpty) return;
 
-    List objetosFiltrados = [];
-
+    List<Usuario> objetosFiltrados = [];
     if (filtrar != '') {
-      for (var objeto in objetos) {
-        if (objeto.toString().toLowerCase().contains(filtrar.toLowerCase())) {
-          objetosFiltrados.add(objeto);
+      for (var objetoInd in objetosOriginais) {
+        if (objetoInd.nome.toLowerCase().contains(filtrar.toLowerCase())) {
+          objetosFiltrados.add(objetoInd);
         }
       }
+    } else {
+      objetosFiltrados = objetosOriginais;
     }
+    
 
-    else {
-      objetosFiltrados = listaUsers;
-    }
     emitirEstadoFiltrado(objetosFiltrados);
   }
-  void emitirEstadoFiltrado(List objetosFiltrados) {
-    var estado = List<Usuario>.from(listaUsers);
-    // estado['dataObjects'] = objetosFiltrados;
-    listaUsers = estado;
+
+  void emitirEstadoFiltrado(List<Usuario> objetosFiltrados) {
+    var estado = Map<String, dynamic>.from(usersStateNotifier.value);
+    estado['dataObjects'] = objetosFiltrados;
+    usersStateNotifier.value = estado;
   }
+
+  ordenar(){
+    var estado = Map<String, dynamic>.from(usersStateNotifier.value);
+
+    if (!isSorted){
+      estado['dataObjects'].sort((Usuario a, Usuario b) => a.nome.compareTo(b.nome));
+      usersStateNotifier.value = estado;
+      isSorted= true;
+    } 
+    else{
+      estado['dataObjects'] = List.from(estado['dataObjects'].reversed);
+      usersStateNotifier.value = estado;
+    }
+  }
+  
+  
 
 }
 
