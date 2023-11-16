@@ -6,11 +6,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // my packages
-import 'package:flutter_crud_app/screens/tela_configs.dart';
-import 'package:flutter_crud_app/screens/dashboard_menu.dart';
-import 'var_json.dart';
+import '/screens/tela_configs.dart';
+import '/screens/dashboard_menu.dart';
 import 'screens/users_list_screen.dart';
+import 'var_json.dart';
 import 'config/theme_config.dart';
+
 
 void main() {
   runApp(const MainApp());
