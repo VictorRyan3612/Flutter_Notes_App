@@ -39,7 +39,7 @@ class UserDataService {
       'dataObjects':[],
     }
   );
-  List<Usuario> listaUsers =[];
+  List<Usuario> listaOriginal =[];
   Future<List<Usuario>> loadUsers() async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
@@ -68,7 +68,7 @@ class UserDataService {
       'status':TableStatus.ready,
       'dataObjects': json
     };
-    listaUsers = json;
+    listaOriginal = json;
   }
   Future<void> saveUsers(List<Usuario> users) async {
     Directory directory = await getApplicationSupportDirectory();
@@ -104,7 +104,7 @@ class UserDataService {
   }
 
   void filtrarEstadoAtual(String filtrar) {
-    List<Usuario> objetosOriginais = listaUsers;
+    List<Usuario> objetosOriginais = listaOriginal;
     if (objetosOriginais.isEmpty) return;
 
     List<Usuario> objetosFiltrados = [];
@@ -127,6 +127,10 @@ class UserDataService {
     estado['dataObjects'] = objetosFiltrados;
     usersStateNotifier.value = estado;
   }
+
+  
+  
+  
 
 }
 

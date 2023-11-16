@@ -19,8 +19,22 @@ class MyAppBar extends HookWidget implements PreferredSizeWidget {
       title: Row(
         children: [
           Expanded(
-            child: Text(AppLocalizations.of(context)!.userPageTitle),
+            child: 
+            Row(
+              children: [
+                Text(AppLocalizations.of(context)!.userPageTitle),
+                
+                IconButton(
+                  tooltip: AppLocalizations.of(context)!.userSort,
+                  icon: const Icon(Icons.sort_by_alpha),
+                  onPressed: (){
+                    // 
+                  },
+                ),
+              ],
+            ),
           ),
+          
           if (showFilter.value)
             Flexible(
               child: Padding(
@@ -34,7 +48,7 @@ class MyAppBar extends HookWidget implements PreferredSizeWidget {
               ),
             ),
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             tooltip: AppLocalizations.of(context)!.userFilter,
             onPressed: () {
               showFilter.value = !showFilter.value;
