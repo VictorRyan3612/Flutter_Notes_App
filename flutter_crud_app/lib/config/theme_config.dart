@@ -29,21 +29,21 @@ ThemeData setTheme(Brightness corTema, corName) {
   return finalTema;
 } 
 
-// Search for varColor['nome'] corresponding to varColor['color'] 
+// Search for varColor['name'] corresponding to varColor['color'] 
 // passed as a parameter of currentColor.value
-searchNomeByCod(codCor){
+searchNameByCod(codCor){
   return varColor.firstWhere(
     (item) => item['color'] == codCor,
     orElse: () => varColor[0]
-  )['nome'];
+  )['name'];
   
 }
 
-// Search for varColor['color'] corresponding to varColor['nome'] 
+// Search for varColor['color'] corresponding to varColor['name'] 
 // passed as a parameter of currentColor.value
 searchCodCorByName(strColor){
   return varColor.firstWhere(
-    (item) => item['nome'] == strColor,
+    (item) => item['name'] == strColor,
     orElse: () => varColor[0]
   )['color'];
 }

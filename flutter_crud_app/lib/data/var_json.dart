@@ -21,39 +21,39 @@ class CardsMenu {
 
 var varColor = [
   {
-    'nome': 'Blue',
+    'name': 'Blue',
     'color': Colors.blue
   },
   {
-    'nome': 'Brown',
+    'name': 'Brown',
     'color': Colors.brown
   },
   {
-    'nome': 'Green',
+    'name': 'Green',
     'color': Colors.green
   },
   {
-    'nome': 'Gray',
+    'name': 'Gray',
     'color': Colors.grey
   },
   {
-    'nome': 'Orange',
+    'name': 'Orange',
     'color': Colors.orange
   },
   {
-    'nome': 'Pink',
+    'name': 'Pink',
     'color': Colors.pink
   },
   {
-    'nome': 'Purple',
+    'name': 'Purple',
     'color': Colors.purple
   },
   {
-    'nome': 'Red',
+    'name': 'Red',
     'color': Colors.red
   },
   {
-    'nome': 'Yellow',
+    'name': 'Yellow',
     'color': Colors.yellow
   },
 ];

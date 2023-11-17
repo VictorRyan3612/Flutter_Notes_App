@@ -46,7 +46,7 @@ class UserScreen extends StatelessWidget {
                       if (value['dataObjects'][index].status == 'v') {
                         // Create Cads for each user
                         return UsuarioCard(
-                          cardTitle: value['dataObjects'][index].nome,
+                          cardTitle: value['dataObjects'][index].name,
                           cardSubtitle: value['dataObjects'][index].email,
                           
                           // Edit user

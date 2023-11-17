@@ -85,7 +85,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                         // Config Color
                         CardSettingsListPicker(
                           label: "Colors",
-                          items: varColor.map((item) => item['nome']).toList(),
+                          items: varColor.map((item) => item['name']).toList(),
                           
                           initialItem: currentColor.value,
 

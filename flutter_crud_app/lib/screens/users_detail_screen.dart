@@ -16,8 +16,8 @@ class UsuarioDetail extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nomeController =
-        useTextEditingController(text: usuarioAtual?.nome ?? '');
+    final nameController =
+        useTextEditingController(text: usuarioAtual?.name ?? '');
     final emailController =
         useTextEditingController(text: usuarioAtual?.email ?? '');
     final cpfController =
@@ -32,7 +32,7 @@ class UsuarioDetail extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
-              controller: nomeController,
+              controller: nameController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldName,
               ),
@@ -52,11 +52,11 @@ class UsuarioDetail extends HookWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                if (nomeController.text.isNotEmpty &&
+                if (nameController.text.isNotEmpty &&
                     emailController.text.isNotEmpty &&
                     cpfController.text.isNotEmpty) {
                   Usuario newUser = Usuario(
-                    nome: nomeController.text,
+                    name: nameController.text,
                     email: emailController.text,
                     cpf: cpfController.text,
                   );

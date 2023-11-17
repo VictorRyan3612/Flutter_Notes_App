@@ -8,12 +8,12 @@ enum TableStatus{idle,loading,ready,error}
 
 // Class User
 class Usuario {
-  late String nome;
+  late String name;
   late String email;
   late String cpf;
   late String status;
   Usuario(
-    {required this.nome,
+    {required this.name,
     required this.email,
     required this.cpf,
     this.status = "v"}
@@ -21,7 +21,7 @@ class Usuario {
 
   Map<String, dynamic> toMap() {
     return {
-      'nome': nome,
+      'name': name,
       'email': email,
       'cpf': cpf,
       'status': status
@@ -56,7 +56,7 @@ class UserDataService {
       if (content != '') {
         List<dynamic> jsonList = json.decode(content);
         List<Usuario> userList = jsonList.map((json) => Usuario(
-          nome: json['nome'],
+          name: json['name'],
           email: json['email'],
           cpf: json['cpf'],
           status: json['status'],
@@ -124,7 +124,7 @@ class UserDataService {
     List<Usuario> objetosFiltrados = [];
     if (filtrar != '') {
       for (var objetoInd in objetosOriginais) {
-        if (objetoInd.nome.toLowerCase().contains(filtrar.toLowerCase())) {
+        if (objetoInd.name.toLowerCase().contains(filtrar.toLowerCase())) {
           objetosFiltrados.add(objetoInd);
         }
       }
@@ -150,7 +150,7 @@ class UserDataService {
     var estado = Map<String, dynamic>.from(usersStateNotifier.value);
 
     if (!isSorted){
-      estado['dataObjects'].sort((Usuario a, Usuario b) => a.nome.compareTo(b.nome));
+      estado['dataObjects'].sort((Usuario a, Usuario b) => a.name.compareTo(b.name));
       usersStateNotifier.value = estado;
       isSorted= true;
     } 
