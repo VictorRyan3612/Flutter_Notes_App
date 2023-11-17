@@ -25,7 +25,7 @@ class UserScreen extends StatelessWidget {
           if ((value['dataObjects'].length == 0) && (value['status'] == TableStatus.ready)) {
             return Center(
               child: Text(AppLocalizations.of(context)!.userNoUser,
-                style: TextStyle(fontSize: 30)
+                style: const TextStyle(fontSize: 30)
               )
             );
           } 
@@ -77,11 +77,12 @@ class UserScreen extends StatelessWidget {
                       return Center(
                         child: Text(
                           AppLocalizations.of(context)!.userEmpty,
-                          style: TextStyle(fontSize: 30)
+                          style: const TextStyle(fontSize: 30)
                         )
                       );
                     }
                 }
+                return null;
               }
             );
           }

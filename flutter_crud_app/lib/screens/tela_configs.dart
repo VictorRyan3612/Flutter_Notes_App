@@ -3,18 +3,18 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../config/theme_config.dart';
+import '../data/var_json.dart' show varColor;
 
 class TelaConfigs extends HookWidget implements PreferredSizeWidget{
   final ValueNotifier<Brightness> currentBrightness;
   final ValueNotifier<Locale> currentLocale;
   final ValueNotifier<String> currentColor;
 
-  const TelaConfigs({
+  const TelaConfigs({super.key, 
     required this.currentBrightness, 
     required this.currentLocale, 
     required this.currentColor, 
-    key});
+    });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

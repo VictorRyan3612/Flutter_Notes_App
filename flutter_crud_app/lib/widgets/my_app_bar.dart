@@ -3,10 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyAppBar extends HookWidget implements PreferredSizeWidget {
-  final _callbackFilter;
-  final _callbackSort;
+  final Function _callbackFilter;
+  final Function _callbackSort;
 
-  MyAppBar({super.key, callbackFilter, callbackSort})
+  const MyAppBar({super.key, callbackFilter, callbackSort})
     : _callbackFilter = callbackFilter ?? (int),
       _callbackSort = callbackSort ?? (int);
     

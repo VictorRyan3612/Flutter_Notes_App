@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '/screens/tela_configs.dart';
 import '/screens/dashboard_menu.dart';
 import 'screens/users_list_screen.dart';
-import 'var_json.dart';
+import 'data/var_json.dart' show CardsMenu;
 import 'config/theme_config.dart';
 
 
@@ -51,10 +51,13 @@ class MainApp extends HookWidget {
         GlobalCupertinoLocalizations.delegate
       ],
 
+
       supportedLocales: const [
         Locale('en'),
         Locale('pt')
-        ],
+      ],
+
+
       locale: currentLocale.value,
       debugShowCheckedModeBanner:false,
 

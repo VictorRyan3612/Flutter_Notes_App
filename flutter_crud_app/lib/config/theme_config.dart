@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../data/var_json.dart' show varColor;
 
 ThemeData setTheme(Brightness corTema, corName) {
   var corColors = searchCodCorByName(corName);
@@ -42,41 +43,3 @@ searchCodCorByName(str){
   )['color'];
 }
 
-var varColor = [
-  {
-    'nome': 'Blue',
-    'color': Colors.blue
-  },
-  {
-    'nome': 'Brown',
-    'color': Colors.brown
-  },
-  {
-    'nome': 'Green',
-    'color': Colors.green
-  },
-  {
-    'nome': 'Gray',
-    'color': Colors.grey
-  },
-  {
-    'nome': 'Orange',
-    'color': Colors.orange
-  },
-  {
-    'nome': 'Pink',
-    'color': Colors.pink
-  },
-  {
-    'nome': 'Purple',
-    'color': Colors.purple
-  },
-  {
-    'nome': 'Red',
-    'color': Colors.red
-  },
-  {
-    'nome': 'Yellow',
-    'color': Colors.yellow
-  },
-];
