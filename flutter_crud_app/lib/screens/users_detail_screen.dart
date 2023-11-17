@@ -33,22 +33,44 @@ class UsuarioDetail extends HookWidget {
           children: [
             TextField(
               controller: nameController,
+              style: const TextStyle(color: Colors.black), // Cor do texto
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldName,
+                filled: true,
+                fillColor: Colors.white, // Cor de fundo
               ),
             ),
+
+            const SizedBox(
+              width: 10, 
+              height: 10
+            ),
+
             TextField(
               controller: emailController,
+              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldEmail,
+                filled: true,
+                fillColor: Colors.white,
               ),
             ),
+
+            const SizedBox(
+              width: 10, 
+              height: 10
+            ),
+
             TextField(
               controller: cpfController,
+              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldCpf,
+                filled: true,
+                fillColor: Colors.white,
               ),
             ),
+
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
