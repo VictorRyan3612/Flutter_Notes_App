@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/var_json.dart' show varColor;
 
+// Setting light and dark themes
 ThemeData setTheme(Brightness corTema, corName) {
   var corColors = searchCodCorByName(corName);
   ThemeData finalTema;
@@ -28,7 +29,8 @@ ThemeData setTheme(Brightness corTema, corName) {
   return finalTema;
 } 
 
-
+// Search for varColor['nome'] corresponding to varColor['color'] 
+// passed as a parameter of currentColor.value
 searchNomeByCod(codCor){
   return varColor.firstWhere(
     (item) => item['color'] == codCor,
@@ -36,9 +38,12 @@ searchNomeByCod(codCor){
   )['nome'];
   
 }
-searchCodCorByName(str){
+
+// Search for varColor['color'] corresponding to varColor['nome'] 
+// passed as a parameter of currentColor.value
+searchCodCorByName(strColor){
   return varColor.firstWhere(
-    (item) => item['nome'] == str,
+    (item) => item['nome'] == strColor,
     orElse: () => varColor[0]
   )['color'];
 }

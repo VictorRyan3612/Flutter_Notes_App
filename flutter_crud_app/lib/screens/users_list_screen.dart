@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+// My packages
 import '../widgets/user_card.dart';
 import '../widgets/my_app_bar.dart';
 import '../data/user_data_service.dart';
 import 'users_detail_screen.dart';
 
 
+// User list screen
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
@@ -16,12 +18,13 @@ class UserScreen extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(
         callbackFilter: userDataService.filtrarEstadoAtual,
-        callbackSort: userDataService.ordenar,
+        callbackSort: userDataService.sort,
         ),
       body: ValueListenableBuilder(
         valueListenable: userDataService.usersStateNotifier,
 
         builder: (_, value, __) {
+          // Message if there are no users
           if ((value['dataObjects'].length == 0) && (value['status'] == TableStatus.ready)) {
             return Center(
               child: Text(AppLocalizations.of(context)!.userNoUser,
@@ -39,12 +42,14 @@ class UserScreen extends StatelessWidget {
                     Text(AppLocalizations.of(context)!.userWait);
 
                   case TableStatus.ready:
-                    if (value['dataObjects'].isNotEmpty) {
+                    // if (value['dataObjects'].isNotEmpty) {
                       if (value['dataObjects'][index].status == 'v') {
+                        // Create Cads for each user
                         return UsuarioCard(
                           cardTitle: value['dataObjects'][index].nome,
                           cardSubtitle: value['dataObjects'][index].email,
                           
+                          // Edit user
                           onEditPressed: () async {
                             Usuario? newUser = await Navigator.push(
                               context,
@@ -63,7 +68,7 @@ class UserScreen extends StatelessWidget {
                               );
                             }
                           },
-                          
+                          // Delete user
                           onDeletePressed: () {
                             userDataService.deleteUser(value['dataObjects'][index]);
                           },
@@ -71,16 +76,15 @@ class UserScreen extends StatelessWidget {
                       }else{
                         return Container();
                       }
-                    } 
-                    
-                    else {
-                      return Center(
-                        child: Text(
-                          AppLocalizations.of(context)!.userEmpty,
-                          style: const TextStyle(fontSize: 30)
-                        )
-                      );
-                    }
+                    // }        
+                    // else {
+                    //   return Center(
+                    //     child: Text(
+                    //       AppLocalizations.of(context)!.userEmpty,
+                    //       style: const TextStyle(fontSize: 30)
+                    //     )
+                    //   );
+                    // }
                 }
                 return null;
               }
@@ -89,6 +93,7 @@ class UserScreen extends StatelessWidget {
         }
           
       ),
+      // Button to crate a user
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           Usuario? newUser = await Navigator.push(

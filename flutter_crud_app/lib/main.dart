@@ -22,10 +22,18 @@ class MainApp extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentBrightness = useState(Brightness.dark);
-    final currentLocale = useState(const Locale("en"));
-    final currentColor = useState('Blue');
 
+    // base states 
+    final currentBrightness = useState(Brightness.dark); //Theme
+    final currentLocale = useState(const Locale("en")); // Locale
+    final currentColor = useState('Blue'); // Accent color
+
+    // Start with DashboardMenu, change it to initialRoute: '/users' 
+    // if you want to start within CRUD, if you do this, go back to access settings
+    final currentRouteStart = useState('/');
+
+
+    // Load settings from file, replacing the initial state
     Future<void> loadSettings() async {
       final prefs = await SharedPreferences.getInstance();
       
@@ -34,16 +42,21 @@ class MainApp extends HookWidget {
 
       final languageCode = prefs.getString('languageCode') ?? 'en';
       currentLocale.value = Locale(languageCode);
+
       final corTheme = prefs.getString('colorTheme') ?? 'Blue';
       currentColor.value = corTheme;
     }
 
+
     // /config/theme_config.dart
     final finalTheme = setTheme(currentBrightness.value, currentColor.value);
-
     loadSettings();
 
+
     return MaterialApp(
+      debugShowCheckedModeBanner:false,
+
+
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -59,13 +72,14 @@ class MainApp extends HookWidget {
 
 
       locale: currentLocale.value,
-      debugShowCheckedModeBanner:false,
 
       
       // color: currentColor.value,
       theme: finalTheme,
       
-      initialRoute: '/',
+
+      initialRoute: currentRouteStart.value,
+      
       routes: {
         '/': (context) => DashboardMenu(
           cards: CardsMenu.getCards(context),

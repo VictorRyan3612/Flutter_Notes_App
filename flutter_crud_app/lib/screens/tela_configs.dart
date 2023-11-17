@@ -3,8 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../data/var_json.dart' show varColor;
 
+// Config Screen
 class TelaConfigs extends HookWidget implements PreferredSizeWidget{
   final ValueNotifier<Brightness> currentBrightness;
   final ValueNotifier<Locale> currentLocale;
@@ -22,6 +24,8 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
+
+    // Save settings to file
     Future<void> saveSettings() async {
       final prefs = await SharedPreferences.getInstance();
 
@@ -51,6 +55,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                         label: AppLocalizations.of(context)!.configsHeader,
                       ),
                       children: [
+                        // Config Theme
                         CardSettingsSwitch(
                           trueLabel: '', 
                           falseLabel: '',
@@ -67,6 +72,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                             saveSettings();
                           },
                         ),
+                        // Config Locale
                         CardSettingsListPicker(
                           label: AppLocalizations.of(context)!.configsLanguagePick,
                           items: AppLocalizations.supportedLocales,
@@ -76,6 +82,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                             saveSettings();
                           }   
                         ),
+                        // Config Color
                         CardSettingsListPicker(
                           label: "Colors",
                           items: varColor.map((item) => item['nome']).toList(),
