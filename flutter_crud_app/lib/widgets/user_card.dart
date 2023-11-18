@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class UsuarioCard extends StatelessWidget {
+class UserCard extends StatelessWidget {
   final String cardTitle;
   final String cardSubtitle;
   final Function() onEditPressed;
   final Function() onDeletePressed;
 
-  const UsuarioCard({super.key, 
+  const UserCard({super.key, 
     required this.cardTitle,
     required this.cardSubtitle,
     required this.onEditPressed,

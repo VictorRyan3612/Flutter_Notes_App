@@ -14,7 +14,7 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    userDataService.carregarUsuarios();
+    userDataService.carregarUsers();
     return Scaffold(
       appBar: MyAppBar(
         callbackFilter: userDataService.filtrarEstadoAtual,
@@ -45,25 +45,25 @@ class UserScreen extends StatelessWidget {
                     // if (value['dataObjects'].isNotEmpty) {
                       if (value['dataObjects'][index].status == 'v') {
                         // Create Cads for each user
-                        return UsuarioCard(
+                        return UserCard(
                           cardTitle: value['dataObjects'][index].name,
                           cardSubtitle: value['dataObjects'][index].email,
                           
                           // Edit user
                           onEditPressed: () async {
-                            Usuario? newUser = await Navigator.push(
+                            User? newUser = await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => UsuarioDetail(
+                                builder: (context) => UserDetail(
                                   titulo: AppLocalizations.of(context)!.userTitleEdit,
-                                  usuarioAtual: value['dataObjects'][index]
+                                  userAtual: value['dataObjects'][index]
                                 ),
                               ),
                             );
                             if (newUser != null) {
-                              userDataService.atualizarUsuario(
+                              userDataService.atualizarUser(
                                 listaUsers: value['dataObjects'],
-                                novoUsuario: newUser,
+                                novoUser: newUser,
                                 index: index,
                               );
                             }
@@ -96,10 +96,10 @@ class UserScreen extends StatelessWidget {
       // Button to crate a user
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Usuario? newUser = await Navigator.push(
+          User? newUser = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => UsuarioDetail(
+              builder: (context) => UserDetail(
                 titulo: AppLocalizations.of(context)!.userTitleCreate),
             ),
           );

@@ -4,24 +4,26 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../data/user_data_service.dart';
 
-class UsuarioDetail extends HookWidget {
-  final String titulo;
-  final Usuario? usuarioAtual;
 
-  const UsuarioDetail({
+
+class UserDetail extends HookWidget {
+  final String titulo;
+  final User? userAtual;
+
+  const UserDetail({
     Key? key, 
     required this.titulo,
-    this.usuarioAtual}
+    this.userAtual}
     ) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final nameController =
-        useTextEditingController(text: usuarioAtual?.name ?? '');
+        useTextEditingController(text: userAtual?.name ?? '');
     final emailController =
-        useTextEditingController(text: usuarioAtual?.email ?? '');
+        useTextEditingController(text: userAtual?.email ?? '');
     final cpfController =
-        useTextEditingController(text: usuarioAtual?.cpf ?? '');
+        useTextEditingController(text: userAtual?.cpf ?? '');
     return Scaffold(
       appBar: AppBar(
         title: Text(titulo),
@@ -77,7 +79,7 @@ class UsuarioDetail extends HookWidget {
                 if (nameController.text.isNotEmpty &&
                     emailController.text.isNotEmpty &&
                     cpfController.text.isNotEmpty) {
-                  Usuario newUser = Usuario(
+                  User newUser = User(
                     name: nameController.text,
                     email: emailController.text,
                     cpf: cpfController.text,

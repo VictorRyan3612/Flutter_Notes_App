@@ -7,12 +7,12 @@ import 'package:flutter/foundation.dart';
 enum TableStatus{idle,loading,ready,error}
 
 // Class User
-class Usuario {
+class User {
   late String name;
   late String email;
   late String cpf;
   late String status;
-  Usuario(
+  User(
     {required this.name,
     required this.email,
     required this.cpf,
@@ -33,8 +33,8 @@ class Usuario {
 
 // User business rules
 class UserDataService {
-  final ValueNotifier<List<Usuario>> _userListNotifier = ValueNotifier<List<Usuario>>([]);
-  ValueNotifier<List<Usuario>> get userListNotifier => _userListNotifier;
+  final ValueNotifier<List<User>> _userListNotifier = ValueNotifier<List<User>>([]);
+  ValueNotifier<List<User>> get userListNotifier => _userListNotifier;
 
   final ValueNotifier<Map<String,dynamic>> usersStateNotifier = 
     ValueNotifier({
@@ -44,10 +44,10 @@ class UserDataService {
   );
 
   bool isSorted = false;
-  List<Usuario> listaOriginal =[];
+  List<User> listaOriginal =[];
 
   // load users from the file
-  Future<List<Usuario>> loadUsers() async {
+  Future<List<User>> loadUsers() async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
 
@@ -55,7 +55,7 @@ class UserDataService {
       String content = await file.readAsString();
       if (content != '') {
         List<dynamic> jsonList = json.decode(content);
-        List<Usuario> userList = jsonList.map((json) => Usuario(
+        List<User> userList = jsonList.map((json) => User(
           name: json['name'],
           email: json['email'],
           cpf: json['cpf'],
@@ -69,7 +69,7 @@ class UserDataService {
   }
 
   // Load users and set in usersStateNotifier.value
-  void carregarUsuarios() async {
+  void carregarUsers() async {
     var json = await loadUsers();
     usersStateNotifier.value = {
       'status':TableStatus.ready,
@@ -79,7 +79,7 @@ class UserDataService {
   }
 
   // Save Users to the file
-  Future<void> saveUsers(List<Usuario> users) async {
+  Future<void> saveUsers(List<User> users) async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
     String content = json.encode(users.map((user) => user.toMap()).toList());
@@ -88,40 +88,40 @@ class UserDataService {
 
 
   // Crate new user
-  void criarUser(Usuario newUser){
+  void criarUser(User newUser){
     usersStateNotifier.value['dataObjects'] = [...usersStateNotifier.value['dataObjects'], newUser];
-    usersStateNotifier.value['dataObjects'] = List<Usuario>.from(usersStateNotifier.value['dataObjects']);
+    usersStateNotifier.value['dataObjects'] = List<User>.from(usersStateNotifier.value['dataObjects']);
 
     saveUsers(usersStateNotifier.value['dataObjects']);
-    carregarUsuarios();
+    carregarUsers();
   }
 
-  void deleteUser(Usuario user) {
+  void deleteUser(User user) {
     user.status = 'x';
     saveUsers(usersStateNotifier.value['dataObjects']);
-    carregarUsuarios();
+    carregarUsers();
   }
 
   // Delete user
-  void atualizarUsuario({
-    required List<Usuario> listaUsers,
+  void atualizarUser({
+    required List<User> listaUsers,
     required int index,
-    required Usuario novoUsuario,
+    required User novoUser,
   }) {
 
-    listaUsers[index] = novoUsuario;
+    listaUsers[index] = novoUser;
 
     userDataService.saveUsers(listaUsers);
-    carregarUsuarios();
+    carregarUsers();
   }
 
 
   // Filer User by seach
   void filtrarEstadoAtual(String filtrar) {
-    List<Usuario> objetosOriginais = listaOriginal;
+    List<User> objetosOriginais = listaOriginal;
     if (objetosOriginais.isEmpty) return;
 
-    List<Usuario> objetosFiltrados = [];
+    List<User> objetosFiltrados = [];
     if (filtrar != '') {
       for (var objetoInd in objetosOriginais) {
         if (objetoInd.name.toLowerCase().contains(filtrar.toLowerCase())) {
@@ -138,7 +138,7 @@ class UserDataService {
 
 
   // Overriding filtered users in usersStateNotifier.value
-  void emitirEstadoFiltrado(List<Usuario> objetosFiltrados) {
+  void emitirEstadoFiltrado(List<User> objetosFiltrados) {
     var estado = Map<String, dynamic>.from(usersStateNotifier.value);
     estado['dataObjects'] = objetosFiltrados;
     usersStateNotifier.value = estado;
@@ -150,7 +150,7 @@ class UserDataService {
     var estado = Map<String, dynamic>.from(usersStateNotifier.value);
 
     if (!isSorted){
-      estado['dataObjects'].sort((Usuario a, Usuario b) => a.name.compareTo(b.name));
+      estado['dataObjects'].sort((User a, User b) => a.name.compareTo(b.name));
       usersStateNotifier.value = estado;
       isSorted= true;
     } 
