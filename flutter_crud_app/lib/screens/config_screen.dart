@@ -4,23 +4,22 @@ import 'package:card_settings/card_settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/var_json.dart' show varColor;
+import '../data/var_json.dart' show varColor, starScreenList, searchNameByRoute, searchRouteByName;
 
 
 // Config Screen
-class ConfigScreen extends HookWidget implements PreferredSizeWidget{
+class ConfigScreen extends HookWidget{
   final ValueNotifier<Brightness> currentBrightness;
   final ValueNotifier<Locale> currentLocale;
   final ValueNotifier<String> currentColor;
+  final ValueNotifier<String> currentStartScreen;
 
   const ConfigScreen({super.key, 
     required this.currentBrightness, 
     required this.currentLocale, 
     required this.currentColor, 
+    required this.currentStartScreen
     });
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
 
   @override
@@ -33,7 +32,10 @@ class ConfigScreen extends HookWidget implements PreferredSizeWidget{
       prefs.setBool('isDarkMode', currentBrightness.value == Brightness.dark);
       prefs.setString('languageCode', currentLocale.value.languageCode);
       prefs.setString('colorTheme', currentColor.value);
+      prefs.setString('startScreen', currentStartScreen.value);
     }
+
+    var routeNameInitialItem = searchNameByRoute(currentStartScreen.value);
 
     return Scaffold(
       appBar: AppBar(
@@ -96,6 +98,17 @@ class ConfigScreen extends HookWidget implements PreferredSizeWidget{
 
                           onChanged: (value2) {
                             currentColor.value = value2.toString();
+                            saveSettings();
+                          },
+                        ),
+                        CardSettingsListPicker(
+                          label: "Tela inicial",
+                          items: starScreenList.map((item) => item['name']).toList(),
+                          initialItem:  routeNameInitialItem,
+                          onChanged: (value3) {
+                            var routeFinal = searchRouteByName(value3.toString());
+                            currentStartScreen.value = routeFinal;
+
                             saveSettings();
                           },
                         )

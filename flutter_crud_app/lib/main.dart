@@ -30,7 +30,7 @@ class MainApp extends HookWidget {
 
     // Start with DashboardMenu, change it to initialRoute: '/users' 
     // if you want to start within CRUD, if you do this, go back to access settings
-    final currentRouteStart = useState('/');
+    final currentStartScreen = useState('/');
 
 
     // Load settings from file, replacing the initial state
@@ -45,12 +45,16 @@ class MainApp extends HookWidget {
 
       final corTheme = prefs.getString('colorTheme') ?? 'Blue';
       currentColor.value = corTheme;
+
+      final startScreen = prefs.getString('startScreen') ?? '/';
+      currentStartScreen.value = startScreen; 
+      print(currentStartScreen.value);
     }
 
+    loadSettings();
 
     // /config/theme_config.dart
     final finalTheme = setTheme(currentBrightness.value, currentColor.value);
-    loadSettings();
 
 
     return MaterialApp(
@@ -78,8 +82,8 @@ class MainApp extends HookWidget {
       theme: finalTheme,
       
 
-      initialRoute: currentRouteStart.value,
-      
+      initialRoute: currentStartScreen.value,
+
       routes: {
         '/': (context) => DashboardMenu(
           cards: CardsMenu.getCards(context),
@@ -89,7 +93,8 @@ class MainApp extends HookWidget {
         '/configs': (context) => ConfigScreen(
           currentBrightness: currentBrightness,
           currentLocale: currentLocale,
-          currentColor: currentColor
+          currentColor: currentColor,
+          currentStartScreen: currentStartScreen ,
           )
       }
     );

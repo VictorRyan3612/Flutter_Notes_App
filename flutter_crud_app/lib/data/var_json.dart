@@ -56,6 +56,31 @@ var userDetail = [
   }
 ];
 
+var starScreenList =[
+  {
+    'name': 'Tela inicial',
+    'route': '/'
+  },
+  {
+    'name': 'Usuarios',
+    'route': '/users'
+  },
+];
+
+searchRouteByName(nameRoute){
+  return starScreenList.firstWhere(
+    (item) => item['name'] == nameRoute,
+    orElse: () => starScreenList[0]
+  )['route'];
+}
+
+searchNameByRoute(codRoute){
+  return starScreenList.firstWhere(
+    (item) => item['route'] == codRoute,
+    orElse: () => starScreenList[0]
+  )['name'];
+}
+
 
 var varColor = [
   {
