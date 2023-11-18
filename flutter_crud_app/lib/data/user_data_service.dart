@@ -10,12 +10,12 @@ enum TableStatus{idle,loading,ready,error}
 class User {
   late String name;
   late String email;
-  late String cpf;
+  late String address;
   late String status;
   User(
     {required this.name,
     required this.email,
-    required this.cpf,
+    required this.address,
     this.status = "v"}
   );
 
@@ -23,7 +23,7 @@ class User {
     return {
       'name': name,
       'email': email,
-      'cpf': cpf,
+      'address': address,
       'status': status
     };
   }
@@ -58,7 +58,7 @@ class UserDataService {
         List<User> userList = jsonList.map((json) => User(
           name: json['name'],
           email: json['email'],
-          cpf: json['cpf'],
+          address: json['address'],
           status: json['status'],
         )).toList();
         return userList;

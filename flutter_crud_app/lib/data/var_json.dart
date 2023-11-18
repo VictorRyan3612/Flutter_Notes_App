@@ -29,8 +29,8 @@ class UserDetailVar {
         useTextEditingController(text: userAtual?.name ?? '');
     final emailController =
         useTextEditingController(text: userAtual?.email ?? '');
-    final cpfController =
-        useTextEditingController(text: userAtual?.cpf ?? '');
+    final addressController =
+        useTextEditingController(text: userAtual?.address ?? '');
 
     return [
       {
@@ -42,8 +42,8 @@ class UserDetailVar {
         "labelText": AppLocalizations.of(context)!.userFieldEmail,
       },
       {
-        "controller": cpfController,
-        "labelText": AppLocalizations.of(context)!.userFieldCpf,
+        "controller": addressController,
+        "labelText": AppLocalizations.of(context)!.userFieldAddress,
       },
     ];
   }

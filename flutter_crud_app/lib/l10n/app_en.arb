@@ -10,7 +10,7 @@
    "userSave": "Save User",
    "userFieldName": "Name",
    "userFieldEmail": "Email",
-   "userFieldCpf": "CPF",
+   "userFieldAddress": "Address",
    "userFilter": "Search",
    "userSort": "Sort",
    

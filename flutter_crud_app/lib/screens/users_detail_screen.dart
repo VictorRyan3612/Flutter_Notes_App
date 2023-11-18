@@ -65,7 +65,7 @@ class UserDetail extends HookWidget {
                   User newUser = User(
                     name: cardData[0]['controller'].text,
                     email: cardData[1]['controller'].text,
-                    cpf: cardData[2]['controller'].text,
+                    address: cardData[2]['controller'].text,
                   );
                   Navigator.pop(context, newUser);
                 } else {
