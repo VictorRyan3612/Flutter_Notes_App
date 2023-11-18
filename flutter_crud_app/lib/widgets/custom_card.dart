@@ -32,7 +32,6 @@ class CustomCard extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
                 ),

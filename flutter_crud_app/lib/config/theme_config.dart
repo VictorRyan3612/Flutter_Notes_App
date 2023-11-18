@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import '../data/var_json.dart' show varColor;
 
+MaterialColor corStateVar = Colors.blue;
+
+
+// iconTheme(corName){
+//   var corColors = searchCodCorByName(corName);
+//   return corColors;
+// }
+
 // Setting light and dark themes
 ThemeData setTheme(Brightness corTema, corName) {
   var corColors = searchCodCorByName(corName);
+  corStateVar = corColors;
+
   ThemeData finalTema;
   if (corTema == Brightness.dark){
     finalTema = ThemeData(
@@ -12,6 +22,10 @@ ThemeData setTheme(Brightness corTema, corName) {
         contentTextStyle: TextStyle(color: Colors.white)
       ),
       brightness: Brightness.dark,
+      inputDecorationTheme: const InputDecorationTheme(
+        filled:true,
+        fillColor: Color.fromARGB(255, 66, 66, 66), 
+      ),
       scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)
     );
   }
@@ -23,6 +37,10 @@ ThemeData setTheme(Brightness corTema, corName) {
       ),
       brightness: Brightness.light,
       primarySwatch: corColors,
+      inputDecorationTheme: const InputDecorationTheme(
+        filled:true,
+        fillColor: Colors.white, 
+      ),
       scaffoldBackgroundColor: const Color.fromARGB(255, 175, 175, 175)
     );
   }

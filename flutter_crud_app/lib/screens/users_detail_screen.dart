@@ -35,11 +35,8 @@ class UserDetail extends HookWidget {
           children: [
             TextField(
               controller: nameController,
-              style: const TextStyle(color: Colors.black), // Cor do texto
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldName,
-                filled: true,
-                fillColor: Colors.white, // Cor de fundo
               ),
             ),
 
@@ -50,11 +47,8 @@ class UserDetail extends HookWidget {
 
             TextField(
               controller: emailController,
-              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldEmail,
-                filled: true,
-                fillColor: Colors.white,
               ),
             ),
 
@@ -65,11 +59,8 @@ class UserDetail extends HookWidget {
 
             TextField(
               controller: cpfController,
-              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.userFieldCpf,
-                filled: true,
-                fillColor: Colors.white,
               ),
             ),
 

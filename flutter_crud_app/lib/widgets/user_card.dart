@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../config/theme_config.dart' show corStateVar;
+
 
 class UserCard extends StatelessWidget {
   final String cardTitle;
@@ -24,10 +26,12 @@ class UserCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
+              color: corStateVar,
               icon: const Icon(Icons.edit),
               onPressed: onEditPressed,
             ),
             IconButton(
+              color: corStateVar,
               icon: const Icon(Icons.delete),
               onPressed: onDeletePressed,
             ),
