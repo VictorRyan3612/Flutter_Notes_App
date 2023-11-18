@@ -30,22 +30,23 @@ class UserDetail extends HookWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (var card in cardData)
-              Column(
-                children: [
-                  TextField(
-                    controller: card['controller'],
-                    decoration: InputDecoration(
-                      labelText: card['labelText'],
-                    ),
+          children: cardData.map((card) {
+            return Column(
+              children: [
+                TextField(
+                  controller: card['controller'],
+                  decoration: InputDecoration(
+                    labelText: card['labelText'],
                   ),
-                  const SizedBox(
-                    width: 10,
-                    height: 10,
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  width: 10,
+                  height: 10,
+                ),
+              ],
+            );
+          }).toList(),
+        ),
 
             // const SizedBox(height: 16.0),
             // ElevatedButton(
@@ -69,9 +70,8 @@ class UserDetail extends HookWidget {
             //   },
             //   child: Text(AppLocalizations.of(context)!.userSave),
             // ),
-          ],
+          
         ),
-      ),
     );
   }
 }
