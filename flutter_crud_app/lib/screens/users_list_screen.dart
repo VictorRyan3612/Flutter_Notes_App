@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // My packages
 import '../widgets/user_card.dart';
-import '../config/theme_config.dart' show corStateVar;
+import '../config/theme_config.dart' show colorStateVar;
 import '../widgets/search_section.dart';
 import '../data/user_data_service.dart';
 import 'users_detail_screen.dart';
@@ -16,7 +16,7 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    userDataService.carregarUsers();
+    userDataService.loadUsers();
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.userPageTitle)
@@ -25,7 +25,7 @@ class UserScreen extends StatelessWidget {
       body: Column(
         children: [
           SearchSection(
-            callbackFilter: userDataService.filtrarEstadoAtual,
+            callbackFilter: userDataService.filterCurrentState,
             callbackSort: userDataService.sort,
           ),
 
@@ -58,14 +58,14 @@ class UserScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => UserDetail(
-                                      titulo: AppLocalizations.of(context)!.userTitleEdit,
-                                      userAtual: value['dataObjects'][index],
+                                      title: AppLocalizations.of(context)!.userTitleEdit,
+                                      currentUser: value['dataObjects'][index],
                                     ),
                                   ),
                                 );
                                 if (newUser != null) {
-                                  userDataService.atualizarUser(
-                                    listaUsers: value['dataObjects'],
+                                  userDataService.updateUser(
+                                    listUsers: value['dataObjects'],
                                     novoUser: newUser,
                                     index: index,
                                   );
@@ -92,17 +92,17 @@ class UserScreen extends StatelessWidget {
 
       // Button to create a user
       floatingActionButton: FloatingActionButton(
-        backgroundColor: corStateVar,
+        backgroundColor: colorStateVar,
         onPressed: () async {
           User? newUser = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => UserDetail(
-                titulo: AppLocalizations.of(context)!.userTitleCreate),
+                title: AppLocalizations.of(context)!.userTitleCreate),
             ),
           );
           if (newUser != null) {
-            userDataService.criarUser(newUser);
+            userDataService.createUser(newUser);
           }
         },
         child: const Icon(Icons.add),

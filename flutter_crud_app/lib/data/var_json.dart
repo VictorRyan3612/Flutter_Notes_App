@@ -10,27 +10,27 @@ class CardsMenu {
     return [
       {
         "title": AppLocalizations.of(context)!.userCardTitle,
-        "rota": '/users',
+        "route": '/users',
       },
       {
         "title": AppLocalizations.of(context)!.configsCardTitle,
-        "rota": '/configs',
+        "route": '/configs',
       },
     ];
   }
 }
 
 class UserDetailVar {
-  final User? userAtual;
-  UserDetailVar({required this.userAtual});
+  final User? currentUser;
+  UserDetailVar({required this.currentUser});
 
   List<Map<String, dynamic>> getCards(context) {
     final nameController =
-        useTextEditingController(text: userAtual?.name ?? '');
+        useTextEditingController(text: currentUser?.name ?? '');
     final emailController =
-        useTextEditingController(text: userAtual?.email ?? '');
+        useTextEditingController(text: currentUser?.email ?? '');
     final addressController =
-        useTextEditingController(text: userAtual?.address ?? '');
+        useTextEditingController(text: currentUser?.address ?? '');
 
     return [
       {

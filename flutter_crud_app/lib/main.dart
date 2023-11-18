@@ -43,8 +43,8 @@ class MainApp extends HookWidget {
       final languageCode = prefs.getString('languageCode') ?? 'en';
       currentLocale.value = Locale(languageCode);
 
-      final corTheme = prefs.getString('colorTheme') ?? 'Blue';
-      currentColor.value = corTheme;
+      final colorTheme = prefs.getString('colorTheme') ?? 'Blue';
+      currentColor.value = colorTheme;
 
       final startScreen = prefs.getString('startScreen') ?? '/';
       currentStartScreen.value = startScreen; 
@@ -87,8 +87,8 @@ class MainApp extends HookWidget {
       routes: {
         '/': (context) => DashboardMenu(
           cards: CardsMenu.getCards(context),
-          titulo: AppLocalizations.of(context)!.mainapptitle,
-        ),        
+          title: AppLocalizations.of(context)!.mainapptitle,
+        ),
         '/users': (context) => const UserScreen(),
         '/configs': (context) => ConfigScreen(
           currentBrightness: currentBrightness,

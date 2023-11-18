@@ -44,10 +44,10 @@ class UserDataService {
   );
 
   bool isSorted = false;
-  List<User> listaOriginal =[];
+  List<User> originalList =[];
 
   // load users from the file
-  Future<List<User>> loadUsers() async {
+  Future<List<User>> loadUsersFromFile() async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/users.dat');
 
@@ -69,13 +69,13 @@ class UserDataService {
   }
 
   // Load users and set in usersStateNotifier.value
-  void carregarUsers() async {
-    var json = await loadUsers();
+  void loadUsers() async {
+    var json = await loadUsersFromFile();
     usersStateNotifier.value = {
       'status':TableStatus.ready,
       'dataObjects': json
     };
-    listaOriginal = json;
+    originalList = json;
   }
 
   // Save Users to the file
@@ -88,75 +88,75 @@ class UserDataService {
 
 
   // Crate new user
-  void criarUser(User newUser){
+  void createUser(User newUser){
     usersStateNotifier.value['dataObjects'] = [...usersStateNotifier.value['dataObjects'], newUser];
     usersStateNotifier.value['dataObjects'] = List<User>.from(usersStateNotifier.value['dataObjects']);
 
     saveUsers(usersStateNotifier.value['dataObjects']);
-    carregarUsers();
+    loadUsers();
   }
 
   void deleteUser(User user) {
     user.status = 'x';
     saveUsers(usersStateNotifier.value['dataObjects']);
-    carregarUsers();
+    loadUsers();
   }
 
   // Delete user
-  void atualizarUser({
-    required List<User> listaUsers,
+  void updateUser({
+    required List<User> listUsers,
     required int index,
     required User novoUser,
   }) {
 
-    listaUsers[index] = novoUser;
+    listUsers[index] = novoUser;
 
-    userDataService.saveUsers(listaUsers);
-    carregarUsers();
+    userDataService.saveUsers(listUsers);
+    loadUsers();
   }
 
 
   // Filer User by seach
-  void filtrarEstadoAtual(String filtrar) {
-    List<User> objetosOriginais = listaOriginal;
-    if (objetosOriginais.isEmpty) return;
+  void filterCurrentState(String filtrar) {
+    List<User> objectsOriginals = originalList;
+    if (objectsOriginals.isEmpty) return;
 
-    List<User> objetosFiltrados = [];
+    List<User> objectsFiltered = [];
     if (filtrar != '') {
-      for (var objetoInd in objetosOriginais) {
+      for (var objetoInd in objectsOriginals) {
         if (objetoInd.name.toLowerCase().contains(filtrar.toLowerCase())) {
-          objetosFiltrados.add(objetoInd);
+          objectsFiltered.add(objetoInd);
         }
       }
     } else {
-      objetosFiltrados = objetosOriginais;
+      objectsFiltered = objectsOriginals;
     }
     
 
-    emitirEstadoFiltrado(objetosFiltrados);
+    issueFilteredState(objectsFiltered);
   }
 
 
   // Overriding filtered users in usersStateNotifier.value
-  void emitirEstadoFiltrado(List<User> objetosFiltrados) {
-    var estado = Map<String, dynamic>.from(usersStateNotifier.value);
-    estado['dataObjects'] = objetosFiltrados;
-    usersStateNotifier.value = estado;
+  void issueFilteredState(List<User> objectsFiltered) {
+    var state = Map<String, dynamic>.from(usersStateNotifier.value);
+    state['dataObjects'] = objectsFiltered;
+    usersStateNotifier.value = state;
   }
 
 
   // sort users, still having problems with sorting and editing
   sort(){
-    var estado = Map<String, dynamic>.from(usersStateNotifier.value);
+    var state = Map<String, dynamic>.from(usersStateNotifier.value);
 
     if (!isSorted){
-      estado['dataObjects'].sort((User a, User b) => a.name.compareTo(b.name));
-      usersStateNotifier.value = estado;
+      state['dataObjects'].sort((User a, User b) => a.name.compareTo(b.name));
+      usersStateNotifier.value = state;
       isSorted= true;
     } 
     else{
-      estado['dataObjects'] = List.from(estado['dataObjects'].reversed);
-      usersStateNotifier.value = estado;
+      state['dataObjects'] = List.from(state['dataObjects'].reversed);
+      usersStateNotifier.value = state;
     }
   }
   

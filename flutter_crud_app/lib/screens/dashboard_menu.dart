@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_card.dart';
 
 class DashboardMenu extends StatelessWidget {
-  final String titulo;
+  final String title;
   final List<Map<String, dynamic>> cards;
-  const DashboardMenu({required this.titulo, required this.cards, super.key});
+  const DashboardMenu({required this.title, required this.cards, super.key});
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(titulo),
+        title: Text(title),
       ),
       body: SafeArea(
         child: Center(
@@ -28,7 +28,7 @@ class DashboardMenu extends StatelessWidget {
                       cards.map((item) {
                         return CustomCard(
                           title: item['title'],
-                          rota: item['rota'],
+                          route: item['route'],
                         );
                       }).toList(),
                     ),

@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import '../data/var_json.dart' show varColor;
 
 
-MaterialColor corStateVar = Colors.blue;
+MaterialColor colorStateVar = Colors.blue;
 
 
-// iconTheme(corName){
-//   var corColors = searchCodCorByName(corName);
-//   return corColors;
+// iconTheme(colorName){
+//   var colorColors = searchCodColorByName(colorName);
+//   return colorColors;
 // }
 
 // Setting light and dark themes
-ThemeData setTheme(Brightness corTema, corName) {
-  var corColors = searchCodCorByName(corName);
-  corStateVar = corColors;
+ThemeData setTheme(Brightness colorTema, colorName) {
+  var colorColors = searchCodColorByName(colorName);
+  colorStateVar = colorColors;
 
   ThemeData finalTema;
-  if (corTema == Brightness.dark){
+  if (colorTema == Brightness.dark){
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
-        iconTheme: IconThemeData(color: corStateVar),
+        iconTheme: IconThemeData(color: colorStateVar),
         backgroundColor: const Color.fromARGB(255, 66, 66, 66),
         titleTextStyle: const TextStyle(
           fontSize: 20,
@@ -33,7 +33,7 @@ ThemeData setTheme(Brightness corTema, corName) {
         contentTextStyle: TextStyle(color: Colors.white)
       ),
       brightness: Brightness.dark,
-      primarySwatch: corColors,
+      primarySwatch: colorColors,
       inputDecorationTheme: const InputDecorationTheme(
         filled:true,
         fillColor: Color.fromARGB(255, 66, 66, 66), 
@@ -41,10 +41,10 @@ ThemeData setTheme(Brightness corTema, corName) {
       scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)
     );
   }
-  else{ // corTema == Brightness.light
+  else{ // colorTema == Brightness.light
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
-        iconTheme: IconThemeData(color: corStateVar),
+        iconTheme: IconThemeData(color: colorStateVar),
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(
           fontSize: 20,
@@ -58,7 +58,7 @@ ThemeData setTheme(Brightness corTema, corName) {
         contentTextStyle: TextStyle(color: Colors.black)
       ),
       brightness: Brightness.light,
-      primarySwatch: corColors,
+      primarySwatch: colorColors,
       inputDecorationTheme: const InputDecorationTheme(
         filled:true,
         fillColor: Colors.white, 
@@ -69,11 +69,11 @@ ThemeData setTheme(Brightness corTema, corName) {
   return finalTema;
 } 
 
-// Search for varColor['name'] corresponding to varColor['color'] 
+// Search for varColor['name'] colorresponding to varColor['color'] 
 // passed as a parameter of currentColor.value
-searchNameByCod(codCor){
+searchNameByCod(codColor){
   return varColor.firstWhere(
-    (item) => item['color'] == codCor,
+    (item) => item['color'] == codColor,
     orElse: () => varColor[0]
   )['name'];
   
@@ -81,7 +81,7 @@ searchNameByCod(codCor){
 
 // Search for varColor['color'] corresponding to varColor['name'] 
 // passed as a parameter of currentColor.value
-searchCodCorByName(strColor){
+searchCodColorByName(strColor){
   return varColor.firstWhere(
     (item) => item['name'] == strColor,
     orElse: () => varColor[0]

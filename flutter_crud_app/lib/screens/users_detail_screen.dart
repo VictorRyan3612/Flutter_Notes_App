@@ -8,24 +8,24 @@ import '../data/var_json.dart' show UserDetailVar;
 
 // User Detail screen
 class UserDetail extends HookWidget {
-  final String titulo;
-  final User? userAtual;
+  final String title;
+  final User? currentUser;
 
   const UserDetail({
     Key? key, 
-    required this.titulo,
-    this.userAtual}
+    required this.title,
+    this.currentUser}
     ) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userDetailVar = UserDetailVar(userAtual: userAtual);
+    final userDetailVar = UserDetailVar(currentUser: currentUser);
     final cardData = userDetailVar.getCards(context);
 
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(titulo),
+        title: Text(title),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
