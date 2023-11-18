@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // my packages
-import '/screens/tela_configs.dart';
+import 'screens/config_screen.dart';
 import '/screens/dashboard_menu.dart';
 import 'screens/users_list_screen.dart';
 import 'data/var_json.dart' show CardsMenu;
@@ -86,7 +86,7 @@ class MainApp extends HookWidget {
           titulo: AppLocalizations.of(context)!.mainapptitle,
         ),        
         '/users': (context) => const UserScreen(),
-        '/configs': (context) => TelaConfigs(
+        '/configs': (context) => ConfigScreen(
           currentBrightness: currentBrightness,
           currentLocale: currentLocale,
           currentColor: currentColor

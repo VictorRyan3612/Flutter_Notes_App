@@ -7,12 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../data/var_json.dart' show varColor;
 
 // Config Screen
-class TelaConfigs extends HookWidget implements PreferredSizeWidget{
+class ConfigScreen extends HookWidget implements PreferredSizeWidget{
   final ValueNotifier<Brightness> currentBrightness;
   final ValueNotifier<Locale> currentLocale;
   final ValueNotifier<String> currentColor;
 
-  const TelaConfigs({super.key, 
+  const ConfigScreen({super.key, 
     required this.currentBrightness, 
     required this.currentLocale, 
     required this.currentColor, 
@@ -50,11 +50,13 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                 padding: const EdgeInsets.all(12),
                 child:CardSettings.sectioned(
                   children: [
+
                     CardSettingsSection(
                       header: CardSettingsHeader(
                         label: AppLocalizations.of(context)!.configsHeader,
                       ),
                       children: [
+
                         // Config Theme
                         CardSettingsSwitch(
                           trueLabel: '', 
@@ -72,6 +74,7 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                             saveSettings();
                           },
                         ),
+
                         // Config Locale
                         CardSettingsListPicker(
                           label: AppLocalizations.of(context)!.configsLanguagePick,
@@ -80,8 +83,9 @@ class TelaConfigs extends HookWidget implements PreferredSizeWidget{
                           onChanged: (value1) {
                             currentLocale.value = value1!;
                             saveSettings();
-                          }   
+                          }
                         ),
+
                         // Config Color
                         CardSettingsListPicker(
                           label: "Colors",
