@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../config/theme_config.dart' show corStateVar;
 
 
-class SearchSection extends HookWidget {
+// Search Section, sort and search
+class SearchSection extends StatelessWidget {
   final Function _callbackFilter;
   final Function _callbackSort;
 
@@ -16,53 +15,39 @@ class SearchSection extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final showFilter = useState(false);
 
-    return Row(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
         children: [
           Expanded(
-            child: 
-            Row(
-              children: [
-                Text(AppLocalizations.of(context)!.userPageTitle),
-
-                IconButton(
-                  tooltip: AppLocalizations.of(context)!.userSort,
-                  icon: Icon(
-                    Icons.sort_by_alpha,
-                    color: corStateVar,
-                    ),
-                  onPressed: (){
-                    _callbackSort();
-                  },
-                ),
-              ],
-            ),
+            child: TextButton(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(AppLocalizations.of(context)!.userSort),
+                  const Icon(Icons.sort_by_alpha)
+                ], 
+              ),
+              onPressed: (){
+                _callbackSort();
+              },
+            
+            )
           ),
-          
-          if (showFilter.value)
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: TextField(
-                  onChanged: (value) => _callbackFilter(value),
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.userFilter,
-                  ),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: TextField(
+                onChanged: (value) => _callbackFilter(value),
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.userFilter,
                 ),
               ),
             ),
-          IconButton(
-            icon:  Icon(
-              Icons.search,
-              color: corStateVar,
-            ),
-            tooltip: AppLocalizations.of(context)!.userFilter,
-            onPressed: () {
-              showFilter.value = !showFilter.value;
-            },
           ),
         ],
-      );
+      ),
+    );
   }
 }

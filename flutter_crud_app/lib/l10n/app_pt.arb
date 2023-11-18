@@ -11,7 +11,7 @@
    "userFieldName": "Nome",
    "userFieldEmail": "Email",
    "userFieldCpf": "CPF",
-   "userFilter": "Filtrar",
+   "userFilter": "Pesquisar",
    "userSort": "Ordenar",
    
    "userWait": "Em estado de espera",

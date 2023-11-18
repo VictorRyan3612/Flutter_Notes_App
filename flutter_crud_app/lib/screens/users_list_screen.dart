@@ -21,81 +21,76 @@ class UserScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.userPageTitle)
       ),
-      
-      body: ValueListenableBuilder(
-        valueListenable: userDataService.usersStateNotifier,
 
-        builder: (_, value, __) {
-          // Message if there are no users
-          if ((value['dataObjects'].length == 0) && (value['status'] == TableStatus.ready)) {
-            return Center(
-              child: Text(AppLocalizations.of(context)!.userNoUser,
-                style: const TextStyle(fontSize: 30)
-              )
-            );
-          } 
+      body: Column(
+        children: [
+          SearchSection(
+            callbackFilter: userDataService.filtrarEstadoAtual,
+            callbackSort: userDataService.sort,
+          ),
 
-          else {
-            return ListView.builder(
-              itemCount: value['dataObjects'].length,
-              itemBuilder: (context, index) {
-                switch (value['status']) {
-                  case TableStatus.idle:
-                    Text(AppLocalizations.of(context)!.userWait);
+          Expanded(
+            child: ValueListenableBuilder(
+              valueListenable: userDataService.usersStateNotifier,
+              builder: (_, value, __) {
+                // Message if there are no users
+                if ((value['dataObjects'].length == 0) &&
+                    (value['status'] == TableStatus.ready)) {
+                  return Center(
+                    child: Text(AppLocalizations.of(context)!.userNoUser,
+                        style: const TextStyle(fontSize: 30)),
+                  );
+                } else {
+                  return ListView.builder(
+                    itemCount: value['dataObjects'].length,
+                    itemBuilder: (context, index) {
+                      switch (value['status']) {
+                        case TableStatus.idle:
+                          return Text(AppLocalizations.of(context)!.userWait);
 
-                  case TableStatus.ready:
-                    // if (value['dataObjects'].isNotEmpty) {
-                      if (value['dataObjects'][index].status == 'v') {
-                        // Create Cads for each user
-                        return UserCard(
-                          cardTitle: value['dataObjects'][index].name,
-                          cardSubtitle: value['dataObjects'][index].email,
-                          
-                          // Edit user
-                          onEditPressed: () async {
-                            User? newUser = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => UserDetail(
-                                  titulo: AppLocalizations.of(context)!.userTitleEdit,
-                                  userAtual: value['dataObjects'][index]
-                                ),
-                              ),
+                        case TableStatus.ready:
+                          if (value['dataObjects'][index].status == 'v') {
+                            return UserCard(
+                              cardTitle: value['dataObjects'][index].name,
+                              cardSubtitle: value['dataObjects'][index].email,
+                              onEditPressed: () async {
+                                User? newUser = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UserDetail(
+                                      titulo: AppLocalizations.of(context)!.userTitleEdit,
+                                      userAtual: value['dataObjects'][index],
+                                    ),
+                                  ),
+                                );
+                                if (newUser != null) {
+                                  userDataService.atualizarUser(
+                                    listaUsers: value['dataObjects'],
+                                    novoUser: newUser,
+                                    index: index,
+                                  );
+                                }
+                              },
+                              onDeletePressed: () {
+                                userDataService.deleteUser(value['dataObjects'][index]);
+                              },
                             );
-                            if (newUser != null) {
-                              userDataService.atualizarUser(
-                                listaUsers: value['dataObjects'],
-                                novoUser: newUser,
-                                index: index,
-                              );
-                            }
-                          },
-                          // Delete user
-                          onDeletePressed: () {
-                            userDataService.deleteUser(value['dataObjects'][index]);
-                          },
-                        );
-                      }else{
-                        return Container();
+                          } else {
+                            return Container();
+                          }
                       }
-                    // }        
-                    // else {
-                    //   return Center(
-                    //     child: Text(
-                    //       AppLocalizations.of(context)!.userEmpty,
-                    //       style: const TextStyle(fontSize: 30)
-                    //     )
-                    //   );
-                    // }
+                      return null;
+                    },
+                  );
                 }
-                return null;
-              }
-            );
-          }
-        }
-          
+              },
+            ),
+          ),
+        ],
+
       ),
-      // Button to crate a user
+
+      // Button to create a user
       floatingActionButton: FloatingActionButton(
         backgroundColor: corStateVar,
         onPressed: () async {
