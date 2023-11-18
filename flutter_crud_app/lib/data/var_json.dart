@@ -20,6 +20,42 @@ class CardsMenu {
   }
 }
 
+class UserDetailVar {
+  final User? userAtual;
+  UserDetailVar({required this.userAtual});
+
+  List<Map<String, dynamic>> getCards(context) {
+    final nameController =
+        useTextEditingController(text: userAtual?.name ?? '');
+    final emailController =
+        useTextEditingController(text: userAtual?.email ?? '');
+    final cpfController =
+        useTextEditingController(text: userAtual?.cpf ?? '');
+
+    return [
+      {
+        "controller": nameController,
+        "labelText": AppLocalizations.of(context)!.userFieldName,
+      },
+      {
+        "controller": emailController,
+        "labelText": AppLocalizations.of(context)!.userFieldEmail,
+      },
+      {
+        "controller": cpfController,
+        "labelText": AppLocalizations.of(context)!.userFieldCpf,
+      },
+    ];
+  }
+}
+
+var userDetail = [
+  {
+    'controller': 'nameController',
+    'textname': 'AppLocalizations.of(context)!.userFieldName'
+  }
+];
+
 
 var varColor = [
   {
