@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // My packages
 import '../widgets/user_card.dart';
 import '../config/theme_config.dart' show corStateVar;
-import '../widgets/my_app_bar.dart';
+import '../widgets/search_section.dart';
 import '../data/user_data_service.dart';
 import 'users_detail_screen.dart';
 
@@ -18,10 +18,10 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     userDataService.carregarUsers();
     return Scaffold(
-      appBar: MyAppBar(
-        callbackFilter: userDataService.filtrarEstadoAtual,
-        callbackSort: userDataService.sort,
-        ),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.userPageTitle)
+      ),
+      
       body: ValueListenableBuilder(
         valueListenable: userDataService.usersStateNotifier,
 

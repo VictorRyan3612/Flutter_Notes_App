@@ -20,7 +20,7 @@ ThemeData setTheme(Brightness corTema, corName) {
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
         iconTheme: IconThemeData(color: corStateVar),
-        backgroundColor: Color.fromARGB(255, 66, 66, 66),
+        backgroundColor: const Color.fromARGB(255, 66, 66, 66),
         titleTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,

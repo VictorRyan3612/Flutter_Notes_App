@@ -4,24 +4,21 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../config/theme_config.dart' show corStateVar;
 
 
-class MyAppBar extends HookWidget implements PreferredSizeWidget {
+class SearchSection extends HookWidget {
   final Function _callbackFilter;
   final Function _callbackSort;
 
-  const MyAppBar({super.key, callbackFilter, callbackSort})
+  const SearchSection({super.key, callbackFilter, callbackSort})
     : _callbackFilter = callbackFilter ?? (int),
       _callbackSort = callbackSort ?? (int);
     
 
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
     final showFilter = useState(false);
 
-    return AppBar(
-      title: Row(
+    return Row(
         children: [
           Expanded(
             child: 
@@ -66,7 +63,6 @@ class MyAppBar extends HookWidget implements PreferredSizeWidget {
             },
           ),
         ],
-      ),
-    );
+      );
   }
 }
