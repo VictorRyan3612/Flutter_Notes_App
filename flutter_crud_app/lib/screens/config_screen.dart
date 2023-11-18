@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/var_json.dart' show varColor;
 
+
 // Config Screen
 class ConfigScreen extends HookWidget implements PreferredSizeWidget{
   final ValueNotifier<Brightness> currentBrightness;

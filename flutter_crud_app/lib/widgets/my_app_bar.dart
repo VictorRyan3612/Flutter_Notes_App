@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_app/data/var_json.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../config/theme_config.dart' show corStateVar;
+
 
 class MyAppBar extends HookWidget implements PreferredSizeWidget {
   final Function _callbackFilter;
@@ -29,7 +32,10 @@ class MyAppBar extends HookWidget implements PreferredSizeWidget {
 
                 IconButton(
                   tooltip: AppLocalizations.of(context)!.userSort,
-                  icon: const Icon(Icons.sort_by_alpha),
+                  icon: Icon(
+                    Icons.sort_by_alpha,
+                    color: corStateVar,
+                    ),
                   onPressed: (){
                     _callbackSort();
                   },
@@ -51,7 +57,10 @@ class MyAppBar extends HookWidget implements PreferredSizeWidget {
               ),
             ),
           IconButton(
-            icon: const Icon(Icons.search),
+            icon:  Icon(
+              Icons.search,
+              color: corStateVar,
+            ),
             tooltip: AppLocalizations.of(context)!.userFilter,
             onPressed: () {
               showFilter.value = !showFilter.value;

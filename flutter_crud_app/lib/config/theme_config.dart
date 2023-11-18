@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/var_json.dart' show varColor;
 
+
 MaterialColor corStateVar = Colors.blue;
 
 
@@ -17,11 +18,22 @@ ThemeData setTheme(Brightness corTema, corName) {
   ThemeData finalTema;
   if (corTema == Brightness.dark){
     finalTema = ThemeData(
+      appBarTheme:  AppBarTheme(
+        iconTheme: IconThemeData(color: corStateVar),
+        backgroundColor: Color.fromARGB(255, 66, 66, 66),
+        titleTextStyle: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.white
+          )
+        ),
+      
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: Colors.black, 
         contentTextStyle: TextStyle(color: Colors.white)
       ),
       brightness: Brightness.dark,
+      primarySwatch: corColors,
       inputDecorationTheme: const InputDecorationTheme(
         filled:true,
         fillColor: Color.fromARGB(255, 66, 66, 66), 
@@ -31,6 +43,16 @@ ThemeData setTheme(Brightness corTema, corName) {
   }
   else{ // corTema == Brightness.light
     finalTema = ThemeData(
+      appBarTheme:  AppBarTheme(
+        iconTheme: IconThemeData(color: corStateVar),
+        backgroundColor: Colors.white,
+        titleTextStyle: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.black
+          )
+        ),
+
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: Colors.white, 
         contentTextStyle: TextStyle(color: Colors.black)

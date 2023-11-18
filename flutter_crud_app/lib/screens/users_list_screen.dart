@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_app/data/var_json.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // My packages
 import '../widgets/user_card.dart';
+import '../config/theme_config.dart' show corStateVar;
 import '../widgets/my_app_bar.dart';
 import '../data/user_data_service.dart';
 import 'users_detail_screen.dart';
+
 
 
 // User list screen
@@ -95,6 +98,7 @@ class UserScreen extends StatelessWidget {
       ),
       // Button to crate a user
       floatingActionButton: FloatingActionButton(
+        backgroundColor: corStateVar,
         onPressed: () async {
           User? newUser = await Navigator.push(
             context,
