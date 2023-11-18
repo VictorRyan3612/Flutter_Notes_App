@@ -23,5 +23,19 @@
    "configsPageTitle": "Tela de Configurações",
    "configsHeader": "Geral",
    "configsModeTheme": "Modo Noturno",
-   "configsLanguagePick": "Selecionar Idioma"
+   "configsLanguagePick": "Selecionar Idioma",
+   "configColor": "Selecionar Cor",
+   "configStartScreen": "Selecionar Tela Inicial",
+
+
+
+   "colorBlue": "Azul",
+   "colorBrown": "Marrom",
+   "colorGreen": "Verde",
+   "colorGray": "Cinza",
+   "colorOrange": "Laranja",
+   "colorPink": "Rosa",
+   "colorPurple": "Roxo",
+   "colorRed": "Vermelho",
+   "colorYellow": "Amarelo"
 }

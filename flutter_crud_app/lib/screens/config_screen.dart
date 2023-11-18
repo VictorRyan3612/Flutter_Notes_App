@@ -4,7 +4,7 @@ import 'package:card_settings/card_settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/var_json.dart' show varColor, starScreenList, searchNameByRoute, searchRouteByName;
+import '../data/var_json.dart';
 
 
 // Config Screen
@@ -91,8 +91,8 @@ class ConfigScreen extends HookWidget{
 
                         // Config Color
                         CardSettingsListPicker(
-                          label: "Colors",
                           items: varColor.map((item) => item['name']).toList(),
+                          label: AppLocalizations.of(context)!.configColor,
                           
                           initialItem: currentColor.value,
 
@@ -102,7 +102,7 @@ class ConfigScreen extends HookWidget{
                           },
                         ),
                         CardSettingsListPicker(
-                          label: "Tela inicial",
+                          label: AppLocalizations.of(context)!.configStartScreen,
                           items: starScreenList.map((item) => item['name']).toList(),
                           initialItem:  routeNameInitialItem,
                           onChanged: (value3) {

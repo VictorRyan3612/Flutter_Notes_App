@@ -48,7 +48,7 @@ class MainApp extends HookWidget {
 
       final startScreen = prefs.getString('startScreen') ?? '/';
       currentStartScreen.value = startScreen; 
-      print(currentStartScreen.value);
+
     }
 
     loadSettings();

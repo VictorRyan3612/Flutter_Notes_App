@@ -24,5 +24,18 @@
    "configsPageTitle": "Configs Screen",
    "configsHeader": "General",
    "configsModeTheme": "Dark Mode",
-   "configsLanguagePick": "Select Language"
+   "configsLanguagePick": "Select Language",
+   "configColor": "Select Color",
+   "configStartScreen": "Select Start Screen",
+
+   
+   "colorBlue": "Blue",
+   "colorBrown": "Brown",
+   "colorGreen": "Green",
+   "colorGray": "Gray",
+   "colorOrange": "Orange",
+   "colorPink": "Pink",
+   "colorPurple": "Purple",
+   "colorRed": "Red",
+   "colorYellow": "Yellow"
 }
