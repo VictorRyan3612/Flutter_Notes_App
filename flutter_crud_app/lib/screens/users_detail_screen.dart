@@ -6,6 +6,7 @@ import '../data/user_data_service.dart';
 import '../data/var_json.dart' show UserDetailVar;
 
 
+// User Detail screen
 class UserDetail extends HookWidget {
   final String titulo;
   final User? userAtual;
@@ -30,48 +31,56 @@ class UserDetail extends HookWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: cardData.map((card) {
-            return Column(
-              children: [
-                TextField(
-                  controller: card['controller'],
-                  decoration: InputDecoration(
-                    labelText: card['labelText'],
+          children: [
+            // Create TextField with map from cardData
+            ...cardData.map((card) {
+              return Column(
+                children: [
+                  TextField(
+                    controller: card['controller'],
+                    decoration: InputDecoration(
+                      labelText: card['labelText'],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                  height: 10,
-                ),
-              ],
-            );
-          }).toList(),
-        ),
+                  const SizedBox(
+                    width: 10,
+                    height: 10,
+                  ),
+                ],
+              );
+            }).toList(),
 
-            // const SizedBox(height: 16.0),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     if (nameController.text.isNotEmpty &&
-            //         emailController.text.isNotEmpty &&
-            //         cpfController.text.isNotEmpty) {
-            //       User newUser = User(
-            //         name: nameController.text,
-            //         email: emailController.text,
-            //         cpf: cpfController.text,
-            //       );
-            //       Navigator.pop(context, newUser);
-            //     } else {
-            //       ScaffoldMessenger.of(context).showSnackBar(
-            //         SnackBar(
-            //           content: Text(AppLocalizations.of(context)!.userAviso)
-            //         ),
-            //       );
-            //     }
-            //   },
-            //   child: Text(AppLocalizations.of(context)!.userSave),
-            // ),
-          
+            const SizedBox(
+              width: 20,
+              height: 20,
+            ),
+
+            // Save button
+            ElevatedButton(
+              onPressed: () {
+                bool anyFieldEmpty = cardData.any((card) =>
+                  (card['controller'] as TextEditingController).text.isEmpty);
+
+                if (!anyFieldEmpty) {
+                  User newUser = User(
+                    name: cardData[0]['controller'].text,
+                    email: cardData[1]['controller'].text,
+                    cpf: cardData[2]['controller'].text,
+                  );
+                  Navigator.pop(context, newUser);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(AppLocalizations.of(context)!.userAviso),
+                    ),
+                  );
+                }
+              },
+              child: Text(AppLocalizations.of(context)!.userSave),
+            ),
+          ],
         ),
+      ),
     );
   }
 }
