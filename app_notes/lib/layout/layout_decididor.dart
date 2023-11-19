@@ -1,7 +1,7 @@
 import 'package:app_notes/screen/desktop_home_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../widget/tela_principal.dart';
+import '../screen/mobile_home_screen.dart';
 import '../widget/drawer_menu.dart';
 
 
@@ -16,7 +16,7 @@ class LayoutDecider extends StatelessWidget {
           drawer: DrawerMenu(),
           appBar: isMobile ? AppBar(title: Text("Mobile Layout")) : AppBar(title: Text("Desktop Layout")),
           body: isMobile 
-          ? TelaPrincipal()
+          ? MobileHomeScreen()
           : DesktopHomeScreen()
         );
       },
