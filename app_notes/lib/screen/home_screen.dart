@@ -1,3 +1,4 @@
+import 'package:app_notes/layout/desktop.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/tela_principal.dart';
@@ -16,14 +17,7 @@ class HomeScreen extends StatelessWidget {
           appBar: isMobile ? AppBar(title: Text("Mobile Layout")) : AppBar(title: Text("Desktop Layout")),
           body: isMobile 
           ? TelaPrincipal()
-          : Row(
-            children: [
-              // DrawerMenu(isMobile: isMobile),
-              Expanded(
-                child: TelaPrincipal()
-              ) 
-            ],
-          ),
+          : DesktopHomePage()
         );
       },
     );

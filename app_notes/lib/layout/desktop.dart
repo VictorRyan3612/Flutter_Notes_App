@@ -1,3 +1,4 @@
+import 'package:app_notes/widget/list_left.dart';
 import 'package:flutter/material.dart';
 
 
@@ -6,10 +7,17 @@ class DesktopHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Desktop Layout")
-      ),
+    return Row(
+      children: [
+        Expanded(
+          child: ListLeft()
+        ),
+        Expanded(
+          child: Center(
+            child: Text("Texto Direito")
+            )
+          )
+      ],
     );
   }
 }
