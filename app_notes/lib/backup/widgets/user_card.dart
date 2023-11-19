@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../config/theme_config.dart' show colorStateVar;
+import '../../config/theme_config.dart' show colorStateVar;
 
 
 class UserCard extends StatelessWidget {

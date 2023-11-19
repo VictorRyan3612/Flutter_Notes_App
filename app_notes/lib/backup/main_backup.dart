@@ -10,7 +10,7 @@ import 'screens/config_screen.dart';
 import '/screens/dashboard_menu.dart';
 import 'screens/users_list_screen.dart';
 import 'data/var_json.dart' show CardsMenu;
-import 'config/theme_config.dart';
+import '../config/theme_config.dart';
 
 
 void main() {

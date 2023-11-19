@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'screen/home_screen.dart';
-
+import 'config/theme_config.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,7 +14,17 @@ class MainApp extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // base states 
+    final currentBrightness = useState(Brightness.dark); //Theme
+    final currentColor = useState('Blue'); // Accent color
+
+
+    final finalTheme = setTheme(currentBrightness.value, currentColor.value);
+
+
     return MaterialApp(
+      theme: finalTheme,
       debugShowCheckedModeBanner: false,
 
       home: HomeScreen(),

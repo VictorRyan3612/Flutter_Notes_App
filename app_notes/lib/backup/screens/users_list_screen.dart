@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // My packages
 import '../widgets/user_card.dart';
-import '../config/theme_config.dart' show colorStateVar;
+import '../../config/theme_config.dart' show colorStateVar;
 import '../widgets/search_section.dart';
 import '../data/user_data_service.dart';
 import 'users_detail_screen.dart';
