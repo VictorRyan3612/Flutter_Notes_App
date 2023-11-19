@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 
 class DrawerMenu extends StatelessWidget {
+
   const DrawerMenu({super.key});
+
+
   @override
   Widget build(BuildContext context) {
-    bool isMobile = true;
-    return Container(
+    return Drawer(
       width: 300,
       child: ListView(
         
@@ -27,14 +29,13 @@ class DrawerMenu extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                if (isMobile)
-                  IconButton(
-                    tooltip: "Voltar",
-                    icon: Icon(Icons.menu, 
-                      size: 30
-                    ),
-                    onPressed: () => Navigator.of(context).pop(), 
+                IconButton(
+                  tooltip: "Voltar",
+                  icon: Icon(Icons.menu, 
+                    size: 30
                   ),
+                  onPressed: () => Navigator.of(context).pop(), 
+                ),
                 Padding(
                   padding: EdgeInsets.only(left: 24),
                   child: Text(
@@ -60,7 +61,7 @@ class DrawerMenu extends StatelessWidget {
               // ...
             },
           ),
-          
+
           const Divider(),
           ListTile(
             title: const Text('Settings'),
