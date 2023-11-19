@@ -1,12 +1,12 @@
-import 'package:app_notes/layout/desktop.dart';
+import 'package:app_notes/screen/desktop_home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/tela_principal.dart';
 import '../widget/drawer_menu.dart';
 
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class LayoutDecider extends StatelessWidget {
+  const LayoutDecider({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
           appBar: isMobile ? AppBar(title: Text("Mobile Layout")) : AppBar(title: Text("Desktop Layout")),
           body: isMobile 
           ? TelaPrincipal()
-          : DesktopHomePage()
+          : DesktopHomeScreen()
         );
       },
     );

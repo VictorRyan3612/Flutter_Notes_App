@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'screen/home_screen.dart';
+import 'layout/layout_decididor.dart';
 import 'config/theme_config.dart';
 
 void main() {
@@ -27,7 +27,7 @@ class MainApp extends HookWidget {
       theme: finalTheme,
       debugShowCheckedModeBanner: false,
 
-      home: HomeScreen(),
+      home: LayoutDecider(),
     );
   }
 }

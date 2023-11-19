@@ -2,8 +2,8 @@ import 'package:app_notes/widget/list_left.dart';
 import 'package:flutter/material.dart';
 
 
-class DesktopHomePage extends StatelessWidget {
-  const DesktopHomePage({super.key});
+class DesktopHomeScreen extends StatelessWidget {
+  const DesktopHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../widget/drawer_menu.dart';
 
 
-class MobileHomePage extends StatelessWidget {
-  const MobileHomePage({super.key});
+class MobileHomeScreen extends StatelessWidget {
+  const MobileHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
