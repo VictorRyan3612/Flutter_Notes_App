@@ -1,4 +1,7 @@
-# The CRUD base in flutter
+# Notes app in flutter
+
+Notes app based on Flutter_CRUD made by me at the link:
+https://github.com/VictorRyan3612/Flutter_CRUD
 
 ## Tutorial for using the program
 ### Pub get
