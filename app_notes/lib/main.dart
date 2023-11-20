@@ -4,6 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'layout/layout_decididor.dart';
 import 'config/theme_config.dart';
+import 'screen/config_screen.dart';
+
 
 void main() {
   runApp(const MainApp());
@@ -27,7 +29,16 @@ class MainApp extends HookWidget {
       theme: finalTheme,
       debugShowCheckedModeBanner: false,
 
-      home: LayoutDecider(),
+
+      initialRoute: '/configs',
+      routes: {
+        '/': (context) => LayoutDecider(),
+
+        '/configs': (context) => ConfigScreen(
+          currentBrightness: currentBrightness,
+          currentColor: currentColor,
+          )
+      },
     );
   }
 }
