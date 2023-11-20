@@ -20,32 +20,44 @@ class ConfigScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Configurações"),),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text("Opção 1"),
-            subtitle: Text("Subtitulo 1"),
-            trailing: Switch(
-              value: currentIsDarkMode.value, 
-              onChanged: (value) {
-                currentIsDarkMode.value = value;
-                saveSettings();
-              },
-            ),
 
+      body: SafeArea(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Text("Modo Escuro"),
+                    // subtitle: Text(""),
+                    trailing: Switch(
+                      value: currentIsDarkMode.value, 
+                      onChanged: (value) {
+                        currentIsDarkMode.value = value;
+                        saveSettings();
+                      },
+                    ),
+                    
+                  ),
+                  Divider(),
+                  ListTile(
+                    title: Text("Opção 2"),
+                    subtitle: Text("Subtitulo 2"),
+                  ),
+                  Divider(),
+                  ListTile(
+                    title: Text("Opção 3"),
+                    subtitle: Text("Subtitulo 3"),
+                  ),
+                  Divider(),
+                ],
+              ),
+            ),
           ),
-          Divider(),
-          ListTile(
-            title: Text("Opção 2"),
-            subtitle: Text("Subtitulo 2"),
-          ),
-          Divider(),
-          ListTile(
-            title: Text("Opção 3"),
-            subtitle: Text("Subtitulo 3"),
-          ),
-          Divider(),
-        ],
+        ),
       ),
     );
   }

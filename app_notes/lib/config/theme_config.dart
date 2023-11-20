@@ -14,7 +14,6 @@ MaterialColor colorStateVar = Colors.blue;
 ThemeData setTheme(bool isDarkMode, colorName) {
   var colorColors = searchCodColorByName(colorName);
   colorStateVar = colorColors;
-
   ThemeData finalTema;
   if (isDarkMode){
     finalTema = ThemeData(
@@ -45,7 +44,7 @@ ThemeData setTheme(bool isDarkMode, colorName) {
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
         iconTheme: IconThemeData(color: colorStateVar),
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 242, 243, 245),
         titleTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -61,9 +60,9 @@ ThemeData setTheme(bool isDarkMode, colorName) {
       primarySwatch: colorColors,
       inputDecorationTheme: const InputDecorationTheme(
         filled:true,
-        fillColor: Colors.white, 
+        fillColor: Color.fromARGB(255, 242, 243, 245), 
       ),
-      scaffoldBackgroundColor: const Color.fromARGB(255, 175, 175, 175)
+      scaffoldBackgroundColor: Colors.white
     );
   }
   return finalTema;
