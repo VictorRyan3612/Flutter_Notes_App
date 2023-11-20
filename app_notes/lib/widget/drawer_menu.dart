@@ -66,8 +66,8 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
             title: const Text('Settings'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/configs');
             },
           ),
         ],
