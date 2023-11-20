@@ -20,14 +20,14 @@ class MainApp extends HookWidget {
   Widget build(BuildContext context) {
 
     // base states 
-    final currentBrightness = useState(Brightness.dark); //Theme
+    final currentIsDarkMode = useState(true); //Theme
     final currentColor = useState('Blue'); // Accent color
 
     Future<void> loadSettings() async {
       final prefs = await SharedPreferences.getInstance();
       
-      final isDarkMode = prefs.getBool('isDarkMode') ?? false;
-      currentBrightness.value = isDarkMode ? Brightness.dark : Brightness.light;
+      final isDarkMode = prefs.getBool('isDarkMode') ?? true;
+      currentIsDarkMode.value = isDarkMode;
 
       final colorTheme = prefs.getString('colorTheme') ?? 'Blue';
       currentColor.value = colorTheme;
@@ -35,8 +35,8 @@ class MainApp extends HookWidget {
     }
 
     loadSettings();
-    
-    final finalTheme = setTheme(currentBrightness.value, currentColor.value);
+
+    final finalTheme = setTheme(currentIsDarkMode.value, currentColor.value);
 
 
     return MaterialApp(
@@ -49,7 +49,7 @@ class MainApp extends HookWidget {
         '/': (context) => LayoutDecider(),
 
         '/configs': (context) => ConfigScreen(
-          currentBrightness: currentBrightness,
+          currentIsDarkMode: currentIsDarkMode,
           currentColor: currentColor,
           )
       },

@@ -11,12 +11,12 @@ MaterialColor colorStateVar = Colors.blue;
 // }
 
 // Setting light and dark themes
-ThemeData setTheme(Brightness colorTema, colorName) {
+ThemeData setTheme(bool isDarkMode, colorName) {
   var colorColors = searchCodColorByName(colorName);
   colorStateVar = colorColors;
 
   ThemeData finalTema;
-  if (colorTema == Brightness.dark){
+  if (isDarkMode){
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
         iconTheme: IconThemeData(color: colorStateVar),
@@ -41,7 +41,7 @@ ThemeData setTheme(Brightness colorTema, colorName) {
       scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)
     );
   }
-  else{ // colorTema == Brightness.light
+  else{ // isDarkMode = false
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
         iconTheme: IconThemeData(color: colorStateVar),
