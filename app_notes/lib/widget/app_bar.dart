@@ -1,3 +1,4 @@
+import 'package:app_notes/config/settings_data_service.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
@@ -28,21 +29,23 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
               return const[
                 PopupMenuItem<int>(
                   value: 0,
-                  child: Text("Tema Branco"),
+                  child: Text("Lista"),
                 ),
 
                 PopupMenuItem<int>(
                   value: 1,
-                  child: Text("Tema Preto"),
+                  child: Text("Grade"),
                 ),
               ];
             },
             
             onSelected:(value){
               if(value == 0){
-                print("Valor 0 selecionado.");
+                settingsService.isGridView.value = false;
+                settingsService.saveSettings();
               }else if(value == 1){
-                print("Valor 1 selecionado.");
+                settingsService.isGridView.value = true;
+                settingsService.saveSettings();
               }
             }
           ),
