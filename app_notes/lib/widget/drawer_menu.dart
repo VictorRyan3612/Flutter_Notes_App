@@ -47,14 +47,16 @@ class DrawerMenu extends StatelessWidget {
             ),
           ),
           ListTile(
+            autofocus: true,
+            leading: Icon(Icons.notes),
             title: const Text('All Notes'),
             onTap: () {
               // Update the state of the app.
               // ...
             },
           ),
-
           ListTile(
+            leading: Icon(Icons.delete_outline),
             title: const Text('Trash'),
             onTap: () {
               // Update the state of the app.
@@ -64,6 +66,7 @@ class DrawerMenu extends StatelessWidget {
 
           const Divider(),
           ListTile(
+            leading: Icon(Icons.settings),
             title: const Text('Settings'),
             onTap: () {
               Navigator.pop(context);

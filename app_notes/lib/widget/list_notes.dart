@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ListLeft extends StatelessWidget {
+class ListNotes extends StatelessWidget {
 
-  const ListLeft({super.key});
+  const ListNotes({super.key});
 
 
   @override

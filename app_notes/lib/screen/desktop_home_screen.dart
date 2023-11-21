@@ -1,4 +1,4 @@
-import 'package:app_notes/widget/list_left.dart';
+import 'package:app_notes/widget/list_notes.dart';
 import 'package:flutter/material.dart';
 
 
@@ -10,7 +10,7 @@ class DesktopHomeScreen extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: ListLeft()
+          child: ListNotes()
         ),
         Expanded(
           child: Center(

@@ -1,4 +1,4 @@
-import 'package:app_notes/widget/list_left.dart';
+import 'package:app_notes/widget/list_notes.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -32,7 +32,7 @@ class MobileHomeScreen extends StatelessWidget {
             ),
           );
         } else {
-          return ListLeft();
+          return ListNotes();
         }
       },
     );
