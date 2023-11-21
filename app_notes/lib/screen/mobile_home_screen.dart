@@ -13,7 +13,6 @@ class MobileHomeScreen extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: settingsService.isGridView, 
       builder:(_, value,__) {
-        print(settingsService.isGridView.value);
         if (value == true) {
           return GridView.builder(
             gridDelegate:
