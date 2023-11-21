@@ -27,20 +27,19 @@ class LoadNotesLayout extends StatelessWidget {
                 return Text("Erro");
 
               case TableStatus.ready:
-                if (isGridViewValue){
+                
+
+                if (isGridViewValue) {
+                  List<Note> validDataObjects = value['dataObjects']
+                    .where((dataObject) => dataObject.status == 'v')
+                    .toList();
                   return GridView.builder(
-                    itemCount: value['dataObjects'].length,
+                    itemCount: validDataObjects.length,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
                     itemBuilder: (_, index) {
-                      if (value['dataObjects'][index].status == 'v'){
-                        return GridNotes(
-                          title: value['dataObjects'][index].title,
-                        );
-                      }
-                        
-                      else{
-                        return Container();
-                      }
+                      return GridNotes(
+                        title: validDataObjects[index].title,
+                      );
                     },
                   );
                 }
