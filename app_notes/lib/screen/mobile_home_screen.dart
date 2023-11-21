@@ -1,4 +1,5 @@
 import 'package:app_notes/data/note_data_service.dart';
+import 'package:app_notes/widget/grid_notes.dart';
 import 'package:app_notes/widget/list_notes.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -15,22 +16,7 @@ class MobileHomeScreen extends StatelessWidget {
       valueListenable: settingsService.isGridView, 
       builder:(_, value,__) {
         if (value == true) {
-          return GridView.builder(
-            gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-            itemCount: 10, // Defina o número desejado de itens
-            itemBuilder: (_, index) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: Color.fromARGB(
-                  255,
-                  Random().nextInt(255),
-                  Random().nextInt(255),
-                  Random().nextInt(255),
-                ),
-              ),
-            ),
-          );
+          return GridNotes();
         } else {
           return ListNotes();
         }

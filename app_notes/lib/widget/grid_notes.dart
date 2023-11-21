@@ -1,9 +1,11 @@
 import 'package:app_notes/data/note_data_service.dart';
 import 'package:flutter/material.dart';
 
-class ListNotes extends StatelessWidget {
 
-  const ListNotes({super.key});
+
+class GridNotes extends StatelessWidget {
+
+  const GridNotes({super.key});
 
 
   @override
@@ -21,20 +23,25 @@ class ListNotes extends StatelessWidget {
 
         }
         else{
-          return ListView.builder(
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
             itemCount: value['dataObjects'].length,
-            itemBuilder:(_,index) {
+            itemBuilder: (_,index) {
               switch (value['status']) {
                 case TableStatus.loading:
                   return CircularProgressIndicator();
                   
                 case TableStatus.ready:
-                  return ListTile(
-                    title: Text(value['dataObjects'][index].title),
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridTile(
+                      child: Text(value['dataObjects'][index].title),
+                    )
                   );
               } return null;
             }
           );
+          
         }
       },
     );

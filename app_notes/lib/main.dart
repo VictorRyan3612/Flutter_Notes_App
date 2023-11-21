@@ -1,4 +1,5 @@
 // flutter packages
+import 'package:app_notes/data/note_data_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,7 +36,8 @@ class MainApp extends HookWidget {
     }
 
     loadSettings();
-
+    noteDataService.loadNotes();
+    
     final finalTheme = setTheme(currentIsDarkMode.value, currentColor.value);
 
 
