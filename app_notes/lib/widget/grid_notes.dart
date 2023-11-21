@@ -12,9 +12,26 @@ class GridNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GridTile(
-        child: Text(title),
-      )
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 5.0,
+              color: Colors.red,
+              margin: EdgeInsets.only(bottom: 5), // Margem ao redor da linha (opcional)
+              width: double.infinity, // Preencher o máximo possível
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ]
+        ),
+      ),
     );
   }
 }
