@@ -37,7 +37,7 @@ class LoadNotesLayout extends StatelessWidget {
                     return GridNotes2(valueNotes: value['dataObjects']);
                   }
                   else{
-                    return ListNotes2();
+                    return ListNotes2(valueNotes: value['dataObjects'],);
                   }
                   
                 } return Container();
@@ -75,12 +75,19 @@ class GridNotes2 extends StatelessWidget {
   }
 }
 class ListNotes2  extends StatelessWidget{
-  const ListNotes2({super.key});
+  final List<Note> valueNotes;
+
+  const ListNotes2({super.key, required this.valueNotes});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Teste List")
+    return ListView.builder(
+      itemCount: valueNotes.length,
+      itemBuilder:(_,index) {
+        return ListTile(
+          title: Text(valueNotes[index].title),
+        );
+      }
     );
   }
 }
