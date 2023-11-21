@@ -16,40 +16,24 @@ class ListNotes extends StatelessWidget {
         if((value['dataObjects'].length == 0) &&
             (value['status'] == TableStatus.ready)){
           return Center(
-            child: Text("Não tem Notas")); 
+            child: Text("Não tem Notas")
+          ); 
 
         }
-        else if (value['status'] == TableStatus.loading) {
-          return CircularProgressIndicator();
-        }
         else{
-          return ListView(
-            children: [
-              ListTile(
-                title: const Text('Note 1'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('Note 2'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-        
-              const Divider(),
-              ListTile(
-                title: const Text('Note 3'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-            ]
+          return ListView.builder(
+            itemCount: value['dataObjects'].length,
+            itemBuilder:(_,index) {
+              switch (value['status']) {
+                case TableStatus.loading:
+                  return CircularProgressIndicator();
+                  
+                case TableStatus.ready:
+                  return ListTile(
+                    title: Text(value['dataObjects'][index].title),
+                  );
+              } return null;
+            }
           );
         }
       },

@@ -66,7 +66,6 @@ class NoteDataService {
 
   void loadNotes() async {
     var json = await loadNotesFromFile();
-    print(json);
     notesValueNotifier.value = {
       'status':TableStatus.ready,
       'dataObjects': json
