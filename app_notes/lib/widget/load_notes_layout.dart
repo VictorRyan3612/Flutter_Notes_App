@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/data/note_data_service.dart';
 import 'package:app_notes/widget/grid_notes.dart';
-import 'package:flutter/material.dart';
+import 'package:app_notes/widget/list_notes.dart';
 
 
 
@@ -34,10 +36,10 @@ class LoadNotesLayout extends StatelessWidget {
                   
                 case TableStatus.ready:
                   if(isGridViewValue){
-                    return GridNotes2(valueNotes: value['dataObjects']);
+                    return GridNotes(valueNotes: value['dataObjects']);
                   }
                   else{
-                    return ListNotes2(valueNotes: value['dataObjects'],);
+                    return ListNotes(valueNotes: value['dataObjects'],);
                   }
                   
                 } return Container();
@@ -51,43 +53,3 @@ class LoadNotesLayout extends StatelessWidget {
   
 
   
-  
-class GridNotes2 extends StatelessWidget {
-  final List<Note> valueNotes;
-
-  const GridNotes2({super.key, required this.valueNotes});
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-      itemCount: valueNotes.length,
-      itemBuilder: (_, index) {
-        return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridTile(
-              child: Text(valueNotes[index].title),
-            )
-          );
-      },
-
-      );
-  }
-}
-class ListNotes2  extends StatelessWidget{
-  final List<Note> valueNotes;
-
-  const ListNotes2({super.key, required this.valueNotes});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: valueNotes.length,
-      itemBuilder:(_,index) {
-        return ListTile(
-          title: Text(valueNotes[index].title),
-        );
-      }
-    );
-  }
-}

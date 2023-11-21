@@ -1,42 +1,20 @@
 import 'package:app_notes/data/note_data_service.dart';
 import 'package:flutter/material.dart';
 
-class ListNotes extends StatelessWidget {
+class ListNotes extends StatelessWidget{
+  final List<Note> valueNotes;
 
-  const ListNotes({super.key});
-
+  const ListNotes({super.key, required this.valueNotes});
 
   @override
   Widget build(BuildContext context) {
-
-    
-    return ValueListenableBuilder(
-      valueListenable: noteDataService.notesValueNotifier,
-      builder: (_, value,__) {
-        if((value['dataObjects'].length == 0) &&
-            (value['status'] == TableStatus.ready)){
-          return Center(
-            child: Text("Não tem Notas")
-          ); 
-
-        }
-        else{
-          return ListView.builder(
-            itemCount: value['dataObjects'].length,
-            itemBuilder:(_,index) {
-              switch (value['status']) {
-                case TableStatus.loading:
-                  return CircularProgressIndicator();
-                  
-                case TableStatus.ready:
-                  return ListTile(
-                    title: Text(value['dataObjects'][index].title),
-                  );
-              } return null;
-            }
-          );
-        }
-      },
+    return ListView.builder(
+      itemCount: valueNotes.length,
+      itemBuilder:(_,index) {
+        return ListTile(
+          title: Text(valueNotes[index].title),
+        );
+      }
     );
   }
 }
