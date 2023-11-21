@@ -34,7 +34,7 @@ class LoadNotesLayout extends StatelessWidget {
                   
                 case TableStatus.ready:
                   if(isGridViewValue){
-                    return GridNotes2();
+                    return GridNotes2(valueNotes: value['dataObjects']);
                   }
                   else{
                     return ListNotes2();
@@ -53,13 +53,25 @@ class LoadNotesLayout extends StatelessWidget {
   
   
 class GridNotes2 extends StatelessWidget {
-  const GridNotes2({super.key});
+  final List<Note> valueNotes;
+
+  const GridNotes2({super.key, required this.valueNotes});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Teste Grid")
-    );
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      itemCount: valueNotes.length,
+      itemBuilder: (_, index) {
+        return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridTile(
+              child: Text(valueNotes[index].title),
+            )
+          );
+      },
+
+      );
   }
 }
 class ListNotes2  extends StatelessWidget{
