@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/note_data_service.dart';
 import '../screen/desktop_home_screen.dart';
 import '../screen/mobile_home_screen.dart';
 import '../widget/app_bar.dart';
@@ -18,7 +19,15 @@ class LayoutDecider extends StatelessWidget {
           appBar: MyAppBar(isMobile: isMobile),
           body: isMobile 
           ? MobileHomeScreen()
-          : DesktopHomeScreen()
+          : DesktopHomeScreen(),
+          floatingActionButton: isMobile ? 
+            FloatingActionButton(
+              onPressed: (){noteDataService.createNote(
+                  Note(title: 'Teste', content: 'content')
+                );},
+              child: Icon(Icons.add),
+            ) 
+            : null,
         );
       },
     );
