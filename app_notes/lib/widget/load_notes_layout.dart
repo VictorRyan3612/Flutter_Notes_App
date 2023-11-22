@@ -18,7 +18,7 @@ class LoadNotesLayout extends StatelessWidget {
     return Column(
       children: [
         SearchSection(
-          callbackSort: noteDataService.sort,
+          callbackSort: noteDataService.sortByField,
           callbackFilter: noteDataService.filterCurrentState
         ),
         Expanded(

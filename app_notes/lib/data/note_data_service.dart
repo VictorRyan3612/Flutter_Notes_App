@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import "package:flutter/foundation.dart" show searchCodColorByName;
 
 import '../config/theme_config.dart';
 
@@ -34,6 +33,11 @@ class Note {
     };
   }
   String toJson() => json.encode(toMap());
+  
+  returnValuebyField(Note note, String field){
+    return note.toMap()[field];
+  }
+  
   
   MaterialColor selectColor(Note note){
     var colorFinal = searchCodColorByName(note.colorNote);
@@ -85,6 +89,7 @@ class NoteDataService {
 
     return [];
   }
+
 
   void loadNotes() async {
     var json = await loadNotesFromFile();
@@ -166,6 +171,32 @@ class NoteDataService {
     }
   }
 
+  sortByField(String? field) {
+    if (field == null){
+      field = 'title';
+      print(field);
+    }
+    
+    print(field);
+
+    var state = Map<String, dynamic>.from(notesValueNotifier.value);
+
+    if (!isSorted) {
+
+      state['dataObjects'] = List<Note>.from(state['dataObjects']);
+      state['dataObjects'].sort((Note a, Note b) {
+        String valueA = a.returnValuebyField(a, field!);
+        String valueB = b.returnValuebyField(b, field);
+        return valueA.compareTo(valueB);
+      });
+
+      notesValueNotifier.value = state;
+      isSorted = true;
+    } else {
+      state['dataObjects'] = List<Note>.from(state['dataObjects'].reversed);
+      notesValueNotifier.value = state;
+    }
+  }
 }
 
 NoteDataService noteDataService = NoteDataService();
