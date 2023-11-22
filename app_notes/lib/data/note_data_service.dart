@@ -161,7 +161,7 @@ class NoteDataService {
       isSorted= true;
     } 
     else{
-      state['dataObjects'] = List.from(state['dataObjects'].reversed);
+      state['dataObjects'] = List<Note>.from(state['dataObjects'].reversed);
       notesValueNotifier.value = state;
     }
   }
