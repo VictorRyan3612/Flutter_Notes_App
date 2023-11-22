@@ -7,11 +7,22 @@ class NoteDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    noteDataService.aNoteValueNotifier.value;
+    var noteActual = noteDataService.aNoteValueNotifier.value;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: noteActual.selectColor(noteActual),
+        title: Text(noteActual.title),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(
+            Icons.arrow_back, 
+            color: Colors.black
+            ),
+        ),
+      ),
+
       body: Center(
-        child: Text(noteDataService.aNoteValueNotifier.value.title)
+        child: Text(noteActual.content)
       ),
     );
     // return Text(noteDataService.aNoteValueNotifier.value.title);
