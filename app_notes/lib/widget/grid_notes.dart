@@ -5,8 +5,9 @@ import 'package:app_notes/data/note_data_service.dart';
 
 class GridNotes extends StatelessWidget {
   final String title;
+  final String subtitle;
 
-  const GridNotes({super.key, required this.title});
+  const GridNotes({super.key, required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +15,21 @@ class GridNotes extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Card(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [  
             Container(
               height: 5.0,
               color: Colors.red,
-              margin: EdgeInsets.only(bottom: 5), // Margem ao redor da linha (opcional)
-              width: double.infinity, // Preencher o máximo possível
+              // margin: EdgeInsets.only(bottom: 5),
+              width: double.infinity, 
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Text(
+            ListTile(
+              contentPadding: EdgeInsets.only(left: 10),
+              title: Text(
                 title,
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20)
               ),
+              subtitle: Text(subtitle),
             ),
           ]
         ),

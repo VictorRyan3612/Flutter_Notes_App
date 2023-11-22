@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 class ListNotes extends StatelessWidget{
   final String title;
+  final String subtitle;
 
-  const ListNotes({super.key, required this.title});
+
+  const ListNotes({super.key, required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class ListNotes extends StatelessWidget{
             title,
             style: TextStyle(fontSize: 20)
           ),
+          subtitle: Text(subtitle),
         ),
       ),
     );

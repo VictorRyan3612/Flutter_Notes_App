@@ -39,6 +39,7 @@ class LoadNotesLayout extends StatelessWidget {
                     itemBuilder: (_, index) {
                       return GridNotes(
                         title: validDataObjects[index].title,
+                        subtitle: validDataObjects[index].content,
                       );
                     },
                   );
@@ -49,7 +50,8 @@ class LoadNotesLayout extends StatelessWidget {
                     itemBuilder: (_, index) {
                       if (value['dataObjects'][index].status == 'v'){
                         return ListNotes(
-                          title: value['dataObjects'][index].title
+                          title: value['dataObjects'][index].title,
+                          subtitle: value['dataObjects'][index].content,
                         );
                       }
                       else {
