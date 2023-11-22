@@ -13,25 +13,31 @@ class GridNotes extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [  
-            Container(
-              height: 5.0,
-              color: note.selectColor(note),
-              // margin: EdgeInsets.only(bottom: 5),
-              width: double.infinity, 
-            ),
-            ListTile(
-              contentPadding: EdgeInsets.only(left: 10),
-              title: Text(
-                note.title,
-                style: TextStyle(fontSize: 20)
+      child: InkWell(
+        onTap: () {
+          noteDataService.defContent(note);
+          Navigator.pushNamed(context, '/noteDetail');
+        },
+        child: Card(
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [  
+              Container(
+                height: 5.0,
+                color: note.selectColor(note),
+                // margin: EdgeInsets.only(bottom: 5),
+                width: double.infinity, 
               ),
-              subtitle: Text(note.content),
-            ),
-          ]
+              ListTile(
+                contentPadding: EdgeInsets.only(left: 10),
+                title: Text(
+                  note.title,
+                  style: TextStyle(fontSize: 20)
+                ),
+                subtitle: Text(note.content),
+              ),
+            ]
+          ),
         ),
       ),
     );

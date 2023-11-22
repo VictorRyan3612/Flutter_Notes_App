@@ -50,7 +50,12 @@ class NoteDataService {
       'dataObjects':[],
     });
 
-
+  final ValueNotifier <Note> aNoteValueNotifier = ValueNotifier(
+    Note(
+      title: '', content: ''
+    )
+  );
+  
   List<Note> originalList = [];
 
   
@@ -85,6 +90,10 @@ class NoteDataService {
       'dataObjects': json
     };
     originalList = json;
+  }
+
+  defContent(Note note){
+    aNoteValueNotifier.value = note;
   }
 
   Future<void> saveNotes(List<Note> notes) async {

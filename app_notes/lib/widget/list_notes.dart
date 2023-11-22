@@ -10,21 +10,27 @@ class ListNotes extends StatelessWidget{
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: Card(
-        child: ListTile(
-          contentPadding: EdgeInsets.only(left: 0),
-          leading: Container(
-            color: note.selectColor(note),
-            height: double.infinity,
-            width: 5,
+      child: InkWell(
+        onTap: () {
+          noteDataService.defContent(note);
+          Navigator.pushNamed(context, '/noteDetail');
+        },
+        child: Card(
+          child: ListTile(
+            contentPadding: EdgeInsets.only(left: 0),
+            leading: Container(
+              color: note.selectColor(note),
+              height: double.infinity,
+              width: 5,
+            ),
+            minLeadingWidth: 10,
+            
+            title: Text(
+              note.title,
+              style: TextStyle(fontSize: 20)
+            ),
+            subtitle: Text(note.content),
           ),
-          minLeadingWidth: 10,
-          
-          title: Text(
-            note.title,
-            style: TextStyle(fontSize: 20)
-          ),
-          subtitle: Text(note.content),
         ),
       ),
     );
