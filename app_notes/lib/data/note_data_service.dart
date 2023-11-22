@@ -156,28 +156,16 @@ class NoteDataService {
   }
 
 
-  // sort notes, still having problems with sorting and editing
-  sort(){
-    var state = Map<String, dynamic>.from(notesValueNotifier.value);
 
-    if (!isSorted){
-      state['dataObjects'].sort((Note a, Note b) => a.title.compareTo(b.title));
-      notesValueNotifier.value = state;
-      isSorted= true;
-    } 
-    else{
-      state['dataObjects'] = List<Note>.from(state['dataObjects'].reversed);
-      notesValueNotifier.value = state;
-    }
-  }
+  // sort notes, still having problems with sorting and editing
+  // If a parameter is passed, it will be used as a metric for the ordering, 
+  // if a parameter is not passed, the title pattern will be used
 
   sortByField(String? field) {
     if (field == null){
       field = 'title';
-      print(field);
     }
     
-    print(field);
 
     var state = Map<String, dynamic>.from(notesValueNotifier.value);
 
@@ -185,9 +173,7 @@ class NoteDataService {
 
       state['dataObjects'] = List<Note>.from(state['dataObjects']);
       state['dataObjects'].sort((Note a, Note b) {
-        String valueA = a.returnValuebyField(a, field!);
-        String valueB = b.returnValuebyField(b, field);
-        return valueA.compareTo(valueB);
+        return a.returnValuebyField(a, field!).compareTo(b.returnValuebyField(b, field));
       });
 
       notesValueNotifier.value = state;
