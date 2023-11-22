@@ -5,8 +5,9 @@ import 'package:app_notes/data/note_data_service.dart';
 
 class GridNotes extends StatelessWidget {
   final Note note;
+  final int index;
 
-  const GridNotes({super.key, required this.note});
+  const GridNotes({super.key, required this.note, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,9 @@ class GridNotes extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          noteDataService.defContent(note);
+          noteDataService.defContent(note, index);
           Navigator.pushNamed(context, '/noteDetail');
+          
         },
         child: Card(
           child: Column(

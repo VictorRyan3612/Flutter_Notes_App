@@ -38,6 +38,7 @@ class LoadNotesLayout extends StatelessWidget {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
                     itemBuilder: (_, index) {
                       return GridNotes(
+                        index: index,
                         note: value['dataObjects'][index],
                       );
                     },
@@ -50,6 +51,7 @@ class LoadNotesLayout extends StatelessWidget {
                       if (value['dataObjects'][index].status == 'v'){
                         return ListNotes(
                           note: value['dataObjects'][index],
+                          index: index,
                         );
                       }
                       else {

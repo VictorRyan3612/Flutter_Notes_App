@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class ListNotes extends StatelessWidget{
   final Note note;
+  final int index;
 
-  const ListNotes({super.key, required this.note});
+  const ListNotes({super.key, required this.note, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class ListNotes extends StatelessWidget{
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
         onTap: () {
-          noteDataService.defContent(note);
+          noteDataService.defContent(note, index);
           Navigator.pushNamed(context, '/noteDetail');
         },
         child: Card(

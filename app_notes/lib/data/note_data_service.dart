@@ -50,12 +50,15 @@ class NoteDataService {
       'dataObjects':[],
     });
 
-  final ValueNotifier <Note> aNoteValueNotifier = ValueNotifier(
-    Note(
-      title: '', content: ''
-    )
+  final ValueNotifier<List> aNoteValueNotifier = ValueNotifier(
+    [
+      Note(
+        title: '', content: ''
+      ),
+      int
+    ]
   );
-  
+
   List<Note> originalList = [];
 
   
@@ -92,8 +95,9 @@ class NoteDataService {
     originalList = json;
   }
 
-  defContent(Note note){
-    aNoteValueNotifier.value = note;
+  defContent(Note note, index){
+    aNoteValueNotifier.value[0] = note;
+    aNoteValueNotifier.value[1] = index;
   }
 
   Future<void> saveNotes(List<Note> notes) async {
@@ -111,6 +115,13 @@ class NoteDataService {
     saveNotes(notesValueNotifier.value['dataObjects']);
     loadNotes();
   }
+
+  saveEditedNote({required Note editedNote, required int index}){
+    notesValueNotifier.value['dataObjects'][index] = editedNote;
+    saveNotes(notesValueNotifier.value['dataObjects']);
+    loadNotes();
+  }
+
 }
 
 NoteDataService noteDataService = NoteDataService();
