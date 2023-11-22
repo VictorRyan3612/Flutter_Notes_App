@@ -3,6 +3,9 @@
 Notes app based on Flutter_CRUD made by me at the link:
 https://github.com/VictorRyan3612/Flutter_CRUD
 
+My inspirations are the ColorNote and SimpleNote applications, and my goal is to combine them
+
+
 ## Tutorial for using the program
 ### Pub get
 - flutter pub get
