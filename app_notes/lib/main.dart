@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-import 'layout/layout_decididor.dart';
+import 'layout/layout_decider.dart';
 import 'config/theme_config.dart';
 import 'screen/config_screen.dart';
 

@@ -16,6 +16,7 @@ class MobileHomeScreen extends StatelessWidget {
       appBar: MyAppBar(isMobile: true),
       body: LoadNotesLayout(),
       floatingActionButton: FloatingActionButton(
+        tooltip: "Criar Nota",
         onPressed: (){noteDataService.createNote(
             Note(title: 'Teste', content: 'content')
           );},

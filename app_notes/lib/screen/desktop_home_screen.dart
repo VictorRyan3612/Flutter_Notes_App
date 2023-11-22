@@ -17,7 +17,6 @@ class DesktopHomeScreen extends HookWidget {
     var noteActual = noteDataService.aNoteValueNotifier.value[0];
     final titleController= useTextEditingController(text: noteActual?.title ?? '');
     final contentController= useTextEditingController(text: noteActual?.content ?? '');
-    var drawerOpen = false;
 
     
     return Scaffold(
@@ -41,7 +40,7 @@ class DesktopHomeScreen extends HookWidget {
                 AppBar(
                   leading: IconButton(
                     onPressed: (){},
-                  icon: Icon(Icons.abc)
+                  icon: Icon(Icons.view_column_outlined)
                     ), 
                 ),
     

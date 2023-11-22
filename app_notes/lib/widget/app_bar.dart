@@ -21,10 +21,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
       titleFinal = "Desktop layout";
     }
     return AppBar(
-      title: Text(titleFinal),
+      title: Center(
+        child: Text(titleFinal)
+      ),
 
       actions: [
         PopupMenuButton(
+          tooltip: "Mudar Vizualização",
           icon: const Icon(Icons.more_vert),
           itemBuilder: (context){
             return const[
@@ -52,6 +55,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
         ),
         if(!isMobile)
         IconButton(
+          tooltip: "Criar Nota",
           onPressed: (){
             noteDataService.createNote(
                 Note(title: 'Teste', content: 'content')
