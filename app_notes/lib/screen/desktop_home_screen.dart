@@ -29,7 +29,9 @@ class DesktopHomeScreen extends HookWidget {
               children: [
                 MyAppBar(isMobile: false),
                 
-                Expanded(child: LoadNotesLayout()),
+                Expanded(
+                  child: LoadNotesLayout()
+                ),
               ],
             )
           ),

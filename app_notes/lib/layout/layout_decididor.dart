@@ -15,21 +15,7 @@ class LayoutDecider extends StatelessWidget {
       builder: (context, constraints){
         bool isMobile = constraints.maxWidth < 600;
         
-        return Scaffold(
-          drawer: DrawerMenu(),
-
-          body: isMobile 
-          ? MobileHomeScreen()
-          : DesktopHomeScreen(),
-          floatingActionButton: isMobile ? 
-            FloatingActionButton(
-              onPressed: (){noteDataService.createNote(
-                  Note(title: 'Teste', content: 'content')
-                );},
-              child: Icon(Icons.add),
-            ) 
-            : null,
-        );
+        return isMobile ? MobileHomeScreen() : DesktopHomeScreen();        
       },
     );
   }

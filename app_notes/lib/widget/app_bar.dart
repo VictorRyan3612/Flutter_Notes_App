@@ -1,6 +1,8 @@
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:flutter/material.dart';
 
+import '../data/note_data_service.dart';
+
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
   final bool isMobile;
 
@@ -22,36 +24,43 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
       title: Text(titleFinal),
 
       actions: [
-        // if(isMobile)
-          PopupMenuButton(
-            icon: const Icon(Icons.more_vert),
-            itemBuilder: (context){
-              return const[
-                PopupMenuItem<int>(
-                  value: 0,
-                  child: Text("Lista"),
-                ),
+        PopupMenuButton(
+          icon: const Icon(Icons.more_vert),
+          itemBuilder: (context){
+            return const[
+              PopupMenuItem<int>(
+                value: 0,
+                child: Text("Lista"),
+              ),
 
-                PopupMenuItem<int>(
-                  value: 1,
-                  child: Text("Grade"),
-                ),
-              ];
+              PopupMenuItem<int>(
+                value: 1,
+                child: Text("Grade"),
+              ),
+            ];
+          },
+          
+          onSelected:(value){
+            if(value == 0){
+              settingsService.isGridView.value = false;
+              settingsService.saveSettings();
+            }else if(value == 1){
+              settingsService.isGridView.value = true;
+              settingsService.saveSettings();
+            }
+          }
+        ),
+        if(!isMobile)
+        IconButton(
+          onPressed: (){
+            noteDataService.createNote(
+                Note(title: 'Teste', content: 'content')
+              );
             },
             
-            onSelected:(value){
-              if(value == 0){
-                settingsService.isGridView.value = false;
-                settingsService.saveSettings();
-              }else if(value == 1){
-                settingsService.isGridView.value = true;
-                settingsService.saveSettings();
-              }
-            }
-          ),
-
+          icon: Icon(Icons.add),
+        ), 
       ],
     );
   }
-
 }
