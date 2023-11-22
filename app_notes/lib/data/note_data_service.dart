@@ -60,7 +60,7 @@ class NoteDataService {
   );
 
   List<Note> originalList = [];
-
+  bool isSorted = false;
   
   Future<List<Note>> loadNotesFromFile() async {
     Directory directory = await getApplicationSupportDirectory();
@@ -103,7 +103,7 @@ class NoteDataService {
   Future<void> saveNotes(List<Note> notes) async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/notes.dat');
-    String content = json.encode(notes.map((user) => user.toMap()).toList());
+    String content = json.encode(notes.map((note) => note.toMap()).toList());
     await file.writeAsString(content);
   }
 
@@ -120,6 +120,50 @@ class NoteDataService {
     notesValueNotifier.value['dataObjects'][index] = editedNote;
     saveNotes(notesValueNotifier.value['dataObjects']);
     loadNotes();
+  }
+
+   // Filer Note by seach
+  void filterCurrentState(String filtrar) {
+    List<Note> objectsOriginals = originalList;
+    if (objectsOriginals.isEmpty) return;
+
+    List<Note> objectsFiltered = [];
+    if (filtrar != '') {
+      for (var objetoInd in objectsOriginals) {
+        if (objetoInd.title.toLowerCase().contains(filtrar.toLowerCase())) {
+          objectsFiltered.add(objetoInd);
+        }
+      }
+    } else {
+      objectsFiltered = objectsOriginals;
+    }
+    
+
+    issueFilteredState(objectsFiltered);
+  }
+
+
+  // Overriding filtered notes in notesStateNotifier.value
+  void issueFilteredState(List<Note> objectsFiltered) {
+    var state = Map<String, dynamic>.from(notesValueNotifier.value);
+    state['dataObjects'] = objectsFiltered;
+    notesValueNotifier.value = state;
+  }
+
+
+  // sort notes, still having problems with sorting and editing
+  sort(){
+    var state = Map<String, dynamic>.from(notesValueNotifier.value);
+
+    if (!isSorted){
+      state['dataObjects'].sort((Note a, Note b) => a.title.compareTo(b.title));
+      notesValueNotifier.value = state;
+      isSorted= true;
+    } 
+    else{
+      state['dataObjects'] = List.from(state['dataObjects'].reversed);
+      notesValueNotifier.value = state;
+    }
   }
 
 }
