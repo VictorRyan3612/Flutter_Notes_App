@@ -33,8 +33,13 @@ class Note {
       'status': status
     };
   }
-  
   String toJson() => json.encode(toMap());
+  
+  MaterialColor selectColor(Note note){
+    var colorFinal = searchCodColorByName(note.colorNote);
+    return colorFinal;
+  }
+
 }
 
 class NoteDataService {
@@ -48,10 +53,6 @@ class NoteDataService {
 
   List<Note> originalList = [];
 
-  MaterialColor selectColor(Note note){
-    var colorFinal = searchCodColorByName(note.colorNote);
-    return colorFinal;
-  }
   
   Future<List<Note>> loadNotesFromFile() async {
     Directory directory = await getApplicationSupportDirectory();
@@ -85,7 +86,6 @@ class NoteDataService {
     };
     originalList = json;
   }
-
 
   Future<void> saveNotes(List<Note> notes) async {
     Directory directory = await getApplicationSupportDirectory();
