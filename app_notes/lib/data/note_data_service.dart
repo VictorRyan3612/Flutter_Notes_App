@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import "package:flutter/foundation.dart";
+import "package:flutter/foundation.dart" show searchCodColorByName;
+
+import '../config/theme_config.dart';
 
 enum TableStatus{idle,loading,ready,error}
 
@@ -9,12 +12,14 @@ enum TableStatus{idle,loading,ready,error}
 class Note {
   late String title;
   late String content;
+  late String colorNote;
   late String tag;
   late String status;
 
   Note(
     {required this.title,
     required this.content,
+    this.colorNote = 'Red',
     this.tag = '',
     this.status = "v"}
   );
@@ -23,11 +28,12 @@ class Note {
     return {
       'title': title,
       'content': content,
+      'colorNote': colorNote,
       'tag': tag,
       'status': status
     };
   }
-
+  
   String toJson() => json.encode(toMap());
 }
 
@@ -42,7 +48,11 @@ class NoteDataService {
 
   List<Note> originalList = [];
 
-
+  MaterialColor selectColor(Note note){
+    var colorFinal = searchCodColorByName(note.colorNote);
+    return colorFinal;
+  }
+  
   Future<List<Note>> loadNotesFromFile() async {
     Directory directory = await getApplicationSupportDirectory();
     File file = File('${directory.path}/notes.dat');
@@ -51,12 +61,15 @@ class NoteDataService {
       String content = await file.readAsString();
       if (content != '') {
         List<dynamic> jsonList = json.decode(content);
-        List<Note> notesList = jsonList.map((json) => Note(
+        List<Note> notesList = jsonList.map((json) {
+          return Note(
           title: json['title'],
           content: json['content'],
+          colorNote: json['colorNote'],
           tag: json['tag'],
           status: json['status'],
-        )).toList();
+        );
+        }).toList();
         return notesList;
       }
     }

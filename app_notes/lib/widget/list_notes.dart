@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 class ListNotes extends StatelessWidget{
   final String title;
   final String subtitle;
+  final MaterialColor colorNote;
 
 
-  const ListNotes({super.key, required this.title, required this.subtitle});
+  const ListNotes({super.key, required this.title, required this.subtitle, required this.colorNote});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ListNotes extends StatelessWidget{
         child: ListTile(
           contentPadding: EdgeInsets.only(left: 0),
           leading: Container(
-            color: Colors.red,
+            color: colorNote,
             height: double.infinity,
             width: 5,
           ),

@@ -37,9 +37,11 @@ class LoadNotesLayout extends StatelessWidget {
                     itemCount: validDataObjects.length,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
                     itemBuilder: (_, index) {
+                      MaterialColor colorNote = noteDataService.selectColor(value['dataObjects'][index]);
                       return GridNotes(
                         title: validDataObjects[index].title,
                         subtitle: validDataObjects[index].content,
+                        colorNote: colorNote
                       );
                     },
                   );
@@ -49,9 +51,11 @@ class LoadNotesLayout extends StatelessWidget {
                     itemCount: value['dataObjects'].length,
                     itemBuilder: (_, index) {
                       if (value['dataObjects'][index].status == 'v'){
+                          MaterialColor colorNote = noteDataService.selectColor(value['dataObjects'][index]);
                         return ListNotes(
                           title: value['dataObjects'][index].title,
                           subtitle: value['dataObjects'][index].content,
+                          colorNote: colorNote,
                         );
                       }
                       else {

@@ -6,8 +6,9 @@ import 'package:app_notes/data/note_data_service.dart';
 class GridNotes extends StatelessWidget {
   final String title;
   final String subtitle;
+  final MaterialColor colorNote;
 
-  const GridNotes({super.key, required this.title, required this.subtitle});
+  const GridNotes({super.key, required this.title, required this.subtitle, required this.colorNote});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class GridNotes extends StatelessWidget {
           children: [  
             Container(
               height: 5.0,
-              color: Colors.red,
+              color: colorNote,
               // margin: EdgeInsets.only(bottom: 5),
               width: double.infinity, 
             ),
