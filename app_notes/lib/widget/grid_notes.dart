@@ -20,25 +20,32 @@ class GridNotes extends StatelessWidget {
           Navigator.pushNamed(context, '/noteDetail');
           
         },
-        child: Card(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [  
-              Container(
-                height: 5.0,
-                color: note.selectColor(note),
-                // margin: EdgeInsets.only(bottom: 5),
-                width: double.infinity, 
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.only(left: 10),
-                title: Text(
-                  note.title,
-                  style: TextStyle(fontSize: 20)
+        child: Center(
+          child: Card(
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [  
+                Container(
+                  height: 5.0,
+                  color: note.selectColor(note),
+                  // margin: EdgeInsets.only(bottom: 5),
+                  width: double.infinity, 
                 ),
-                subtitle: Text(note.content),
-              ),
-            ]
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: ListTile(
+                      contentPadding: EdgeInsets.only(left: 10),
+                      title: Text(
+                        note.title,
+                        style: TextStyle(fontSize: 20)
+                      ),
+                      subtitle: Text(note.content),
+                    ),
+                  ),
+                ),
+              ]
+            ),
           ),
         ),
       ),

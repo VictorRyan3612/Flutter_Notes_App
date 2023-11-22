@@ -22,7 +22,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
       title: Text(titleFinal),
 
       actions: [
-        if(isMobile)
+        // if(isMobile)
           PopupMenuButton(
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context){

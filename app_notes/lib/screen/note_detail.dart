@@ -49,6 +49,7 @@ class NoteDetail extends HookWidget {
           autofocus: true,
           style: TextStyle(fontSize: 20),
           maxLines: null,
+          minLines: 1,
 
           onChanged: (value) {
             noteActual.content = value;

@@ -14,9 +14,10 @@ class LayoutDecider extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints){
         bool isMobile = constraints.maxWidth < 600;
+        
         return Scaffold(
           drawer: DrawerMenu(),
-          appBar: MyAppBar(isMobile: isMobile),
+
           body: isMobile 
           ? MobileHomeScreen()
           : DesktopHomeScreen(),
