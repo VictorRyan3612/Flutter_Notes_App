@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsService{
   ValueNotifier<bool> isGridView = ValueNotifier(false);
-
+  ValueNotifier<bool> desktopLoadView = ValueNotifier(true);
   Future<void> saveSettings() async {
     final prefs = await SharedPreferences.getInstance();
 

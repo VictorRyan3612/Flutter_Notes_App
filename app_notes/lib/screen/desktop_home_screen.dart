@@ -1,3 +1,4 @@
+import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/screen/note_detail.dart';
 import 'package:app_notes/widget/app_bar.dart';
 import 'package:app_notes/widget/drawer_menu.dart';
@@ -17,29 +18,40 @@ class DesktopHomeScreen extends HookWidget {
     var noteActual = noteDataService.aNoteValueNotifier.value[0];
     final titleController= useTextEditingController(text: noteActual?.title ?? '');
     final contentController= useTextEditingController(text: noteActual?.content ?? '');
-
+  
     
     return Scaffold(
       drawer: DrawerMenu(),
       body: Row(
         children: [
-          Expanded(
-            child: Column(
-              children: [
-                MyAppBar(isMobile: false),
-                
-                Expanded(
-                  child: LoadNotesLayout()
-                ),
-              ],
-            )
-          ),
+          ValueListenableBuilder(
+            valueListenable: settingsService.desktopLoadView,
+            builder: (_, value, __) {
+              if (value){
+                return Expanded(
+                  child: Column(
+                    children: [
+                      MyAppBar(isMobile: false),
+                      
+                      Expanded(
+                        child: LoadNotesLayout()
+                      ),
+                    ],
+                  )
+                );
+              }
+              return Container();
+            },),
+            
           Expanded(
             child: Column(
               children: [
                 AppBar(
                   leading: IconButton(
-                    onPressed: (){},
+                    tooltip: "Ativar/Desativar Lista de Notas",
+                    onPressed: (){
+                      settingsService.desktopLoadView.value = !settingsService.desktopLoadView.value;
+                    },
                   icon: Icon(Icons.view_column_outlined)
                     ), 
                 ),
@@ -50,7 +62,7 @@ class DesktopHomeScreen extends HookWidget {
                     children: [
                       Icon(
                         Icons.sticky_note_2, 
-                        size: 70
+                        size: 70,
                       ),
                       Text(
                         "Nenhuma Nota",
