@@ -48,8 +48,17 @@ class NoteDetail extends HookWidget {
           controller: contentController,
           autofocus: true,
           style: TextStyle(fontSize: 20),
+          expands: true,
           maxLines: null,
-          minLines: 1,
+          minLines: null,
+          
+          decoration: InputDecoration(
+            errorBorder: InputBorder.none,
+            focusedErrorBorder: InputBorder.none,
+            border: InputBorder.none,
+            filled: true,
+            fillColor: Theme.of(context).scaffoldBackgroundColor, // Cor de fundo desejada
+          ),
 
           onChanged: (value) {
             noteActual.content = value;
