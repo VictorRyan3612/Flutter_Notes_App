@@ -63,6 +63,7 @@ class NoteDataService {
     ]
   );
 
+  List<String> notesFieldsSortables = ['title', 'content', 'tag', 'colorNote'];
   List<Note> originalList = [];
   bool isSorted = false;
   
@@ -173,9 +174,12 @@ class NoteDataService {
 
       state['dataObjects'] = List<Note>.from(state['dataObjects']);
       state['dataObjects'].sort((Note a, Note b) {
-        return a.returnValuebyField(a, field!).compareTo(b.returnValuebyField(b, field));
+        String valueA = a.returnValuebyField(a, field!);
+        String valueB = b.returnValuebyField(b, field);
+        return valueA.compareTo(valueB);
+        // return a.returnValuebyField(a, field!).compareTo(b.returnValuebyField(b, field));
       });
-
+      
       notesValueNotifier.value = state;
       isSorted = true;
     } else {

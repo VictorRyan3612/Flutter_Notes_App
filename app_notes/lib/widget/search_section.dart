@@ -1,4 +1,5 @@
 import 'package:app_notes/data/note_data_service.dart';
+import 'package:app_notes/widget/dropdownbutton.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,18 +24,7 @@ class SearchSection extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: TextButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Ordenar"),
-                  const Icon(Icons.sort_by_alpha)
-                ], 
-              ),
-              onPressed: (){
-                callbackSort(sortParam);
-              },
-            
+            child: MyDropdownButton(
             )
           ),
           Flexible(
