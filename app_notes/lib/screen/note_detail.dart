@@ -38,13 +38,37 @@ class NoteDetail extends HookWidget {
             else{
               Navigator.pop(context);
             }
-            
+
           },
           icon: Icon(
             Icons.arrow_back, 
             color: Colors.black
             ),
         ),
+        actions: [
+          PopupMenuButton(
+          tooltip: "Opções",
+          icon: const Icon(
+            Icons.more_vert, 
+            color: Colors.black
+            ),
+          itemBuilder: (context){
+            return const[
+              PopupMenuItem<int>(
+                value: 0,
+                child: Text("Excluir"),
+              ),
+
+            ];
+          },
+          
+          onSelected:(value){
+            if(value == 0){
+              print("entrou aqui"); 
+            }
+          }
+        ),
+        ],
       ),
 
       body: Padding(
