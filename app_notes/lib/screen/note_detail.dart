@@ -5,26 +5,24 @@ import 'package:app_notes/data/note_data_service.dart';
 
 
 class NoteDetail extends HookWidget {
-  
-  const NoteDetail({super.key});
+  final Note? currentNote;
+  const NoteDetail({super.key, this.currentNote});
 
   @override
   Widget build(BuildContext context) {
-    var noteActual = noteDataService.aNoteValueNotifier.value[0];
-    final titleController= useTextEditingController(text: noteActual?.title ?? '');
-    final contentController= useTextEditingController(text: noteActual?.content ?? '');
+    final titleController= useTextEditingController(text: currentNote?.title ?? '');
+    final contentController= useTextEditingController(text: currentNote?.content ?? '');
+
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: noteActual.selectColor(noteActual),
+        backgroundColor: currentNote?.selectColor(currentNote!),
         
         title: TextField(
           controller: titleController,
           style: TextStyle(fontSize: 20),
           onChanged: (value) {
-            noteActual.title = value;
-            noteDataService.aNoteValueNotifier.value[0].title = noteActual.title;
-            
+            currentNote?.title = value;
           },
         ),
 
@@ -64,7 +62,9 @@ class NoteDetail extends HookWidget {
           
           onSelected:(value){
             if(value == 0){
-              print("entrou aqui"); 
+              if(currentNote != null){
+                noteDataService.deleteNote(currentNote!);
+              }
             }
           }
         ),
@@ -90,9 +90,7 @@ class NoteDetail extends HookWidget {
           ),
 
           onChanged: (value) {
-            noteActual.content = value;
-            noteDataService.aNoteValueNotifier.value[0].content = noteActual.content;
-            
+            currentNote?.content = value;            
           },
         ),
       ),

@@ -24,6 +24,7 @@ class GridNotes extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => NoteDetail(
+                currentNote: note,
               ),
             ),
           );
