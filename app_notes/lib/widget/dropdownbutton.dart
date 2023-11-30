@@ -21,6 +21,7 @@ class MyDropdownButton extends StatelessWidget {
           onChanged: (newValue) {
             value = newValue!;
             noteDataService.sortByField(value);
+            settingsService.dropDownValueText.value = newValue;
           },
         );
       }, 

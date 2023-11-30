@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:app_notes/config/settings_data_service.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -163,12 +164,15 @@ class NoteDataService {
   // if a parameter is not passed, the title pattern will be used
 
   sortByField(String? field) {
-    if (field == null){
-      field = 'title';
-    }
+    field ??= 'title';
     
 
     var state = Map<String, dynamic>.from(notesValueNotifier.value);
+
+
+    if (field != settingsService.dropDownValueText.value){
+      isSorted = false;
+    }
 
     if (!isSorted) {
 
@@ -183,6 +187,7 @@ class NoteDataService {
       notesValueNotifier.value = state;
       isSorted = true;
     } else {
+
       state['dataObjects'] = List<Note>.from(state['dataObjects'].reversed);
       notesValueNotifier.value = state;
     }
