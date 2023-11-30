@@ -1,3 +1,4 @@
+import 'package:app_notes/screen/note_detail.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_notes/data/note_data_service.dart';
@@ -15,10 +16,24 @@ class GridNotes extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        onTap: () {
+        onTap: () async{
           noteDataService.defContent(note, index);
-          Navigator.pushNamed(context, '/noteDetail');
-          
+          // Navigator.pushNamed(context, '/noteDetail');
+
+          Note? noteEdited = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NoteDetail(
+              ),
+            ),
+          );
+
+          if (noteEdited != null){
+            noteDataService.saveEditedNote(
+              editedNote: noteEdited,
+              index: index
+            );
+          }
           
         },
         child: Center(
