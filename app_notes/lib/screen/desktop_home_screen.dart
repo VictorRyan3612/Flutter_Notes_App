@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/widget/app_bar.dart';
 import 'package:app_notes/widget/drawer_menu.dart';
-import 'package:app_notes/data/note_data_service.dart';
 import 'package:app_notes/widget/load_notes_layout.dart';
 
 
@@ -13,9 +12,9 @@ class DesktopHomeScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var noteActual = noteDataService.aNoteValueNotifier.value[0];
-    final titleController= useTextEditingController(text: noteActual?.title ?? '');
-    final contentController= useTextEditingController(text: noteActual?.content ?? '');
+    // var noteActual = noteDataService.aNoteValueNotifier.value[0];
+    // final titleController= useTextEditingController(text: noteActual?.title ?? '');
+    // final contentController= useTextEditingController(text: noteActual?.content ?? '');
   
     
     return Scaffold(
@@ -39,7 +38,8 @@ class DesktopHomeScreen extends HookWidget {
                 );
               }
               return Container();
-            },),
+            },
+          ),
             
           Expanded(
             child: Column(

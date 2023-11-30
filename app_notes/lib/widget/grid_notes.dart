@@ -17,9 +17,7 @@ class GridNotes extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () async{
-          noteDataService.defContent(note, index);
-          // Navigator.pushNamed(context, '/noteDetail');
-
+          
           Note? noteEdited = await Navigator.push(
             context,
             MaterialPageRoute(
