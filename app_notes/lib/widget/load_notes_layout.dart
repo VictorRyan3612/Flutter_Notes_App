@@ -45,9 +45,14 @@ class LoadNotesLayout extends StatelessWidget {
                           itemCount: validDataObjects.length,
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
                           itemBuilder: (_, index) {
-                            return GridNotes(
-                              index: index,
-                              note: value['dataObjects'][index],
+                            return GestureDetector(
+                              onLongPress: () {
+                                print('Long-pressed on item at index $index');
+                              },
+                              child: GridNotes(
+                                index: index,
+                                note: value['dataObjects'][index],
+                              )
                             );
                           },
                         );
@@ -57,9 +62,14 @@ class LoadNotesLayout extends StatelessWidget {
                           itemCount: value['dataObjects'].length,
                           itemBuilder: (_, index) {
                             if (value['dataObjects'][index].status == 'v'){
-                              return ListNotes(
-                                note: value['dataObjects'][index],
-                                index: index,
+                              return GestureDetector(
+                                onLongPress: () {
+                                  print('Long-pressed on item at index $index');
+                                },
+                                child:  ListNotes(
+                                  note: value['dataObjects'][index],
+                                  index: index,
+                                ),
                               );
                             }
                             else {
