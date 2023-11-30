@@ -1,7 +1,6 @@
-import 'package:app_notes/data/note_data_service.dart';
-import 'package:app_notes/widget/dropdownbutton.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:app_notes/widget/dropdownbutton.dart';
 
 
 // Search Section, sort and search

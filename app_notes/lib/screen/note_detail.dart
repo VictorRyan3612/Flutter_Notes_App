@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../data/note_data_service.dart';
+import 'package:app_notes/data/note_data_service.dart';
 
 
 class NoteDetail extends HookWidget {

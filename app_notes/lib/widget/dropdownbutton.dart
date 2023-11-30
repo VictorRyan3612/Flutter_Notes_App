@@ -1,6 +1,7 @@
-import 'package:app_notes/data/note_data_service.dart';
 import 'package:flutter/material.dart';
-import '../config/settings_data_service.dart';
+
+import 'package:app_notes/config/settings_data_service.dart';
+import 'package:app_notes/data/note_data_service.dart';
 
 class MyDropdownButton extends StatelessWidget {
   const MyDropdownButton({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/var_json.dart' show varColor;
+import 'package:app_notes/data/var_json.dart' show varColor;
 
 
 MaterialColor colorStateVar = Colors.blue;

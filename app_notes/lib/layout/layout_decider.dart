@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../data/note_data_service.dart';
-import '../screen/desktop_home_screen.dart';
-import '../screen/mobile_home_screen.dart';
-import '../widget/app_bar.dart';
-import '../widget/drawer_menu.dart';
+import 'package:app_notes/screen/desktop_home_screen.dart';
+import 'package:app_notes/screen/mobile_home_screen.dart';
+
 
 
 class LayoutDecider extends StatelessWidget {
