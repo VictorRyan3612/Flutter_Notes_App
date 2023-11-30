@@ -1,3 +1,4 @@
+import 'package:app_notes/screen/note_detail.dart';
 import 'package:app_notes/widget/app_bar.dart';
 import 'package:app_notes/widget/drawer_menu.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,20 @@ class MobileHomeScreen extends StatelessWidget {
       body: LoadNotesLayout(),
       floatingActionButton: FloatingActionButton(
         tooltip: "Criar Nota",
-        onPressed: (){noteDataService.createNote(
-            Note(title: 'Teste', content: 'content')
-          );},
+        onPressed: () async {
+          Note? newNote = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NoteDetail(
+              ),
+            ),
+          );
+          if (newNote != null){
+            noteDataService.createNote(
+              newNote
+            );
+          }
+        },
         child: Icon(Icons.add),
       ),
     );

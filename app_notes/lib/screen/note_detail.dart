@@ -30,10 +30,15 @@ class NoteDetail extends HookWidget {
 
         leading: IconButton(
           onPressed: () {
-            noteDataService.saveEditedNote(
-              editedNote: noteDataService.aNoteValueNotifier.value[0], 
-              index: noteDataService.aNoteValueNotifier.value[1]);
-            Navigator.pop(context);
+            if (titleController.text != '' && contentController.text != '' ){
+              Note newNote =  Note(title: titleController.text, content: contentController.text);
+
+              Navigator.pop(context, newNote);
+            }
+            else{
+              Navigator.pop(context);
+            }
+            
           },
           icon: Icon(
             Icons.arrow_back, 

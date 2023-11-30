@@ -19,6 +19,7 @@ class GridNotes extends StatelessWidget {
           noteDataService.defContent(note, index);
           Navigator.pushNamed(context, '/noteDetail');
           
+          
         },
         child: Center(
           child: Card(
