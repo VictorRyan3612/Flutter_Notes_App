@@ -1,3 +1,5 @@
+import 'package:app_notes/view/load_notes_layout.dart';
+import 'package:app_notes/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 
 
@@ -60,6 +62,19 @@ class DrawerMenu extends StatelessWidget {
             leading: Icon(Icons.delete_outline),
             title: const Text('Trash'),
             onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Scaffold(
+                      appBar: MyAppBar(isMobile: false, statusNotes: 'x'),
+                      body: LoadNotesLayout(statusNotes: 'x'),
+                    );
+                  }
+                )
+              );
+              // Navigator.pushNamed(context, '/configs');
               // Update the state of the app.
               // ...
             },

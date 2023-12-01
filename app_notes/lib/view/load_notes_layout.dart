@@ -9,7 +9,8 @@ import 'package:app_notes/widget/search_section.dart';
 
 
 class LoadNotesLayout extends StatelessWidget {
-  const LoadNotesLayout({super.key});
+  final String? statusNotes;
+  const LoadNotesLayout({super.key, this.statusNotes = 'v'});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class LoadNotesLayout extends StatelessWidget {
         
                       if (isGridViewValue) {
                         List<Note> validDataObjects = value['dataObjects']
-                          .where((dataObject) => dataObject.status == 'v')
+                          .where((dataObject) => dataObject.status == statusNotes)
                           .toList();
                         return GridView.builder(
                           itemCount: validDataObjects.length,
@@ -61,7 +62,7 @@ class LoadNotesLayout extends StatelessWidget {
                         return ListView.builder(
                           itemCount: value['dataObjects'].length,
                           itemBuilder: (_, index) {
-                            if (value['dataObjects'][index].status == 'v'){
+                            if (value['dataObjects'][index].status == statusNotes){
                               return GestureDetector(
                                 onLongPress: () {
                                   print('Long-pressed on item at index $index');
