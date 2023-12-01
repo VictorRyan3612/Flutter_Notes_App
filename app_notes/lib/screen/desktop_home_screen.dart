@@ -54,20 +54,30 @@ class DesktopHomeScreen extends HookWidget {
                     ), 
                 ),
     
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.sticky_note_2, 
-                        size: 70,
-                      ),
-                      Text(
-                        "Nenhuma Nota",
-                        style: TextStyle(fontSize: 30),
-                      )
-                    ]
-                  )
+                ValueListenableBuilder(
+                  valueListenable: settingsService.desktopLateralView,
+                  builder: (_, value, __) {
+                    if(!value){
+                      return Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.sticky_note_2, 
+                              size: 70,
+                            ),
+                            Text(
+                              "Nenhuma Nota",
+                              style: TextStyle(fontSize: 30),
+                            )
+                          ]
+                        )
+                      );
+                    }
+                    else {
+                      return Text("Conteudo de nota");
+                    }
+                  },
                 )
               ],
             ),

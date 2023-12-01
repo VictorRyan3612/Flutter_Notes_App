@@ -34,6 +34,7 @@ class ListNotes extends StatelessWidget{
             }
           }
           else{
+            settingsService.desktopLateralView.value = true;
             noteDataService.defContent(
               note: note,
               index: index

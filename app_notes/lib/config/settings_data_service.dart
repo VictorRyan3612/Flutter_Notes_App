@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsService{
+  ValueNotifier<bool> desktopLateralView = ValueNotifier(false);
   ValueNotifier<bool> isMobile = ValueNotifier(false);
   ValueNotifier<bool> isGridView = ValueNotifier(false);
   ValueNotifier<bool> desktopLoadView = ValueNotifier(true);
