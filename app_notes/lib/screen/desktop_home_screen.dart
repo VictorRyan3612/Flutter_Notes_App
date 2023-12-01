@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/widget/app_bar.dart';
 import 'package:app_notes/widget/drawer_menu.dart';
-import 'package:app_notes/widget/load_notes_layout.dart';
+import 'package:app_notes/view/load_notes_layout.dart';
 
 
 class DesktopHomeScreen extends HookWidget {

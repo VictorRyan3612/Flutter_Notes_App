@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/data/note_data_service.dart';
-import 'package:app_notes/widget/grid_notes.dart';
-import 'package:app_notes/widget/list_notes.dart';
+import 'package:app_notes/view/grid_notes.dart';
+import 'package:app_notes/view/list_notes.dart';
 import 'package:app_notes/widget/search_section.dart';
 
 
