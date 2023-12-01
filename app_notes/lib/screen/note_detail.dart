@@ -65,6 +65,7 @@ class NoteDetail extends HookWidget {
               if(currentNote != null){
                 noteDataService.deleteNote(currentNote!);
               }
+              Navigator.pop(context);
             }
           }
         ),

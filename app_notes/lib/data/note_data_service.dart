@@ -193,8 +193,8 @@ class NoteDataService {
       notesValueNotifier.value = state;
     }
   }
-  void deleteNote(Note Note) {
-    Note.status = 'x';
+  void deleteNote(Note note) {
+    note.status = 'x';
     saveNotes(notesValueNotifier.value['dataObjects']);
     loadNotes();
   }
