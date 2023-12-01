@@ -106,6 +106,7 @@ class NoteDataService {
   defContent({required Note note, required int index}){
     aNoteValueNotifier.value[0] = note;
     aNoteValueNotifier.value[1] = index;
+    print({"dentro de def content", aNoteValueNotifier.value[0].content});
   }
 
   Future<void> saveNotes(List<Note> notes) async {
