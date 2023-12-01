@@ -45,30 +45,29 @@ class NoteDetail extends HookWidget {
         ),
         actions: [
           PopupMenuButton(
-          tooltip: "Opções",
-          icon: const Icon(
-            Icons.more_vert, 
-            color: Colors.black
-            ),
-          itemBuilder: (context){
-            return const[
-              PopupMenuItem<int>(
-                value: 0,
-                child: Text("Excluir"),
+            tooltip: "Opções",
+            icon: const Icon(
+              Icons.more_vert, 
+              color: Colors.black
               ),
-
-            ];
-          },
+            itemBuilder: (context){
+              return const[
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: Text("Excluir"),
+                ),
+              ];
+            },
           
-          onSelected:(value){
-            if(value == 0){
-              if(currentNote != null){
-                noteDataService.deleteNote(currentNote!);
+            onSelected:(value){
+              if(value == 0){
+                if(currentNote != null){
+                  noteDataService.deleteNote(currentNote!);
+                }
+                Navigator.pop(context);
               }
-              Navigator.pop(context);
             }
-          }
-        ),
+          ),
         ],
       ),
 

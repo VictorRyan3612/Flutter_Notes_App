@@ -48,8 +48,33 @@ class DesktopHomeScreen extends HookWidget {
                     onPressed: (){
                       settingsService.desktopLoadView.value = !settingsService.desktopLoadView.value;
                     },
-                  icon: Icon(Icons.view_column_outlined)
-                    ), 
+                    icon: Icon(Icons.view_column_outlined)
+                  ),
+                  actions: [
+                    PopupMenuButton(
+                      tooltip: "Opções",
+                      icon: const Icon(
+                        Icons.more_vert, 
+                        color: Colors.black
+                        ),
+                      itemBuilder: (context){
+                        return const[
+                          PopupMenuItem<int>(
+                            value: 0,
+                            child: Text("Excluir"),
+                          ),
+                        ];
+                      },
+                    
+                      onSelected:(value){
+                        if(value == 0){
+                          noteDataService.deleteNote(noteDataService.aNoteValueNotifier.value[0]);
+                          
+                          settingsService.desktopLateralView.value = false;
+                        }
+                      }
+                    ),
+                  ],
                 ),
     
                 ValueListenableBuilder(
