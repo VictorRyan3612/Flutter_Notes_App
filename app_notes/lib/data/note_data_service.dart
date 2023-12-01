@@ -103,10 +103,10 @@ class NoteDataService {
     originalList = json;
   }
 
-  // defContent(Note note, index){
-  //   aNoteValueNotifier.value[0] = note;
-  //   aNoteValueNotifier.value[1] = index;
-  // }
+  defContent({required Note note, required int index}){
+    aNoteValueNotifier.value[0] = note;
+    aNoteValueNotifier.value[1] = index;
+  }
 
   Future<void> saveNotes(List<Note> notes) async {
     Directory directory = await getApplicationSupportDirectory();

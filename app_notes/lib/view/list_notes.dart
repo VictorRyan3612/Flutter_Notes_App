@@ -1,3 +1,4 @@
+import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/data/note_data_service.dart';
 import 'package:app_notes/screen/note_detail.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +17,28 @@ class ListNotes extends StatelessWidget{
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
         onTap: () async {
-          
-          Note? noteEdited = await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => NoteDetail(
-                currentNote: note,
+          if(settingsService.isMobile.value){
+            Note? noteEdited = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NoteDetail(
+                  currentNote: note,
+                ),
               ),
-            ),
-          );
-
-          if (noteEdited != null){
-            noteDataService.saveEditedNote(
-              editedNote: noteEdited,
+            );
+            if (noteEdited != null){
+              noteDataService.saveEditedNote(
+                editedNote: noteEdited,
+                index: index
+              );
+            }
+          }
+          else{
+            noteDataService.defContent(
+              note: note,
               index: index
             );
           }
-
         },
         child: Card(
           child: ListTile(
