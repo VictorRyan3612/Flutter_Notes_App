@@ -36,14 +36,12 @@ class GridNotes extends StatelessWidget {
             }
           }
           else{
-            print({"no grid",note.content});
             settingsService.desktopLateralView.value = true;
             noteDataService.defContent(
               note: note,
               index: index
             );
 
-            print({"no grid depois",noteDataService.aNoteValueNotifier.value[0].content});
           }
         },
         child: Center(

@@ -9,19 +9,11 @@ import 'package:app_notes/view/load_notes_layout.dart';
 
 
 class DesktopHomeScreen extends HookWidget {
-  const DesktopHomeScreen({super.key});
+  final Note? note;
+  const DesktopHomeScreen({super.key, this.note});
 
   @override
-  Widget build(BuildContext context) {
-    print({"dektop note ",noteDataService.aNoteValueNotifier.value[0]});
-    print({"dektop note content",noteDataService.aNoteValueNotifier.value[0].content});
-
-    var noteActual = noteDataService.aNoteValueNotifier.value[0];
-    // final titleController= useTextEditingController(text: noteActual?.title ?? '');
-    print({"dektop",noteActual.content});
-    final contentController= useTextEditingController(text: noteActual?.content ?? '');
-    print(contentController.text);
-  
+  Widget build(BuildContext context) {  
     
     return Scaffold(
       drawer: DrawerMenu(),
@@ -81,31 +73,42 @@ class DesktopHomeScreen extends HookWidget {
                       );
                     }
                     else {
-                      return Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(40.0),
-                          child: TextField(
-                            controller: contentController,
-                            autofocus: true,
-                            style: TextStyle(fontSize: 20),
-                            expands: true,
-                            maxLines: null,
-                            minLines: null,
-                            
-                            decoration: InputDecoration(
-                              errorBorder: InputBorder.none,
-                              focusedErrorBorder: InputBorder.none,
-                              border: InputBorder.none,
-                              filled: true,
-                              fillColor: Theme.of(context).scaffoldBackgroundColor, // Cor de fundo desejada
+                      return ValueListenableBuilder(
+                        valueListenable: noteDataService.aNoteValueNotifier,
+                        builder: (_, value, __) {
+                          return Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(40.0),
+                              child: TextField(
+                                controller: TextEditingController(text: value[0].content),
+                                autofocus: true,
+                                style: TextStyle(fontSize: 20),
+                                expands: true,
+                                maxLines: null,
+                                minLines: null,
+                                
+                                decoration: InputDecoration(
+                                  errorBorder: InputBorder.none,
+                                  focusedErrorBorder: InputBorder.none,
+                                  border: InputBorder.none,
+                                  filled: true,
+                                  fillColor: Theme.of(context).scaffoldBackgroundColor, // Cor de fundo desejada
+                                ),
+                          
+                                onChanged: (value2) {
+                                  value[0].content = value2;
+                                  
+                                  noteDataService.saveEditedNote(
+                                    editedNote: value[0], 
+                                    index: value[1]
+                                  );
+                                  
+                                },
+                              ),
                             ),
-                      
-                            onChanged: (value) {
-                              noteActual?.content = value;
-                              
-                            },
-                          ),
-                        ),
+                          );
+                        },
+                        
                       );
                     }
                   },
