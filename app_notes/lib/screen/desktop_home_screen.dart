@@ -55,7 +55,6 @@ class DesktopHomeScreen extends HookWidget {
                       tooltip: "Opções",
                       icon: const Icon(
                         Icons.more_vert, 
-                        color: Colors.black
                         ),
                       itemBuilder: (context){
                         return const[
@@ -101,11 +100,13 @@ class DesktopHomeScreen extends HookWidget {
                       return ValueListenableBuilder(
                         valueListenable: noteDataService.aNoteValueNotifier,
                         builder: (_, value, __) {
+                          TextEditingController controller = TextEditingController(text: value[0].content);
+                          
                           return Expanded(
                             child: Padding(
                               padding: const EdgeInsets.all(40.0),
                               child: TextField(
-                                controller: TextEditingController(text: value[0].content),
+                                controller: controller,
                                 autofocus: true,
                                 style: TextStyle(fontSize: 20),
                                 expands: true,

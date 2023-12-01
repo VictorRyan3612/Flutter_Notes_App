@@ -17,11 +17,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     String titleFinal;
-    if (isMobile){
-      titleFinal = "Mobile Layout";
+    if (statusNotes == 'x'){
+      titleFinal = "Notas Excluídas";
     } else{
-      titleFinal = "Desktop layout";
+      titleFinal = "Notas";
     }
+    
     return AppBar(
       title: Center(
         child: Text(titleFinal)
