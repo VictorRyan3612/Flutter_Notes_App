@@ -1,12 +1,13 @@
 import 'package:app_notes/data/note_data_service.dart';
+import 'package:app_notes/view/desktop_left_side.dart';
 import 'package:app_notes/widget/app_bar_right.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:app_notes/config/settings_data_service.dart';
-import 'package:app_notes/widget/app_bar.dart';
+
 import 'package:app_notes/widget/drawer_menu.dart';
-import 'package:app_notes/view/load_notes_layout.dart';
+
 
 
 class DesktopHomeScreen extends HookWidget {
@@ -20,27 +21,8 @@ class DesktopHomeScreen extends HookWidget {
       drawer: DrawerMenu(),
       body: Row(
         children: [
-          
-          // Left Side
-          ValueListenableBuilder(
-            valueListenable: settingsService.desktopLoadView,
-            builder: (_, value, __) {
-              if (value){
-                return Expanded(
-                  child: Column(
-                    children: [
-                      MyAppBar(isMobile: false),
-                      
-                      Expanded(
-                        child: LoadNotesLayout()
-                      ),
-                    ],
-                  )
-                );
-              }
-              return Container();
-            },
-          ),
+
+          LeftSide(),
           
           // Right Side
           Expanded(
