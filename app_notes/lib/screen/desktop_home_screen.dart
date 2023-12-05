@@ -1,4 +1,5 @@
 import 'package:app_notes/data/note_data_service.dart';
+import 'package:app_notes/widget/app_bar_right.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -19,6 +20,8 @@ class DesktopHomeScreen extends HookWidget {
       drawer: DrawerMenu(),
       body: Row(
         children: [
+          
+          // Left Side
           ValueListenableBuilder(
             valueListenable: settingsService.desktopLoadView,
             builder: (_, value, __) {
@@ -38,44 +41,13 @@ class DesktopHomeScreen extends HookWidget {
               return Container();
             },
           ),
-            
+          
+          // Right Side
           Expanded(
             child: Column(
               children: [
-                AppBar(
-                  leading: IconButton(
-                    tooltip: "Ativar/Desativar Lista de Notas",
-                    onPressed: (){
-                      settingsService.desktopLoadView.value = !settingsService.desktopLoadView.value;
-                    },
-                    icon: Icon(Icons.view_column_outlined)
-                  ),
-                  actions: [
-                    PopupMenuButton(
-                      tooltip: "Opções",
-                      icon: const Icon(
-                        Icons.more_vert, 
-                        ),
-                      itemBuilder: (context){
-                        return const[
-                          PopupMenuItem<int>(
-                            value: 0,
-                            child: Text("Excluir"),
-                          ),
-                        ];
-                      },
-                    
-                      onSelected:(value){
-                        if(value == 0){
-                          noteDataService.deleteNote(noteDataService.aNoteValueNotifier.value[0]);
-                          
-                          settingsService.desktopLateralView.value = false;
-                        }
-                      }
-                    ),
-                  ],
-                ),
-    
+                AppBarRight(),
+
                 ValueListenableBuilder(
                   valueListenable: settingsService.desktopLateralView,
                   builder: (_, value, __) {
