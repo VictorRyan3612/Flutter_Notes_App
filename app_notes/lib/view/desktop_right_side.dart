@@ -44,6 +44,7 @@ class RightSide extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(40.0),
                         child: TextField(
+                          key: Key(controller.toString()),
                           controller: controller,
                           autofocus: true,
                           style: TextStyle(fontSize: 20),
