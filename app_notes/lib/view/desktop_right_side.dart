@@ -56,6 +56,7 @@ class RightSide extends StatelessWidget {
                             errorBorder: InputBorder.none,
                             focusedErrorBorder: InputBorder.none,
                             border: InputBorder.none,
+                            hoverColor: Colors.transparent,
                             filled: true,
                             fillColor: Theme.of(context).scaffoldBackgroundColor, // Cor de fundo desejada
                           ),

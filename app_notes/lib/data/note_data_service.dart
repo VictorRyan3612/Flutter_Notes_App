@@ -138,7 +138,10 @@ class NoteDataService {
     List<Note> objectsFiltered = [];
     if (filtrar != '') {
       for (var objetoInd in objectsOriginals) {
-        if (objetoInd.title.toLowerCase().contains(filtrar.toLowerCase())) {
+        if (
+            objetoInd.title.toLowerCase().contains(filtrar.toLowerCase()) ||
+            objetoInd.content.toLowerCase().contains(filtrar.toLowerCase())
+          ) {
           objectsFiltered.add(objetoInd);
         }
       }
