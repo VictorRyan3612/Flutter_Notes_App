@@ -11,7 +11,6 @@ class ListNotes extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    String firstLine = note.content.split('\n').first;
 
     return Padding(
       padding: const EdgeInsets.all(5.0),
@@ -53,9 +52,12 @@ class ListNotes extends StatelessWidget{
           
           title: Text(
             note.title,
-            style: TextStyle(fontSize: 20)
+            style: TextStyle(
+              fontSize: 20, 
+              fontWeight: FontWeight.bold
+            )
           ),
-          subtitle: Text(firstLine),
+          subtitle: Text(noteDataService.defSubtitle(note, '   ')),
         ),
       ),
     );

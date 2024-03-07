@@ -125,6 +125,18 @@ class NoteDataService {
     saveNotesFile(listNotesLoaded);
   }
 
+
+  String defSubtitle(Note note, String separator){
+    var listSubString = note.content.split('\n');
+    var stringfinal = listSubString.skip(1).join(separator);
+    return stringfinal;
+  }
+
+  Note firstLineToTitle(Note note){
+    note.title = note.content.split('\n')[0];
+    return note;
+  }
+  
   defContent({required Note note, required int index}){
     aNoteValueNotifier.value[0] = note;
     aNoteValueNotifier.value[1] = index;
@@ -147,6 +159,7 @@ class NoteDataService {
   }
 
   saveEditedNote({required Note editedNote, required int index}){
+    editedNote = firstLineToTitle(editedNote);
     notesValueNotifier.value['dataObjects'][index] = editedNote;
     saveNotesFile(notesValueNotifier.value['dataObjects']);
     loadNotes();
