@@ -36,18 +36,18 @@ class GridNotes extends StatelessWidget {
                   index: index
                 );
               }
-              else{
-                settingsService.desktopLateralView.value = false;
-                settingsService.desktopLateralView.value = true;
-                noteDataService.defContent(
-                  note: note,
-                  index: index
-                );
-              }
+              
             }
             
           }
-          
+          else{
+            settingsService.desktopLateralView.value = false;
+            settingsService.desktopLateralView.value = true;
+            noteDataService.defContent(
+              note: note,
+              index: index
+            );
+          }
         },
         child: Center(
           child: Column(

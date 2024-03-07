@@ -34,18 +34,18 @@ class ListNotes extends StatelessWidget{
                   index: index
                 );
               }
-              else{
-                settingsService.desktopLateralView.value = false;
-                settingsService.desktopLateralView.value = true;
-                noteDataService.defContent(
-                  note: note,
-                  index: index
-                );
-              }
+              
             }
             
           }
-          
+          else{
+            settingsService.desktopLateralView.value = false;
+            settingsService.desktopLateralView.value = true;
+            noteDataService.defContent(
+              note: note,
+              index: index
+            );
+          }
         },
         child: ListTile(
           contentPadding: EdgeInsets.only(left: 0),
