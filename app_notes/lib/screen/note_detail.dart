@@ -6,17 +6,16 @@ import 'package:app_notes/data/note_data_service.dart';
 
 
 class NoteDetail extends HookWidget {
-  final Note? currentNote;
-  const NoteDetail({super.key, this.currentNote});
+
+  const NoteDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final titleController= useTextEditingController(text: currentNote?.title ?? '');
-    final contentController= useTextEditingController(text: currentNote?.content ?? '');
+    final contentController= useTextEditingController(text: noteDataService.aNoteValueNotifier.value[0]?.content ?? '');
 
     void mobileButtonOnPressedFunction(){
-      if (titleController.text != '' && contentController.text != '' ){
-        Note newNote =  Note(title: titleController.text, content: contentController.text);
+      if (contentController.text != '' ){
+        Note newNote =  Note(title: contentController.text.split('\n')[0], content: contentController.text);
 
         Navigator.pop(context, newNote);
       }
@@ -46,9 +45,8 @@ class NoteDetail extends HookWidget {
             filled: true,
             fillColor: Theme.of(context).scaffoldBackgroundColor, // Cor de fundo desejada
           ),
-
           onChanged: (value) {
-            currentNote?.content = value;            
+            noteDataService.aNoteValueNotifier.value[0].content = value;            
           },
         ),
       ),

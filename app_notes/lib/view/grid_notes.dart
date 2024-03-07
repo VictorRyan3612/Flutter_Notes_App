@@ -19,12 +19,14 @@ class GridNotes extends StatelessWidget {
       child: InkWell(
         onTap: () async{
           if(settingsService.isMobile.value){
+            noteDataService.defContent(
+              note: note,
+              index: index
+            );
             Note? noteEdited = await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NoteDetail(
-                  currentNote: note,
-                ),
+                builder: (context) => NoteDetail(),
               ),
             );
 

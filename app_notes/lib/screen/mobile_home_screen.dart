@@ -23,8 +23,7 @@ class MobileHomeScreen extends StatelessWidget {
           Note? newNote = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NoteDetail(
-              ),
+              builder: (context) => NoteDetail(),
             ),
           );
           if (newNote != null){
