@@ -50,6 +50,9 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
               noteDataService.deleteNote(noteDataService.aNoteValueNotifier.value[0]);
               
               settingsService.desktopLateralView.value = false;
+              if(settingsService.isMobile.value){
+                Navigator.pop(context);
+              }
             }
           }
         ),

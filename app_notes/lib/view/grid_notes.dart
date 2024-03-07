@@ -29,23 +29,25 @@ class GridNotes extends StatelessWidget {
                 builder: (context) => NoteDetail(),
               ),
             );
-
-            if (noteEdited != null){
-              noteDataService.saveEditedNote(
-                editedNote: noteEdited,
-                index: index
-              );
+            if (settingsService.currentStatusNotes.value != 'x'){
+              if (noteEdited != null){
+                noteDataService.saveEditedNote(
+                  editedNote: noteEdited,
+                  index: index
+                );
+              }
+              else{
+                settingsService.desktopLateralView.value = false;
+                settingsService.desktopLateralView.value = true;
+                noteDataService.defContent(
+                  note: note,
+                  index: index
+                );
+              }
             }
+            
           }
-          else{
-            settingsService.desktopLateralView.value = false;
-            settingsService.desktopLateralView.value = true;
-            noteDataService.defContent(
-              note: note,
-              index: index
-            );
-
-          }
+          
         },
         child: Center(
           child: Column(
