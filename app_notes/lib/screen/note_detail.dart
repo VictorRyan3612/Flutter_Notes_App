@@ -15,53 +15,7 @@ class NoteDetail extends HookWidget {
 
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: currentNote?.selectColor(currentNote!),
-        
-        leading: IconButton(
-          onPressed: () {
-            if (titleController.text != '' && contentController.text != '' ){
-              Note newNote =  Note(title: titleController.text, content: contentController.text);
-
-              Navigator.pop(context, newNote);
-            }
-            else{
-              Navigator.pop(context);
-            }
-
-          },
-          icon: Icon(
-            Icons.arrow_back, 
-            color: Colors.black
-            ),
-        ),
-        actions: [
-          PopupMenuButton(
-            tooltip: "Opções",
-            icon: const Icon(
-              Icons.more_vert, 
-              color: Colors.black
-              ),
-            itemBuilder: (context){
-              return const[
-                PopupMenuItem<int>(
-                  value: 0,
-                  child: Text("Excluir"),
-                ),
-              ];
-            },
-          
-            onSelected:(value){
-              if(value == 0){
-                if(currentNote != null){
-                  noteDataService.deleteNote(currentNote!);
-                }
-                Navigator.pop(context);
-              }
-            }
-          ),
-        ],
-      ),
+      appBar: AppBar(),
 
       body: Padding(
         padding: const EdgeInsets.all(40.0),
