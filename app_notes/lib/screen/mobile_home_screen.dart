@@ -20,6 +20,7 @@ class MobileHomeScreen extends StatelessWidget {
       floatingActionButton: settingsService.currentStatusNotes.value == 'x' ? null : FloatingActionButton(
         tooltip: "Criar Nota",
         onPressed: () async {
+          noteDataService.defContent(note: Note(title: '', content: ''), index: 0);
           Note? newNote = await Navigator.push(
             context,
             MaterialPageRoute(
