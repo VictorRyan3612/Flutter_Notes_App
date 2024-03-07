@@ -55,7 +55,7 @@ class GridNotes extends StatelessWidget {
             children: [  
               Container(
                 height: 5.0,
-                color: note.selectColor(note),
+                color: note.selectColor(),
                 // margin: EdgeInsets.only(bottom: 5),
                 width: double.infinity, 
               ),

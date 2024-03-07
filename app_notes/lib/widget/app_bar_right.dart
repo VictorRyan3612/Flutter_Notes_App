@@ -44,6 +44,28 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(Icons.recycling)
         ),
+        if(settingsService.currentStatusNotes.value == 'v')
+        ValueListenableBuilder(
+          valueListenable: settingsService.desktopLateralView,
+          builder: (_, value, __) {
+            if (value){
+              return IconButton(
+                tooltip: "Mudar cor",
+                onPressed: (){
+                },
+                icon: Icon(
+                  Icons.square,
+                  color: noteDataService.aNoteValueNotifier.value[0].selectColor()
+                )
+              );
+            }
+            else{
+              return Container();
+            }
+          }
+          
+        ),
+
         PopupMenuButton(
           tooltip: "Opções",
           icon: const Icon(

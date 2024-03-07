@@ -50,7 +50,7 @@ class ListNotes extends StatelessWidget{
         child: ListTile(
           contentPadding: EdgeInsets.only(left: 0),
           leading: Container(
-            color: note.selectColor(note),
+            color: note.selectColor(),
             height: double.infinity,
             width: 5,
           ),

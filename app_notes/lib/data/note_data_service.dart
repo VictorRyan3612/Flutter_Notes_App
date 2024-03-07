@@ -48,8 +48,8 @@ class Note {
   }
   
   
-  MaterialColor selectColor(Note note){
-    var colorFinal = searchCodColorByName(note.colorNote);
+  MaterialColor selectColor(){
+    var colorFinal = searchCodColorByName(colorNote);
     return colorFinal;
   }
 
