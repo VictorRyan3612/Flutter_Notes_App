@@ -15,7 +15,7 @@ class MobileHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DrawerMenu(),
-      appBar: MyAppBar(isMobile: true),
+      appBar: MyAppBar(),
       body: LoadNotesLayout(),
       floatingActionButton: settingsService.currentStatusNotes.value == 'x' ? null : FloatingActionButton(
         tooltip: "Criar Nota",

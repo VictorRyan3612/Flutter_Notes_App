@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import '../data/note_data_service.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
-  final bool isMobile;
 
-  MyAppBar({super.key, required this.isMobile});
+
+  MyAppBar({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -55,7 +55,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
             }
           }
         ),
-        if(!isMobile && settingsService.currentStatusNotes.value != 'x')
+        if(!settingsService.isMobile.value && settingsService.currentStatusNotes.value != 'x')
         IconButton(
           tooltip: "Criar Nota",
           onPressed: () async{
