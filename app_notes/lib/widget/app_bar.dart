@@ -6,9 +6,8 @@ import '../data/note_data_service.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
   final bool isMobile;
-  final String? statusNotes;
 
-  MyAppBar({super.key, required this.isMobile, this.statusNotes = 'v'});
+  MyAppBar({super.key, required this.isMobile});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -17,7 +16,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     String titleFinal;
-    if (statusNotes == 'x'){
+    if (settingsService.currentStatusNotes.value == 'x'){
       titleFinal = "Notas Excluídas";
     } else{
       titleFinal = "Notas";
@@ -56,7 +55,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
             }
           }
         ),
-        if(!isMobile && statusNotes != 'x')
+        if(!isMobile && settingsService.currentStatusNotes.value != 'x')
         IconButton(
           tooltip: "Criar Nota",
           onPressed: () async{

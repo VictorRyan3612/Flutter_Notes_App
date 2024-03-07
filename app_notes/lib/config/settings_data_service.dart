@@ -7,7 +7,8 @@ class SettingsService{
   ValueNotifier<bool> isGridView = ValueNotifier(false);
   ValueNotifier<bool> desktopLoadView = ValueNotifier(true);
   ValueNotifier<String> dropDownValueText = ValueNotifier('title');
-
+  ValueNotifier<String> currentStatusNotes = ValueNotifier('v');
+  
   Future<void> saveSettings() async {
     final prefs = await SharedPreferences.getInstance();
 

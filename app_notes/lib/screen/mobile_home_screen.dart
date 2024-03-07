@@ -1,3 +1,4 @@
+import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/screen/note_detail.dart';
 import 'package:app_notes/widget/app_bar.dart';
 import 'package:app_notes/widget/drawer_menu.dart';
@@ -16,7 +17,7 @@ class MobileHomeScreen extends StatelessWidget {
       drawer: DrawerMenu(),
       appBar: MyAppBar(isMobile: true),
       body: LoadNotesLayout(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: settingsService.currentStatusNotes.value == 'x' ? null : FloatingActionButton(
         tooltip: "Criar Nota",
         onPressed: () async {
           Note? newNote = await Navigator.push(
