@@ -63,14 +63,19 @@ class LoadNotesLayout extends StatelessWidget {
                           itemCount: value['dataObjects'].length,
                           itemBuilder: (_, index) {
                             if (value['dataObjects'][index].status == statusNotes){
-                              return GestureDetector(
-                                onLongPress: () {
-                                  print('Long-pressed on item at index $index');
-                                },
-                                child:  ListNotes(
-                                  note: value['dataObjects'][index],
-                                  index: index,
-                                ),
+                              return Column(
+                                children: [
+                                  Divider(),
+                                  GestureDetector(
+                                    onLongPress: () {
+                                      print('Long-pressed on item at index $index');
+                                    },
+                                    child: ListNotes(
+                                      note: value['dataObjects'][index],
+                                      index: index,
+                                    ),
+                                  ),
+                                ],
                               );
                             }
                             else {
