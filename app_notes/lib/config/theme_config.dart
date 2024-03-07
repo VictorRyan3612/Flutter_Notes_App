@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:app_notes/data/var_json.dart' show varColor;
 
 
 MaterialColor colorStateVar = Colors.blue;
@@ -71,6 +70,47 @@ ThemeData setTheme(bool isDarkMode, colorName) {
   }
   return finalTema;
 } 
+
+
+
+var varColor = [
+  {
+    'name': 'Blue',
+    'color': Colors.blue
+  },
+  {
+    'name': 'Brown',
+    'color': Colors.brown
+  },
+  {
+    'name': 'Green',
+    'color': Colors.green
+  },
+  {
+    'name': 'Gray',
+    'color': Colors.grey
+  },
+  {
+    'name': 'Orange',
+    'color': Colors.orange
+  },
+  {
+    'name': 'Pink',
+    'color': Colors.pink
+  },
+  {
+    'name': 'Purple',
+    'color': Colors.purple
+  },
+  {
+    'name': 'Red',
+    'color': Colors.red
+  },
+  {
+    'name': 'Yellow',
+    'color': Colors.yellow
+  },
+];
 
 // Search for varColor['name'] colorresponding to varColor['color'] 
 // passed as a parameter of currentColor.value
