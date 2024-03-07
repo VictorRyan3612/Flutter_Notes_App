@@ -236,6 +236,11 @@ class NoteDataService {
     saveNotesFile(notesValueNotifier.value['dataObjects']);
     loadNotes();
   }
+  void restoreNote(Note note) {
+    note.status = 'v';
+    saveNotesFile(notesValueNotifier.value['dataObjects']);
+    loadNotes();
+  }
 }
 
 NoteDataService noteDataService = NoteDataService();

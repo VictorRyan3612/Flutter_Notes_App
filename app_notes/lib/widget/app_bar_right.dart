@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 
 class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
-  Function? mobileBackButtonCallbackFunction; 
+  final Function? mobileBackButtonCallbackFunction; 
+  
   AppBarRight({super.key, this.mobileBackButtonCallbackFunction});
 
 
@@ -16,13 +17,13 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: settingsService.isMobile.value ? IconButton(
-          onPressed: () {
-            mobileBackButtonCallbackFunction?.call();
-          },
-          icon: Icon(
-            Icons.arrow_back, 
-          )
+        onPressed: () {
+          mobileBackButtonCallbackFunction?.call();
+        },
+        icon: Icon(
+          Icons.arrow_back, 
         )
+      )
       : IconButton(
         tooltip: "Ativar/Desativar Lista de Notas",
         onPressed: (){
@@ -31,6 +32,18 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
         icon: Icon(Icons.view_column_outlined)
       ),
       actions: [
+        if(settingsService.currentStatusNotes.value == 'x')
+        IconButton(
+          tooltip: "Restaurar",
+          onPressed: (){
+            noteDataService.restoreNote(noteDataService.aNoteValueNotifier.value[0]);
+            settingsService.desktopLateralView.value = false;
+            if(settingsService.isMobile.value){
+              Navigator.pop(context);
+            }
+          },
+          icon: Icon(Icons.recycling)
+        ),
         PopupMenuButton(
           tooltip: "Opções",
           icon: const Icon(
