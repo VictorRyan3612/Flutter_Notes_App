@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 
 class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarRight({super.key});
+  Function? mobileBackButtonCallbackFunction; 
+  AppBarRight({super.key, this.mobileBackButtonCallbackFunction});
 
 
   @override
@@ -16,6 +17,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: settingsService.isMobile.value ? IconButton(
           onPressed: () {
+            mobileBackButtonCallbackFunction?.call();
           },
           icon: Icon(
             Icons.arrow_back, 

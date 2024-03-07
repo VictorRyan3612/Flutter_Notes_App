@@ -1,3 +1,4 @@
+import 'package:app_notes/widget/app_bar_right.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -13,9 +14,20 @@ class NoteDetail extends HookWidget {
     final titleController= useTextEditingController(text: currentNote?.title ?? '');
     final contentController= useTextEditingController(text: currentNote?.content ?? '');
 
+    void mobileButtonOnPressedFunction(){
+      if (titleController.text != '' && contentController.text != '' ){
+        Note newNote =  Note(title: titleController.text, content: contentController.text);
+
+        Navigator.pop(context, newNote);
+      }
+      else{
+        Navigator.pop(context);
+      }
+    }
+
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBarRight(mobileBackButtonCallbackFunction: mobileButtonOnPressedFunction),
 
       body: Padding(
         padding: const EdgeInsets.all(40.0),
