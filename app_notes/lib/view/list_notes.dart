@@ -42,22 +42,20 @@ class ListNotes extends StatelessWidget{
             );
           }
         },
-        child: Card(
-          child: ListTile(
-            contentPadding: EdgeInsets.only(left: 0),
-            leading: Container(
-              color: note.selectColor(note),
-              height: double.infinity,
-              width: 5,
-            ),
-            minLeadingWidth: 10,
-            
-            title: Text(
-              note.title,
-              style: TextStyle(fontSize: 20)
-            ),
-            subtitle: Text(firstLine),
+        child: ListTile(
+          contentPadding: EdgeInsets.only(left: 0),
+          leading: Container(
+            color: note.selectColor(note),
+            height: double.infinity,
+            width: 5,
           ),
+          minLeadingWidth: 10,
+          
+          title: Text(
+            note.title,
+            style: TextStyle(fontSize: 20)
+          ),
+          subtitle: Text(firstLine),
         ),
       ),
     );

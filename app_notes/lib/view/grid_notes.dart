@@ -46,31 +46,29 @@ class GridNotes extends StatelessWidget {
           }
         },
         child: Center(
-          child: Card(
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [  
-                Container(
-                  height: 5.0,
-                  color: note.selectColor(note),
-                  // margin: EdgeInsets.only(bottom: 5),
-                  width: double.infinity, 
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: ListTile(
-                      contentPadding: EdgeInsets.only(left: 10),
-                      title: Text(
-                        note.title,
-                        style: TextStyle(fontSize: 20)
-                      ),
-                      subtitle: Text(note.content),
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [  
+              Container(
+                height: 5.0,
+                color: note.selectColor(note),
+                // margin: EdgeInsets.only(bottom: 5),
+                width: double.infinity, 
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.only(left: 10),
+                    title: Text(
+                      note.title,
+                      style: TextStyle(fontSize: 20)
                     ),
+                    subtitle: Text(note.content),
                   ),
                 ),
-              ]
-            ),
+              ),
+            ]
           ),
         ),
       ),
