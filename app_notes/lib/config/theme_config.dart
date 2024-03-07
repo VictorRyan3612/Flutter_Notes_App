@@ -19,7 +19,8 @@ ThemeData setTheme(bool isDarkMode, colorName) {
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
         iconTheme: IconThemeData(color: colorStateVar),
-        backgroundColor: const Color.fromARGB(255, 66, 66, 66),
+        // backgroundColor: const Color.fromARGB(255, 66, 66, 66),
+        backgroundColor: Color.fromARGB(255, 27, 27, 27),
         titleTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -34,8 +35,9 @@ ThemeData setTheme(bool isDarkMode, colorName) {
       brightness: Brightness.dark,
       primarySwatch: colorColors,
       inputDecorationTheme: const InputDecorationTheme(
+        hoverColor: Colors.transparent,
         filled:true,
-        fillColor: Color.fromARGB(255, 66, 66, 66), 
+        fillColor: Colors.transparent, 
       ),
       scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)
     );
@@ -44,7 +46,8 @@ ThemeData setTheme(bool isDarkMode, colorName) {
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
         iconTheme: IconThemeData(color: colorStateVar),
-        backgroundColor: Color.fromARGB(255, 242, 243, 245),
+        // backgroundColor: Color.fromARGB(255, 242, 243, 245),
+        backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -59,8 +62,9 @@ ThemeData setTheme(bool isDarkMode, colorName) {
       brightness: Brightness.light,
       primarySwatch: colorColors,
       inputDecorationTheme: const InputDecorationTheme(
+        hoverColor: Colors.transparent,
         filled:true,
-        fillColor: Color.fromARGB(255, 242, 243, 245), 
+        fillColor: Colors.transparent, 
       ),
       scaffoldBackgroundColor: Colors.white
     );
