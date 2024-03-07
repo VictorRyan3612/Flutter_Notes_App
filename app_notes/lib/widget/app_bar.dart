@@ -1,5 +1,4 @@
 import 'package:app_notes/config/settings_data_service.dart';
-import 'package:app_notes/screen/note_detail.dart';
 import 'package:flutter/material.dart';
 
 import '../data/note_data_service.dart';
@@ -59,18 +58,19 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
         IconButton(
           tooltip: "Criar Nota",
           onPressed: () async{
-            Note? newNote = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NoteDetail(
-                ),
-              ),
+            Note newNote = Note(content: '', title: '');
+            var indexLastNote = noteDataService.notesValueNotifier.value['dataObjects'].length;
+
+            settingsService.desktopLateralView.value = false;
+            settingsService.desktopLateralView.value = true;
+            noteDataService.defContent(
+              note: newNote, index: indexLastNote
             );
-            if (newNote != null){
-              noteDataService.createNote(
-                newNote
-              );
-            }
+            
+            noteDataService.createNote(
+              newNote
+            );
+            
           },
             
           icon: Icon(Icons.add),
