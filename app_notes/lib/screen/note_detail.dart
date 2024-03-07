@@ -18,14 +18,6 @@ class NoteDetail extends HookWidget {
       appBar: AppBar(
         backgroundColor: currentNote?.selectColor(currentNote!),
         
-        title: TextField(
-          controller: titleController,
-          style: TextStyle(fontSize: 20),
-          onChanged: (value) {
-            currentNote?.title = value;
-          },
-        ),
-
         leading: IconButton(
           onPressed: () {
             if (titleController.text != '' && contentController.text != '' ){
