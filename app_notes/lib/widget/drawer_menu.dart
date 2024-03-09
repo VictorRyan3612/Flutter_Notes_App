@@ -67,6 +67,22 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.archive_rounded),
+            title: const Text('Archived'),
+            onTap: () {
+              settingsService.currentStatusNotes.value = 'a';
+              Navigator.pop(context);
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) {
+                    return LayoutDecider();
+                  }
+                )
+              );
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.delete_outline),
             title: const Text('Trash'),
             onTap: () {
@@ -80,9 +96,7 @@ class DrawerMenu extends StatelessWidget {
                   }
                 )
               );
-              // Navigator.pushNamed(context, '/configs');
-              // Update the state of the app.
-              // ...
+              
             },
           ),
 
