@@ -1,5 +1,6 @@
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/data/note_data_service.dart';
+import 'package:app_notes/widget/color_select.dart';
 import 'package:flutter/material.dart';
 
 
@@ -52,6 +53,14 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
               return IconButton(
                 tooltip: "Mudar cor",
                 onPressed: (){
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ColorSelect();
+                      }
+                    )
+                  );
                 },
                 icon: Icon(
                   Icons.square,
