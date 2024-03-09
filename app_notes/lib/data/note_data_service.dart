@@ -149,8 +149,11 @@ class NoteDataService {
     await file.writeAsString(content);
   }
 
-
   void createNote(Note newNote){
+    var dateNow = DateTime.now().toString();
+    newNote.dateCreate = dateNow;
+    newNote.dateModified = dateNow;
+
     notesValueNotifier.value['dataObjects'] = [...notesValueNotifier.value['dataObjects'], newNote];
     notesValueNotifier.value['dataObjects'] = List<Note>.from(notesValueNotifier.value['dataObjects']);
 
