@@ -162,6 +162,9 @@ class NoteDataService {
   }
 
   saveEditedNote({required Note editedNote, required int index}){
+    var dateNow = DateTime.now().toString();
+    editedNote.dateModified = dateNow;
+    
     editedNote = firstLineToTitle(editedNote);
     notesValueNotifier.value['dataObjects'][index] = editedNote;
     saveNotesFile(notesValueNotifier.value['dataObjects']);
