@@ -75,6 +75,10 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
             return const[
               PopupMenuItem<int>(
                 value: 0,
+                child: Text("Arquivar")
+              ),
+              PopupMenuItem<int>(
+                value: 1,
                 child: Text("Excluir"),
               ),
             ];
@@ -82,6 +86,14 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
         
           onSelected:(value){
             if(value == 0){
+              // noteDataService.deleteNote(noteDataService.aNoteValueNotifier.value[0]);
+              
+              // settingsService.desktopLateralView.value = false;
+              // if(settingsService.isMobile.value){
+              //   Navigator.pop(context);
+              // }
+            }
+            if(value == 1){
               noteDataService.deleteNote(noteDataService.aNoteValueNotifier.value[0]);
               
               settingsService.desktopLateralView.value = false;
