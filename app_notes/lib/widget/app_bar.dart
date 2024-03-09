@@ -17,7 +17,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
     String titleFinal;
     if (settingsService.currentStatusNotes.value == 'x'){
       titleFinal = "Notas Excluídas";
-    } else{
+    } 
+    else if (settingsService.currentStatusNotes.value == 'a'){
+      titleFinal = "Notas Arquivadas";
+    }
+    else{
       titleFinal = "Notas";
     }
     
