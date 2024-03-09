@@ -25,6 +25,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
           Icons.arrow_back, 
         )
       )
+
       : IconButton(
         tooltip: "Ativar/Desativar Lista de Notas",
         onPressed: (){
@@ -32,6 +33,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
         },
         icon: Icon(Icons.view_column_outlined)
       ),
+
       actions: [
         if(settingsService.currentStatusNotes.value == 'x')
         IconButton(
@@ -45,6 +47,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(Icons.recycling)
         ),
+
         if(settingsService.currentStatusNotes.value == 'v')
         ValueListenableBuilder(
           valueListenable: settingsService.desktopLateralView,
@@ -52,19 +55,27 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
             if (value){
               return IconButton(
                 tooltip: "Mudar cor",
-                onPressed: (){
-                  Navigator.push(
-                    context, 
+                onPressed: () async {
+
+                  Note? noteEdited = await Navigator.push(
+                    context,
                     MaterialPageRoute(
                       builder: (context) {
                         return ColorSelect();
                       }
                     )
                   );
+                  if (noteEdited != null){
+                    noteDataService.saveEditedNote(
+                      editedNote: noteEdited,
+                      index: noteDataService.aNoteValueNotifier.value[1]
+                    );
+                  }
                 },
+                
                 icon: Icon(
                   Icons.square,
-                  color: noteDataService.aNoteValueNotifier.value[0].selectColor()
+                  color: noteDataService.aNoteValueNotifier.value[0].selectColor() as Color
                 )
               );
             }

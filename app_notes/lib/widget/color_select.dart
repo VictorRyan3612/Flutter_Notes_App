@@ -1,4 +1,5 @@
 import 'package:app_notes/config/theme_config.dart';
+import 'package:app_notes/data/note_data_service.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,64 +21,24 @@ class ColorSelect extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: GridView(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                children: [
-                  Padding(
+                children: varColor.map((itemColor) {
+                  return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: GestureDetector(
+                      
                       onTap: () {
-                        print('Container clicado!');
+                        noteDataService.aNoteValueNotifier.value[0].colorNote = itemColor['name'];
+                        Navigator.pop(context, noteDataService.aNoteValueNotifier.value[0]);
                       },
                     child:
                       Container(
-                        color: Colors.blue,
+                        color: itemColor['color'] as Color,
                         height: 100,
                         width: 100,
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        print('Container clicado!');
-                      },
-                    child:
-                      Container(
-                        color: Colors.blue,
-                        height: 100,
-                        width: 100,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        print('Container clicado!');
-                      },
-                    child:
-                      Container(
-                        color: Colors.blue,
-                        height: 100,
-                        width: 100,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        print('Container clicado!');
-                      },
-                    child:
-                      Container(
-                        color: Colors.blue,
-                        height: 100,
-                        width: 100,
-                      ),
-                    ),
-                  )
-                ]
+                  );
+                }).toList()
               ),
             ),
           ),
