@@ -1,3 +1,4 @@
+import 'package:app_notes/screen/note_detail.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_notes/config/settings_data_service.dart';
@@ -15,6 +16,32 @@ class LoadNotesLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     settingsService.loadSettings();
 
+    clickFunction (Note note, int index) async{
+      settingsService.hasALoadedNote.value = false;
+          settingsService.hasALoadedNote.value = true;
+          noteDataService.defContent(
+            note: note,
+            index: index
+          );
+          if(settingsService.isMobile.value){
+            Note? noteEdited = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NoteDetail(),
+              ),
+            );
+            if (settingsService.currentStatusNotes.value != 'x'){
+              if (noteEdited != null){
+                noteDataService.saveEditedNote(
+                  editedNote: noteEdited,
+                  index: index
+                );
+              }
+              
+            }
+            
+          }
+    }
     return Column(
       children: [
         SearchSection(
