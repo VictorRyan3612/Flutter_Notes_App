@@ -18,11 +18,13 @@ class GridNotes extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () async{
+          settingsService.hasALoadedNote.value = false;
+          settingsService.hasALoadedNote.value = true;
+          noteDataService.defContent(
+            note: note,
+            index: index
+          );
           if(settingsService.isMobile.value){
-            noteDataService.defContent(
-              note: note,
-              index: index
-            );
             Note? noteEdited = await Navigator.push(
               context,
               MaterialPageRoute(
@@ -39,14 +41,6 @@ class GridNotes extends StatelessWidget {
               
             }
             
-          }
-          else{
-            settingsService.hasALoadedNote.value = false;
-            settingsService.hasALoadedNote.value = true;
-            noteDataService.defContent(
-              note: note,
-              index: index
-            );
           }
         },
         child: Center(
