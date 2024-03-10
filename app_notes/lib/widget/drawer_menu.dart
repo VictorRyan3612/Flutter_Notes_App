@@ -1,4 +1,5 @@
 import 'package:app_notes/config/settings_data_service.dart';
+import 'package:app_notes/data/note_data_service.dart';
 import 'package:app_notes/layout/layout_decider.dart';
 import 'package:flutter/material.dart';
 
@@ -109,6 +110,14 @@ class DrawerMenu extends StatelessWidget {
               Navigator.pushNamed(context, '/configs');
             },
           ),
+          Divider(),
+          
+          ListTile(
+            leading: Icon(Icons.upload_file_outlined),
+            title: const Text('Export'),
+            onTap: () {
+              noteDataService.exportNotestoTxt(noteDataService.notesValueNotifier.value['dataObjects']);
+            },)
         ],
       )
     );

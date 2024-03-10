@@ -149,6 +149,17 @@ class NoteDataService {
     await file.writeAsString(content);
   }
 
+  Future<void> exportNotestoTxt(List<Note> notes) async {
+    Directory directory = await getApplicationSupportDirectory();
+    Directory directoryNotesFolder = Directory('${directory.path}\\notes');
+
+    notes.forEach((note) async {
+      File file = File('${directoryNotesFolder.path}/${note.title}.txt');
+      await file.writeAsString(note.content);
+      await file.setLastAccessed(DateTime.parse(note.dateCreate));
+      await file.setLastModified(DateTime.parse(note.dateModified));
+    });
+  }
   void createNote(Note newNote){
     var dateNow = DateTime.now().toString();
     newNote.dateCreate = dateNow;
