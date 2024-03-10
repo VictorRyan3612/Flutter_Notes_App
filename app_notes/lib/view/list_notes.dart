@@ -16,30 +16,7 @@ class ListNotes extends StatelessWidget{
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
         onTap: () async {
-          settingsService.hasALoadedNote.value = false;
-          settingsService.hasALoadedNote.value = true;
-          noteDataService.defContent(
-            note: note,
-            index: index
-          );
-          if(settingsService.isMobile.value){
-            Note? noteEdited = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NoteDetail(),
-              ),
-            );
-            if (settingsService.currentStatusNotes.value != 'x'){
-              if (noteEdited != null){
-                noteDataService.saveEditedNote(
-                  editedNote: noteEdited,
-                  index: index
-                );
-              }
-              
-            }
-            
-          }
+          
         },
         child: ListTile(
           contentPadding: EdgeInsets.only(left: 0),
