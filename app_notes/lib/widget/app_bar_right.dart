@@ -19,7 +19,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: settingsService.isMobile.value ? IconButton(
         onPressed: () {
-          mobileBackButtonCallbackFunction?.call();
+          Navigator.pop(context);
         },
         icon: Icon(
           Icons.arrow_back, 
