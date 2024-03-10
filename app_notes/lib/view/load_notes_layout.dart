@@ -77,6 +77,7 @@ class LoadNotesLayout extends StatelessWidget {
                                 print('Long-pressed on item at index $index');
                               },
                               child: GridNotes(
+                                callbackClickFunction: clickFunction,
                                 index: index,
                                 note: value['dataObjects'][index],
                               )
@@ -97,6 +98,7 @@ class LoadNotesLayout extends StatelessWidget {
                                       print('Long-pressed on item at index $index');
                                     },
                                     child: ListNotes(
+                                      callbackClickFunction: clickFunction,
                                       note: value['dataObjects'][index],
                                       index: index,
                                     ),

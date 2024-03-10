@@ -1,13 +1,13 @@
-import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/data/note_data_service.dart';
-import 'package:app_notes/screen/note_detail.dart';
+
 import 'package:flutter/material.dart';
 
 class ListNotes extends StatelessWidget{
   final Note note;
   final int index;
+  final Function callbackClickFunction;
 
-  const ListNotes({super.key, required this.note, required this.index});
+  const ListNotes({super.key, required this.note, required this.index, required this.callbackClickFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ListNotes extends StatelessWidget{
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
         onTap: () async {
-          
+          callbackClickFunction(note, index);
         },
         child: ListTile(
           contentPadding: EdgeInsets.only(left: 0),
