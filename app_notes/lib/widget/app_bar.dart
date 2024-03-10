@@ -65,8 +65,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
             Note newNote = Note(content: '', title: '');
             var indexLastNote = noteDataService.notesValueNotifier.value['dataObjects'].length;
 
-            settingsService.desktopLateralView.value = false;
-            settingsService.desktopLateralView.value = true;
+            settingsService.hasALoadedNote.value = false;
+            settingsService.hasALoadedNote.value = true;
             noteDataService.defContent(
               note: newNote, index: indexLastNote
             );

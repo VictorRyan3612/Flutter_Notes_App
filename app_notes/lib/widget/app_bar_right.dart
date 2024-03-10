@@ -40,7 +40,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
           tooltip: "Restaurar",
           onPressed: (){
             noteDataService.restoreNote(noteDataService.aNoteValueNotifier.value[0]);
-            settingsService.desktopLateralView.value = false;
+            settingsService.hasALoadedNote.value = false;
             if(settingsService.isMobile.value){
               Navigator.pop(context);
             }
@@ -50,7 +50,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
 
         if(settingsService.currentStatusNotes.value == 'v')
         ValueListenableBuilder(
-          valueListenable: settingsService.desktopLateralView,
+          valueListenable: settingsService.hasALoadedNote,
           builder: (_, value, __) {
             if (value){
               return IconButton(
@@ -108,7 +108,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
             if(value == 0){
               noteDataService.archiveNote(noteDataService.aNoteValueNotifier.value[0]);
               
-              settingsService.desktopLateralView.value = false;
+              settingsService.hasALoadedNote.value = false;
               if(settingsService.isMobile.value){
                 Navigator.pop(context);
               }
@@ -116,7 +116,7 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
             if(value == 1){
               noteDataService.deleteNote(noteDataService.aNoteValueNotifier.value[0]);
               
-              settingsService.desktopLateralView.value = false;
+              settingsService.hasALoadedNote.value = false;
               if(settingsService.isMobile.value){
                 Navigator.pop(context);
               }
