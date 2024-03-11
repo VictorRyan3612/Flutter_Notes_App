@@ -32,16 +32,18 @@ class GridNotes extends StatelessWidget {
               Expanded(
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.only(left: 10),
-                    title: Text(
-                      note.title,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                        )
+                  child: SingleChildScrollView(
+                    child: ListTile(
+                      contentPadding: EdgeInsets.only(left: 10),
+                      title: Text(
+                        note.title,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                          )
+                      ),
+                      subtitle: Text(noteDataService.defSubtitle(note, '\n')),
                     ),
-                    subtitle: Text(noteDataService.defSubtitle(note, '\n')),
                   ),
                 ),
               ),
