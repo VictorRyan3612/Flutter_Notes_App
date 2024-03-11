@@ -133,7 +133,16 @@ class NoteDataService {
   }
 
   Note firstLineToTitle(Note note){
-    note.title = note.content.split('\n')[0];
+    
+    String title = note.content.split('\n')[0];
+    print(title);
+    if (title.length >= 20){
+      note.title = title.substring(0,20);
+    }
+    else{
+      note.title = title;
+    }
+    
     return note;
   }
   
