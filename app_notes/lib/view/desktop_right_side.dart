@@ -15,7 +15,7 @@ class RightSide extends StatelessWidget {
           AppBarRight(),
 
           ValueListenableBuilder(
-            valueListenable: settingsService.desktopLateralView,
+            valueListenable: settingsService.hasALoadedNote,
             builder: (_, value, __) {
               if(!value){
                 return Expanded(

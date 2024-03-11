@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:app_notes/data/var_json.dart' show varColor;
 
 
 MaterialColor colorStateVar = Colors.blue;
@@ -19,7 +18,8 @@ ThemeData setTheme(bool isDarkMode, colorName) {
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
         iconTheme: IconThemeData(color: colorStateVar),
-        backgroundColor: const Color.fromARGB(255, 66, 66, 66),
+        // backgroundColor: const Color.fromARGB(255, 66, 66, 66),
+        backgroundColor: Color.fromARGB(255, 27, 27, 27),
         titleTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -34,8 +34,9 @@ ThemeData setTheme(bool isDarkMode, colorName) {
       brightness: Brightness.dark,
       primarySwatch: colorColors,
       inputDecorationTheme: const InputDecorationTheme(
+        hoverColor: Colors.transparent,
         filled:true,
-        fillColor: Color.fromARGB(255, 66, 66, 66), 
+        fillColor: Colors.transparent, 
       ),
       scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)
     );
@@ -44,7 +45,8 @@ ThemeData setTheme(bool isDarkMode, colorName) {
     finalTema = ThemeData(
       appBarTheme:  AppBarTheme(
         iconTheme: IconThemeData(color: colorStateVar),
-        backgroundColor: Color.fromARGB(255, 242, 243, 245),
+        // backgroundColor: Color.fromARGB(255, 242, 243, 245),
+        backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -59,14 +61,56 @@ ThemeData setTheme(bool isDarkMode, colorName) {
       brightness: Brightness.light,
       primarySwatch: colorColors,
       inputDecorationTheme: const InputDecorationTheme(
+        hoverColor: Colors.transparent,
         filled:true,
-        fillColor: Color.fromARGB(255, 242, 243, 245), 
+        fillColor: Colors.transparent, 
       ),
       scaffoldBackgroundColor: Colors.white
     );
   }
   return finalTema;
 } 
+
+
+
+var varColor = [
+  {
+    'name': 'Blue',
+    'color': Colors.blue
+  },
+  {
+    'name': 'Brown',
+    'color': Colors.brown
+  },
+  {
+    'name': 'Green',
+    'color': Colors.green
+  },
+  {
+    'name': 'Gray',
+    'color': Colors.grey
+  },
+  {
+    'name': 'Orange',
+    'color': Colors.orange
+  },
+  {
+    'name': 'Pink',
+    'color': Colors.pink
+  },
+  {
+    'name': 'Purple',
+    'color': Colors.purple
+  },
+  {
+    'name': 'Red',
+    'color': Colors.red
+  },
+  {
+    'name': 'Yellow',
+    'color': Colors.yellow
+  },
+];
 
 // Search for varColor['name'] colorresponding to varColor['color'] 
 // passed as a parameter of currentColor.value

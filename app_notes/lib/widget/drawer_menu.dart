@@ -1,5 +1,6 @@
-import 'package:app_notes/view/load_notes_layout.dart';
-import 'package:app_notes/widget/app_bar.dart';
+import 'package:app_notes/config/settings_data_service.dart';
+import 'package:app_notes/data/note_data_service.dart';
+import 'package:app_notes/layout/layout_decider.dart';
 import 'package:flutter/material.dart';
 
 
@@ -54,29 +55,49 @@ class DrawerMenu extends StatelessWidget {
             leading: Icon(Icons.notes),
             title: const Text('All Notes'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              settingsService.currentStatusNotes.value = 'v';
+              Navigator.pop(context);
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) {
+                    return LayoutDecider();
+                  }
+                )
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.archive_rounded),
+            title: const Text('Archived'),
+            onTap: () {
+              settingsService.currentStatusNotes.value = 'a';
+              Navigator.pop(context);
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) {
+                    return LayoutDecider();
+                  }
+                )
+              );
             },
           ),
           ListTile(
             leading: Icon(Icons.delete_outline),
             title: const Text('Trash'),
             onTap: () {
+              settingsService.currentStatusNotes.value = 'x';
               Navigator.pop(context);
               Navigator.push(
                 context, 
                 MaterialPageRoute(
                   builder: (context) {
-                    return Scaffold(
-                      appBar: MyAppBar(isMobile: false, statusNotes: 'x'),
-                      body: LoadNotesLayout(statusNotes: 'x'),
-                    );
+                    return LayoutDecider();
                   }
                 )
               );
-              // Navigator.pushNamed(context, '/configs');
-              // Update the state of the app.
-              // ...
+              
             },
           ),
 
@@ -89,6 +110,14 @@ class DrawerMenu extends StatelessWidget {
               Navigator.pushNamed(context, '/configs');
             },
           ),
+          Divider(),
+          
+          ListTile(
+            leading: Icon(Icons.upload_file_outlined),
+            title: const Text('Export'),
+            onTap: () {
+              noteDataService.exportNotestoTxt(noteDataService.notesValueNotifier.value['dataObjects']);
+            },)
         ],
       )
     );

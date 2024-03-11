@@ -16,7 +16,7 @@ class LeftSide extends StatelessWidget {
           return Expanded(
             child: Column(
               children: [
-                MyAppBar(isMobile: false),
+                MyAppBar(),
                 
                 Expanded(
                   child: LoadNotesLayout()

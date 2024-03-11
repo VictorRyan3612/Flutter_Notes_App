@@ -1,14 +1,12 @@
 import 'package:app_notes/config/settings_data_service.dart';
-import 'package:app_notes/screen/note_detail.dart';
 import 'package:flutter/material.dart';
 
 import '../data/note_data_service.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
-  final bool isMobile;
-  final String? statusNotes;
 
-  MyAppBar({super.key, required this.isMobile, this.statusNotes = 'v'});
+
+  MyAppBar({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -17,9 +15,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     String titleFinal;
-    if (statusNotes == 'x'){
+    if (settingsService.currentStatusNotes.value == 'x'){
       titleFinal = "Notas Excluídas";
-    } else{
+    } 
+    else if (settingsService.currentStatusNotes.value == 'a'){
+      titleFinal = "Notas Arquivadas";
+    }
+    else{
       titleFinal = "Notas";
     }
     
@@ -56,22 +58,23 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
             }
           }
         ),
-        if(!isMobile && statusNotes != 'x')
+        if(!settingsService.isMobile.value && settingsService.currentStatusNotes.value != 'x')
         IconButton(
           tooltip: "Criar Nota",
           onPressed: () async{
-            Note? newNote = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NoteDetail(
-                ),
-              ),
+            Note newNote = Note(content: '', title: '');
+            var indexLastNote = noteDataService.notesValueNotifier.value['dataObjects'].length;
+
+            settingsService.hasALoadedNote.value = false;
+            settingsService.hasALoadedNote.value = true;
+            noteDataService.defContent(
+              note: newNote, index: indexLastNote
             );
-            if (newNote != null){
-              noteDataService.createNote(
-                newNote
-              );
-            }
+            
+            noteDataService.createNote(
+              newNote
+            );
+            
           },
             
           icon: Icon(Icons.add),
