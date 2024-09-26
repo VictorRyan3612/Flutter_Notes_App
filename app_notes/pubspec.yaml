@@ -16,7 +16,9 @@ dependencies:
     sdk: flutter
   intl: ^0.18.1
   shared_preferences: ^2.0.8
-  
+  flutter_vicr_widgets:
+    git: https://github.com/VictorRyan3612/flutter_vicr_widgets.git
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
