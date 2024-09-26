@@ -1,7 +1,9 @@
 import 'package:app_notes/config/settings_data_service.dart';
+import 'package:app_notes/config/theme_config.dart';
 import 'package:app_notes/data/note_data_service.dart';
 import 'package:app_notes/widget/color_select.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vicr_widgets/flutter_vicr_widgets.dart';
 
 
 class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
@@ -57,17 +59,19 @@ class AppBarRight extends StatelessWidget implements PreferredSizeWidget {
                 tooltip: "Mudar cor",
                 onPressed: () async {
 
-                  Note? noteEdited = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ColorSelect();
-                      }
-                    )
-                  );
-                  if (noteEdited != null){
+                  Color? colorEdited = await showDialog(context: context, builder: (context) {
+                    return AlertDialog(
+                      content: VicrColorSelector(colors: List<MaterialColor>.from(varColor.map((colorElement) => colorElement['color']).toList())),
+                    );
+                  }); 
+
+                  if (colorEdited != null){
+                    Map<String,dynamic> jsonColor = varColor.firstWhere((element) {
+                      return element['color'] == colorEdited;
+                    });
+                    noteDataService.aNoteValueNotifier.value[0].colorNote = jsonColor['name'];
                     noteDataService.saveEditedNote(
-                      editedNote: noteEdited,
+                      editedNote: noteDataService.aNoteValueNotifier.value[0],
                       index: noteDataService.aNoteValueNotifier.value[1]
                     );
                   }
