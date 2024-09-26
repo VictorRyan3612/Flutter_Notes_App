@@ -1,7 +1,6 @@
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/config/theme_config.dart';
 import 'package:app_notes/data/note_data_service.dart';
-import 'package:app_notes/widget/color_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vicr_widgets/flutter_vicr_widgets.dart';
 
