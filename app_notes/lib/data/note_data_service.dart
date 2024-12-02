@@ -152,6 +152,38 @@ class NoteDataService {
     await file.writeAsString(content);
   }
 
+  Future<void> importNotesFromTxt(String folder) async {
+    var finalDirectory = Directory(folder);
+    var fileNotes =  finalDirectory.listSync();
+    List<Note> listNote =[];
+    fileNotes.forEach((element) async{
+      var extension = element.path.split('.').last;
+      if (extension == 'txt') {
+        File file = File(element.path);
+        String content = '';
+        try {
+          content = file.readAsStringSync();
+          
+        } catch (e) {
+          try {
+            var bytes = file.readAsBytesSync();
+
+            // Decodificar o conteúdo como Latin1 (ISO-8859-1)
+            content = latin1.decode(bytes);
+          } catch (e) {
+            print(e); 
+          }
+        }
+        // print(content);
+        Note note= Note(title: '', content: content);
+        listNote.add(firstLineToTitle(note));
+        print('no for $listNote');
+      }
+    });
+    print('fora do for $listNote');
+    addList(listNote);
+  }
+
   void addList(List<Note> listNote){
     var state = Map<String, dynamic>.from(notesValueNotifier.value);
     var list = [...notesValueNotifier.value['dataObjects'], ...listNote];
