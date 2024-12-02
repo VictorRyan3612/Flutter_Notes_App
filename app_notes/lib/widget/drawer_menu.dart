@@ -130,6 +130,22 @@ class DrawerMenu extends StatelessWidget {
                 print('Nenhuma pasta foi selecionada.');
               }
             }
+          ),
+
+          ListTile(
+            leading: Icon(Icons.download),
+            title: const Text('Import'),
+            onTap: () async{
+              String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+
+              if (selectedDirectory != null) {
+                print('Pasta selecionada: $selectedDirectory');
+                noteDataService.importNotesFromTxt(selectedDirectory);
+
+              } else {
+                print('Nenhuma pasta foi selecionada.');
+              }
+            }
           )
         ],
       )
