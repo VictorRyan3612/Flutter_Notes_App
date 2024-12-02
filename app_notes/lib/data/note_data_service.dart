@@ -152,12 +152,18 @@ class NoteDataService {
     await file.writeAsString(content);
   }
 
-  Future<void> exportNotestoTxt(List<Note> notes) async {
+  Future<void> exportNotestoTxt(List<Note> notes, {String? folder}) async {
+    Directory finalDirectory;
+    if (folder == null) {
     Directory directory = await getApplicationSupportDirectory();
-    Directory directoryNotesFolder = Directory('${directory.path}\\notes');
-    directoryNotesFolder.createSync();
+    finalDirectory = Directory('${directory.path}\\notes');
+    finalDirectory.createSync();
+    } else {
+      finalDirectory = Directory(folder);
+    }
+
     notes.forEach((note) async {
-      File file = File('${directoryNotesFolder.path}\\${note.title}.txt');
+      File file = File('${finalDirectory.path}\\${note.title}.txt');
 
       file.createSync();
       await file.writeAsString(note.content);

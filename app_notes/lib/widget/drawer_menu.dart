@@ -1,6 +1,7 @@
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/data/note_data_service.dart';
 import 'package:app_notes/layout/layout_decider.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 
@@ -115,9 +116,21 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.upload_file_outlined),
             title: const Text('Export'),
-            onTap: () {
-              noteDataService.exportNotestoTxt(noteDataService.notesValueNotifier.value['dataObjects']);
-            },)
+            onTap: () async{
+              String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+
+              if (selectedDirectory != null) {
+                print('Pasta selecionada: $selectedDirectory');
+                noteDataService.exportNotestoTxt(
+                  noteDataService.notesValueNotifier.value['dataObjects'],
+                  folder: selectedDirectory
+                );
+
+              } else {
+                print('Nenhuma pasta foi selecionada.');
+              }
+            }
+          )
         ],
       )
     );
