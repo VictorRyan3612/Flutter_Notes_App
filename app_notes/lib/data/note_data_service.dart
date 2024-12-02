@@ -41,12 +41,23 @@ class Note {
       'status': status
     };
   }
+  
   String toJson() => json.encode(toMap());
   
   returnValuebyField(Note note, String field){
     return note.toMap()[field];
   }
-  
+  static Note fromJson(Map<String, dynamic> json){
+    return Note(
+      title: json['title'],
+      content: json['content'],
+      tag: json['tag'],
+      colorNote: json['colorNote'],
+      dateCreate: json['dateCreate'],
+      dateModified: json['dateModified'],
+      status: json['status'],
+    );
+  }
   
   MaterialColor selectColor(){
     var colorFinal = searchCodColorByName(colorNote);
@@ -96,15 +107,7 @@ class NoteDataService {
         List<Note> notesList = jsonList.map((json) {
           json = checkFields(json);
 
-          return Note(
-          title: json['title'],
-          content: json['content'],
-          tag: json['tag'],
-          colorNote: json['colorNote'],
-          dateCreate: json['dateCreate'],
-          dateModified: json['dateModified'],
-          status: json['status'],
-        );
+          return Note.fromJson(json);
         }).toList();
 
         return notesList;
