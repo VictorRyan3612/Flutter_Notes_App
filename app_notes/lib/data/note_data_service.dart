@@ -183,13 +183,18 @@ class NoteDataService {
     loadNotes();
   }
 
-  saveEditedNote({required Note editedNote, required int index}){
+  void saveEditedNote({required Note editedNote, required int index}){
     var dateNow = DateTime.now().toString();
     editedNote.dateModified = dateNow;
     
     editedNote = firstLineToTitle(editedNote);
-    notesValueNotifier.value['dataObjects'][index] = editedNote;
-    saveNotesFile(notesValueNotifier.value['dataObjects']);
+
+    // Certifique-se de que o valor é tratado como List<Note>
+    var dataObjects = List<Note>.from(notesValueNotifier.value['dataObjects']);
+    dataObjects[index] = editedNote;
+
+    notesValueNotifier.value['dataObjects'] = dataObjects;
+    saveNotesFile(dataObjects);
     loadNotes();
   }
 
