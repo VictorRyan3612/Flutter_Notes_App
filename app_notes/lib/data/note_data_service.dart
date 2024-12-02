@@ -152,6 +152,14 @@ class NoteDataService {
     await file.writeAsString(content);
   }
 
+  void addList(List<Note> listNote){
+    var state = Map<String, dynamic>.from(notesValueNotifier.value);
+    var list = [...notesValueNotifier.value['dataObjects'], ...listNote];
+    state['dataObjects'] = list;
+    notesValueNotifier.value = state;
+    saveNotesFile(List<Note>.from(list));
+  }
+  
   Future<void> exportNotestoTxt(List<Note> notes, {String? folder}) async {
     Directory finalDirectory;
     if (folder == null) {
