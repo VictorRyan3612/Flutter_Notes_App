@@ -12,40 +12,38 @@ class GridNotes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(5.0),
       child: InkWell(
-        onTap: () async{
+        onTap: () async {
           callbackClickFunction(note, index);
         },
-        child: Center(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [  
-              Container(
-                height: 5.0,
-                color: note.selectColor(),
-                // margin: EdgeInsets.only(bottom: 5),
-                width: double.infinity, 
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: 80, // Limita a altura máxima
+          ),
+          child: ListTile(
+            contentPadding: EdgeInsets.only(left: 0),
+            leading: Container(
+              color: note.selectColor(),
+              height: double.infinity,
+              width: 5,
+            ),
+            minLeadingWidth: 10,
+            title: Text(
+              note.title,
+              style: TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.bold,
               ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.only(left: 10),
-                    title: Text(
-                      note.title,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                        )
-                    ),
-                    subtitle: Text(noteDataService.defSubtitle(note, '\n')),
-                  ),
-                ),
-              ),
-            ]
+              maxLines: 1, // Limita o número de linhas do título
+              overflow: TextOverflow.ellipsis, // Adiciona "..." no final se ultrapassar
+            ),
+            subtitle: Text(
+              noteDataService.defSubtitle(note, '   '),
+              maxLines: 2, // Limita o número de linhas do subtítulo
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
       ),
