@@ -1,4 +1,5 @@
 // flutter packages
+import 'package:app_notes/config/shortcuts_settings.dart';
 import 'package:app_notes/data/note_data_service.dart';
 import 'package:app_notes/screen/note_detail.dart';
 import 'package:flutter/material.dart';
@@ -42,20 +43,23 @@ class MainApp extends HookWidget {
     final finalTheme = setTheme(currentIsDarkMode.value, currentColor.value);
 
 
-    return MaterialApp(
-      theme: finalTheme,
-      debugShowCheckedModeBanner: false,
-
-
-      initialRoute: '/',
-      routes: {
-        '/': (context) => LayoutDecider(),
-        '/noteDetail': (context) => NoteDetail(),
-        '/configs': (context) => ConfigScreen(
-          currentIsDarkMode: currentIsDarkMode,
-          currentColor: currentColor,
-          )
-      },
+    return CallbackShortcuts(
+      bindings: ShortcutsSettings.getGlobalShortcuts(),
+      child: MaterialApp(
+        theme: finalTheme,
+        debugShowCheckedModeBanner: false,
+      
+      
+        initialRoute: '/',
+        routes: {
+          '/': (context) => LayoutDecider(),
+          '/noteDetail': (context) => NoteDetail(),
+          '/configs': (context) => ConfigScreen(
+            currentIsDarkMode: currentIsDarkMode,
+            currentColor: currentColor,
+            )
+        },
+      ),
     );
   }
 }
