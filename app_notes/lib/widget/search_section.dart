@@ -1,3 +1,5 @@
+import 'package:app_notes/config/focus_settings.dart';
+import 'package:app_notes/config/settings_data_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_notes/widget/dropdownbutton.dart';
@@ -30,10 +32,12 @@ class SearchSection extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: TextField(
+                focusNode: focusSettings.textFieldFocusNode,
                 onChanged: (value) => callbackFilter(value),
                 decoration: InputDecoration(
                   hintText: "filtrar",
                 ),
+                onSubmitted: (value) => focusSettings.restoreLastFocus(),
               ),
             ),
           ),
