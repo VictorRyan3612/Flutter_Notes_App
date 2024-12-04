@@ -1,6 +1,5 @@
 import 'package:app_notes/config/settings_data_service.dart';
 import 'package:app_notes/data/note_data_service.dart';
-import 'package:app_notes/layout/layout_decider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -58,14 +57,7 @@ class DrawerMenu extends StatelessWidget {
             onTap: () {
               settingsService.currentStatusNotes.value = 'v';
               Navigator.pop(context);
-              Navigator.push(
-                context, 
-                MaterialPageRoute(
-                  builder: (context) {
-                    return LayoutDecider();
-                  }
-                )
-              );
+              Navigator.pushNamed(context, '/');
             },
           ),
           ListTile(
@@ -74,14 +66,7 @@ class DrawerMenu extends StatelessWidget {
             onTap: () {
               settingsService.currentStatusNotes.value = 'a';
               Navigator.pop(context);
-              Navigator.push(
-                context, 
-                MaterialPageRoute(
-                  builder: (context) {
-                    return LayoutDecider();
-                  }
-                )
-              );
+              Navigator.pushNamed(context, '/');
             },
           ),
           ListTile(
@@ -90,14 +75,7 @@ class DrawerMenu extends StatelessWidget {
             onTap: () {
               settingsService.currentStatusNotes.value = 'x';
               Navigator.pop(context);
-              Navigator.push(
-                context, 
-                MaterialPageRoute(
-                  builder: (context) {
-                    return LayoutDecider();
-                  }
-                )
-              );
+              Navigator.pushNamed(context, '/');
               
             },
           ),
